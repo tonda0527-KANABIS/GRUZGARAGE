@@ -246,7 +246,7 @@
             box-shadow: 0 0 15px rgba(197, 160, 89, 0.4) !important;
         }
 
-        /* --- NOVÁ PLYNULÁ CURTAIN / SLIDE-UP ANIMACE PRO SPECIFIKACE --- */
+        /* --- ČISTÁ PLYNULÁ FADE ANIMACE PRO SPECIFIKACE (BEZ KONFLIKTŮ S CURSOREM) --- */
         .car-card {
             position: relative;
             border: 1px solid var(--border-dark);
@@ -254,7 +254,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            transition: all 0.25s ease;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
         }
 
         .car-card:hover {
@@ -263,29 +263,37 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.8), 0 0 10px rgba(255, 0, 60, 0.1);
         }
 
-        .spec-overlay {
+        .car-main-content, .car-spec-content {
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+
+        .car-spec-content {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(6, 6, 6, 0.97);
+            background: var(--surface-color);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             padding: 30px;
-            transform: translateY(100%);
             opacity: 0;
-            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            visibility: hidden;
             z-index: 10;
         }
 
-        .car-card.specs-active .spec-overlay {
-            transform: translateY(0);
-            opacity: 1;
+        .car-card.specs-active .car-main-content {
+            opacity: 0;
+            visibility: hidden;
         }
 
-        .spec-overlay h3 {
+        .car-card.specs-active .car-spec-content {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .car-spec-content h3 {
             color: var(--text-main);
             border-bottom: 1px solid var(--border-dark);
             padding-bottom: 12px;
@@ -397,16 +405,18 @@
             <div class="grid-2">
                 <!-- KARTA 1: BMW E60 535d -->
                 <div class="car-card">
-                    <div class="card-img-wrap">
-                        <img src="e60.jpg" alt="BMW E60 535d" loading="lazy">
+                    <div class="car-main-content" style="display: flex; flex-direction: column; height: 100%;">
+                        <div class="card-img-wrap">
+                            <img src="e60.jpg" alt="BMW E60 535d" loading="lazy">
+                        </div>
+                        <div class="brutal-card-body">
+                            <h3>PROJECT E60 535d</h3>
+                            <p>Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a kompletní historie vývoje. Stroj, který budí respekt na ulici i na okruhu.</p>
+                            <a href="#" class="brutal-btn" onclick="toggleSpecs(event, this)">Detail vozu</a>
+                        </div>
                     </div>
-                    <div class="brutal-card-body">
-                        <h3>PROJECT E60 535d</h3>
-                        <p>Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a kompletní historie vývoje. Stroj, který budí respekt na ulici i na okruhu.</p>
-                        <a href="#" class="brutal-btn" onclick="toggleSpecs(event, this)">Detail vozu</a>
-                    </div>
-                    <!-- Specifikace Overlay (Slide-up panel) -->
-                    <div class="spec-overlay">
+                    <!-- Specifikace Overlay (Fade cross-fade panel) -->
+                    <div class="car-spec-content">
                         <h3>SPECIFIKACE // E60</h3>
                         <ul class="spec-list">
                             <li><span>MOTOR</span> 3.0L R6 Biturbo (M57)</li>
@@ -422,16 +432,18 @@
 
                 <!-- KARTA 2: BMW E46ti 316i -->
                 <div class="car-card">
-                    <div class="card-img-wrap">
-                        <img src="prdelka.jpg" alt="BMW E46ti 316i" loading="lazy">
+                    <div class="car-main-content" style="display: flex; flex-direction: column; height: 100%;">
+                        <div class="card-img-wrap">
+                            <img src="prdelka.jpg" alt="BMW E46ti 316i" loading="lazy">
+                        </div>
+                        <div class="brutal-card-body">
+                            <h3>COMPACT E46ti 316i</h3>
+                            <p>Oldschool přístup. Syrová zadokolka postavená pro čistý řidičský zážitek, winter pekáč a nekompromisní průjezdy zatáčkami.</p>
+                            <a href="#" class="brutal-btn btn-gold" onclick="toggleSpecs(event, this)">Detail vozu</a>
+                        </div>
                     </div>
-                    <div class="brutal-card-body">
-                        <h3>COMPACT E46ti 316i</h3>
-                        <p>Oldschool přístup. Syrová zadokolka postavená pro čistý řidičský zážitek, winter pekáč a nekompromisní průjezdy zatáčkami.</p>
-                        <a href="#" class="brutal-btn btn-gold" onclick="toggleSpecs(event, this)">Detail vozu</a>
-                    </div>
-                    <!-- Specifikace Overlay (Slide-up panel) -->
-                    <div class="spec-overlay" style="border-top: 2px solid var(--lux-gold);">
+                    <!-- Specifikace Overlay (Fade cross-fade panel) -->
+                    <div class="car-spec-content" style="border-top: 2px solid var(--lux-gold);">
                         <h3 style="color: var(--lux-gold);">SPECIFIKACE // E46ti</h3>
                         <ul class="spec-list">
                             <li><span>MOTOR</span> 1.8L R4 (N42/N46)</li>
