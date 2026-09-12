@@ -23,6 +23,53 @@
             --border-accent: #2c3242;
         }
 
+        /* Custom Cyber Cursor */
+        body, a, button, input {
+            cursor: none !important;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--punk-red);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+            z-index: 10000;
+            box-shadow: 0 0 10px var(--punk-red);
+        }
+
+        .custom-cursor-follower {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: transform 0.08s ease-out, width 0.2s, height 0.2s, border-color 0.2s;
+            z-index: 9999;
+        }
+
+        body.cursor-hover .custom-cursor {
+            width: 20px;
+            height: 20px;
+            background: var(--lux-gold);
+            box-shadow: 0 0 15px var(--lux-gold);
+        }
+
+        body.cursor-hover .custom-cursor-follower {
+            width: 50px;
+            height: 50px;
+            border-color: var(--punk-red);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -47,16 +94,17 @@
             padding-bottom: 80px;
         }
 
+        /* CRT Scanlines and subtle flicker */
         body::before {
             content: " ";
             display: block;
             position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
             background-size: 100% 3px;
-            z-index: 9999;
+            z-index: 9998;
             pointer-events: none;
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
         h1, h2, h3, h4 {
@@ -92,7 +140,6 @@
 
         .logo-nav img {
             height: 72px;
-            cursor: pointer;
             filter: drop-shadow(0 0 8px rgba(255, 0, 68, 0.5));
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -121,7 +168,6 @@
             border: 1px solid var(--border-dark);
             background: rgba(15, 17, 24, 0.6);
             transition: all 0.25s ease;
-            cursor: pointer;
             text-transform: uppercase;
         }
 
@@ -164,6 +210,7 @@
             box-shadow: inset 0 -2px 0 rgba(255, 0, 68, 0.3);
         }
 
+        /* Glitch Title Animation */
         .glitch-title {
             font-size: 38px;
             margin: 0;
@@ -171,6 +218,17 @@
             position: relative;
             letter-spacing: 3px;
             text-shadow: 0 0 15px rgba(255, 0, 68, 0.4);
+            animation: glitch-anim 4s infinite;
+        }
+
+        @keyframes glitch-anim {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            21% { transform: translate(0); }
+            60% { transform: translate(1px, -1px); }
+            61% { transform: translate(0); }
+            95% { transform: translate(-1px, 1px); }
+            100% { transform: translate(0); }
         }
 
         .section-header span {
@@ -277,7 +335,6 @@
             position: relative;
             overflow: hidden;
             transition: all 0.25s ease;
-            cursor: pointer;
             margin-top: 10px;
         }
 
@@ -373,7 +430,7 @@
             position: fixed;
             bottom: 25px;
             left: 25px;
-            z-index: 999;
+            z-index: 997;
             background: rgba(8, 10, 15, 0.92);
             border: 1px solid var(--border-accent);
             border-left: 3px solid var(--punk-red);
@@ -412,24 +469,30 @@
             nav { grid-column: 1; justify-content: center; }
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
             .fixed-contacts { bottom: 12px; left: 12px; font-size: 10px; padding: 12px 14px; }
+            .custom-cursor, .custom-cursor-follower { display: none; }
+            body, a, button, input { cursor: auto !important; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Custom Cursor Elements -->
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="custom-cursor-follower" id="cursor-follower"></div>
+
     <header>
         <div class="logo-nav">
-            <img src="logo.jpg" alt="GRUZ LOGO" onclick="switchTab(event, 'crew')">
+            <img src="logo.jpg" alt="GRUZ LOGO" onclick="playClickSound(); switchTab(event, 'crew')">
         </div>
         <nav>
-            <a onclick="switchTab(event, 'crew')" class="active">GRUZ CREW</a>
-            <a onclick="switchTab(event, 'projekty')">PROJEKTY</a>
-            <a onclick="switchTab(event, 'servis')">SERVIS</a>
-            <a onclick="switchTab(event, 'upravy')">ÚPRAVY</a>
-            <a onclick="switchTab(event, 'lesteni')">LEŠTĚNÍ</a>
-            <a onclick="switchTab(event, 'lakovna')">LAKOVNA</a>
-            <a onclick="switchTab(event, 'kontakt')">KONTAKT</a>
-            <a onclick="switchTab(event, 'forum')">FÓRUM</a>
+            <a onclick="playClickSound(); switchTab(event, 'crew')" class="active">GRUZ CREW</a>
+            <a onclick="playClickSound(); switchTab(event, 'projekty')">PROJEKTY</a>
+            <a onclick="playClickSound(); switchTab(event, 'servis')">SERVIS</a>
+            <a onclick="playClickSound(); switchTab(event, 'upravy')">ÚPRAVY</a>
+            <a onclick="playClickSound(); switchTab(event, 'lesteni')">LEŠTĚNÍ</a>
+            <a onclick="playClickSound(); switchTab(event, 'lakovna')">LAKOVNA</a>
+            <a onclick="playClickSound(); switchTab(event, 'kontakt')">KONTAKT</a>
+            <a onclick="playClickSound(); switchTab(event, 'forum')">FÓRUM</a>
         </nav>
     </header>
 
@@ -472,7 +535,7 @@
                             // AUTOSERVIS GRUZ.GARAGE
                         </span>
                         
-                        <a href="#" class="brutal-btn btn-gold" onclick="switchTab(event, 'projekty')">PROHLÉDNOUT PROJEKTY -></a>
+                        <a href="#" class="brutal-btn btn-gold" onclick="playClickSound(); switchTab(event, 'projekty')">PROHLÉDNOUT PROJEKTY -></a>
                     </div>
                 </div>
             </div>
@@ -492,7 +555,7 @@
                     <div class="brutal-card-body">
                         <h3>PROJECT E60 535d</h3>
                         <p>Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a kompletní historie vývoje. Stroj, který budí respekt na ulici i na okruhu.</p>
-                        <a href="#" class="brutal-btn" onclick="toggleSpecs(event, this)">Detail vozu</a>
+                        <a href="#" class="brutal-btn" onclick="playClickSound(); toggleSpecs(event, this)">Detail vozu</a>
                     </div>
                     <div class="spec-overlay">
                         <h3>SPECIFIKACE // E60</h3>
@@ -504,7 +567,7 @@
                             <li><span>PODVOZEK</span> M-Paket / Snížený</li>
                             <li><span>STATUS</span> Daily / Street Weapon</li>
                         </ul>
-                        <a href="#" class="brutal-btn" onclick="toggleSpecs(event, this)">< NÁVRAT</a>
+                        <a href="#" class="brutal-btn" onclick="playClickSound(); toggleSpecs(event, this)">< NÁVRAT</a>
                     </div>
                 </div>
 
@@ -515,7 +578,7 @@
                     <div class="brutal-card-body">
                         <h3>COMPACT E46ti 316i</h3>
                         <p>Oldschool přístup. Syrová zadokolka postavená pro čistý řidičský zážitek, winter pekáč a nekompromisní průjezdy zatáčkami.</p>
-                        <a href="#" class="brutal-btn btn-gold" onclick="toggleSpecs(event, this)">Detail vozu</a>
+                        <a href="#" class="brutal-btn btn-gold" onclick="playClickSound(); toggleSpecs(event, this)">Detail vozu</a>
                     </div>
                     <div class="spec-overlay" style="border-top: 2px solid var(--lux-gold);">
                         <h3 style="color: var(--lux-gold);">SPECIFIKACE // E46ti</h3>
@@ -527,7 +590,7 @@
                             <li><span>VÁHA</span> Odlehčeno (Striktní dieta)</li>
                             <li><span>STATUS</span> Drift Missile / Fun car</li>
                         </ul>
-                        <a href="#" class="brutal-btn btn-gold" onclick="toggleSpecs(event, this)">< NÁVRAT</a>
+                        <a href="#" class="brutal-btn btn-gold" onclick="playClickSound(); toggleSpecs(event, this)">< NÁVRAT</a>
                     </div>
                 </div>
             </div>
@@ -582,7 +645,7 @@
                     <div class="brutal-card-body">
                         <h3>CUSTOM EXHAUST & AERO</h3>
                         <p>Svařování výfukových systémů na míru s dokonalým zvukovým projevem. Instalace difuzorů, spoilerů a bodykitů pro agresivní stance.</p>
-                        <a href="#" class="brutal-btn">Zjistit více</a>
+                        <a href="#" class="brutal-btn" onclick="playClickSound()">Zjistit více</a>
                     </div>
                 </div>
                 <div class="brutal-card">
@@ -592,7 +655,7 @@
                     <div class="brutal-card-body">
                         <h3>VÝZTUHY & HANDLING</h3>
                         <p>Montáž předních rozpěr, stavitelných podvozků a přesné nastavení odklonů pro maximální torzní tuhost a přilnavost v zatáčkách.</p>
-                        <a href="#" class="brutal-btn btn-gold">Zjistit více</a>
+                        <a href="#" class="brutal-btn btn-gold" onclick="playClickSound()">Zjistit více</a>
                     </div>
                 </div>
             </div>
@@ -673,7 +736,7 @@
                                     SO // 10:00 - 18:00<br>
                                     NE // <span style="color: var(--punk-red); font-weight: bold;">OFFLINE</span>
                                 </p>
-                                <a href="tel:608607667" class="brutal-btn btn-gold" style="width: 100%; text-align: center; margin-top: 15px;">ZAVOLAT HNED</a>
+                                <a href="tel:608607667" class="brutal-btn btn-gold" style="width: 100%; text-align: center; margin-top: 15px;" onclick="playClickSound()">ZAVOLAT HNED</a>
                             </div>
                         </div>
                     </div>
@@ -696,7 +759,7 @@
                     <form id="chat-form" onsubmit="handleChatSubmit(event)" style="display: flex; gap: 10px; flex-wrap: wrap;">
                         <input type="text" id="chat-name" placeholder="TVŮJ NICK..." required maxlength="25" style="background: var(--bg-color); border: 1px solid var(--border-accent); color: var(--text-main); padding: 12px 15px; font-family: 'Space Mono', monospace; font-size: 13px; width: 160px; outline: none;">
                         <input type="text" id="chat-input" placeholder="NAPIŠ ZPRÁVU DO CHATU..." required autocomplete="off" style="flex-grow: 1; background: var(--bg-color); border: 1px solid var(--border-accent); color: var(--text-main); padding: 12px 15px; font-family: 'Space Mono', monospace; font-size: 13px; outline: none;">
-                        <button type="submit" class="brutal-btn btn-gold" style="margin-top: 0; padding: 12px 25px;">ODESLAT</button>
+                        <button type="submit" class="brutal-btn btn-gold" style="margin-top: 0; padding: 12px 25px;" onclick="playClickSound()">ODESLAT</button>
                     </form>
                 </div>
             </div>
@@ -705,10 +768,65 @@
     </div>
 
     <script>
+        // Custom Cursor Motion
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+        });
+
+        function animateFollower() {
+            followerX += (mouseX - followerX) * 0.15;
+            followerY += (mouseY - followerY) * 0.15;
+            cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
+            requestAnimationFrame(animateFollower);
+        }
+        animateFollower();
+
+        // Hover Effect on Interactive Elements
+        const interactiveElements = document.querySelectorAll('a, button, input, img');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+
+        // Web Audio API for Retro Synth Click Sound (No external files needed)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playClickSound() {
+            try {
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.05);
+                
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.05);
+            } catch(e) {
+                // Audio Context might be restricted before user interaction
+            }
+        }
+
+        // Blinking system status cursor
         setInterval(() => {
-            const cursor = document.getElementById('blink');
-            if(cursor) {
-                cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+            const blinker = document.getElementById('blink');
+            if(blinker) {
+                blinker.style.opacity = blinker.style.opacity === '0' ? '1' : '0';
             }
         }, 500);
 
