@@ -172,7 +172,6 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.8), 0 0 10px rgba(255, 0, 60, 0.1);
         }
 
-        /* OPRAVENÉ A VYLAZENÉ FOTO KONTEJNERY */
         .card-img-wrap {
             position: relative;
             width: 100%;
@@ -193,6 +192,12 @@
         .brutal-card:hover .card-img-wrap img {
             filter: contrast(1.1) brightness(1.05);
             transform: scale(1.04);
+        }
+
+        /* SPECIÁLNÍ ÚPRAVA PRO PRVNÍ STRÁNKU (CELÁ AUTA BEZ OŘEZU) */
+        .car-card .card-img-wrap img {
+            object-fit: contain;
+            background-color: #030303;
         }
 
         .brutal-card-body {
@@ -250,7 +255,6 @@
             box-shadow: 0 0 15px rgba(197, 160, 89, 0.4) !important;
         }
 
-        /* CURTAIN / SLIDE-UP ANIMACE PRO SPECIFIKACE */
         .car-card {
             position: relative;
             border: 1px solid var(--border-dark);
