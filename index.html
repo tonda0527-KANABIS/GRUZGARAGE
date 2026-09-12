@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRUZ GARAGE // UNDERGROUND LUXURY</title>
+    <link rel="icon" type="image/jpeg" href="gruz.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #030303;
+            --surface-color: #080808;
+            --text-main: #f4f4f4;
+            --text-dim: #888888;
+            --punk-red: #ff003c;
+            --lux-gold: #c5a059;
+            --border-dark: #222222;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
+            z-index: 9999;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.03;
+            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--border-dark); border-left: 1px solid var(--punk-red); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--punk-red); }
+
+        header {
+            background-color: rgba(3, 3, 3, 0.9);
+            border-bottom: 1px solid var(--border-dark);
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        }
+
+        .logo-nav img {
+            height: 45px;
+            cursor: pointer;
+            filter: drop-shadow(0 0 5px rgba(255, 0, 60, 0.4));
+            transition: all 0.3s ease;
+        }
+
+        .logo-nav img:hover {
+            filter: drop-shadow(0 0 15px var(--punk-red));
+            transform: scale(1.05);
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1px;
+            padding: 8px 14px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--text-main);
+            border: 1px solid var(--lux-gold);
+            background: linear-gradient(180deg, rgba(197, 160, 89, 0.1) 0%, transparent 100%);
+            box-shadow: 0 0 10px rgba(197, 160, 89, 0.2);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+        }
+
+        .container {
+            max-width: 1350px;
+            margin: 50px auto;
+            padding: 0 25px;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active-tab {
+            display: block;
+            animation: glitchFadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes glitchFadeIn {
+            0% { opacity: 0; transform: translateY(15px); filter: contrast(150%); }
+            100% { opacity: 1; transform: translateY(0); filter: contrast(100%); }
+        }
+
+        .section-header {
+            border-bottom: 2px solid var(--punk-red);
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .glitch-title {
+            font-size: 38px;
+            margin: 0;
+            color: #fff;
+            position: relative;
+            letter-spacing: 3px;
+        }
+
+        .section-header span {
+            color: var(--lux-gold);
+            font-size: 13px;
+            font-family: 'Syncopate', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 35px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .brutal-card {
+            border: 1px solid var(--border-dark);
+            background: var(--surface-color);
+            position: relative;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .brutal-card::before, .brutal-card::after {
+            content: ''; position: absolute; width: 12px; height: 12px; border: 1px solid var(--text-dim); transition: all 0.3s; z-index: 5;
+        }
+        .brutal-card::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+        .brutal-card::after { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+        .brutal-card:hover {
+            border-color: var(--lux-gold);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), 0 0 15px rgba(255, 0, 60, 0.15);
+        }
+
+        .card-img-wrap {
+            position: relative;
+            height: 320px;
+            overflow: hidden;
+        }
+
+        .brutal-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(30%) contrast(110%) brightness(0.9);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .brutal-card:hover img {
+            filter: grayscale(0%) contrast(1.1) brightness(1.05);
+            transform: scale(1.06);
+        }
+
+        .brutal-card-body {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(0deg, #020202 0%, var(--surface-color) 100%);
+        }
+
+        .brutal-card-body h3 {
+            font-size: 24px;
+            color: var(--punk-red);
+            letter-spacing: 1px;
+        }
+
+        .brutal-card-body p {
+            color: var(--text-dim);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .brutal-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-dark);
+            padding: 12px 25px;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .brutal-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--punk-red);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: -1;
+        }
+
+        .brutal-btn:hover {
+            color: #fff;
+            border-color: var(--punk-red);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
+        }
+
+        .brutal-btn:hover::before { left: 0; }
+        .btn-gold:hover::before { background: var(--lux-gold); }
+        .btn-gold:hover { border-color: var(--lux-gold); box-shadow: 0 0 15px rgba(197, 160, 89, 0.4); }
+
+        .forum-thread {
+            border-left: 2px solid var(--border-dark);
+            border-bottom: 1px solid #111;
+            padding: 20px 25px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.6);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .forum-thread:hover {
+            border-left: 5px solid var(--lux-gold);
+            background: #111;
+            padding-left: 30px;
+        }
+
+        .thread-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .thread-meta {
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        .thread-stats span {
+            margin-left: 20px;
+            color: var(--lux-gold);
+            font-family: 'Syncopate', sans-serif;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 900px) {
+            header { flex-direction: column; gap: 20px; padding: 15px; }
+            nav { justify-content: center; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .forum-thread { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .thread-stats { margin-top: 5px; }
+            .thread-stats span { margin-left: 0; margin-right: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+
+    <header>
+        <div class="logo-nav">
+            <img src="logo.jpg" alt="GRUZ LOGO" onclick="switchTab(event, 'crew')">
+        </div>
+        <nav>
+            <a onclick="switchTab(event, 'crew')" class="active">GRUZ CREW</a>
+            <a onclick="switchTab(event, 'servis')">SERVIS</a>
+            <a onclick="switchTab(event, 'upravy')">ÚPRAVY</a>
+            <a onclick="switchTab(event, 'lesteni')">LEŠTĚNÍ</a>
+            <a onclick="switchTab(event, 'lakovna')">LAKOVNA</a>
+            <a onclick="switchTab(event, 'kontakt')">KONTAKT</a>
+            <a onclick="switchTab(event, 'forum')">FÓRUM</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <!-- 1. GRUZ CREW -->
+        <div id="crew" class="content-section active-tab">
+            <div class="section-header">
+                <h1 class="glitch-title">GRUZ CREW</h1>
+                <span>// 01 PROJEKTY & VÝSTAVA</span>
+            </div>
+            <div class="grid-2">
+                <div class="brutal-card">
+                    <div class="card-img-wrap">
+                        <img src="e60.jpg" alt="BMW E60">
+                    </div>
+                    <div class="brutal-card-body">
+                        <h3>PROJECT E60</h3>
+                        <p>Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a kompletní historie vývoje. Stroj, který budí respekt na ulici i na okruhu.</p>
+                        <a href="#" class="brutal-btn">Detail vozu</a>
+                    </div>
+                </div>
+                <div class="brutal-card">
+                    <div class="card-img-wrap">
+                        <img src="prdelka.jpg" alt="BMW Compact">
+                    </div>
+                    <div class="brutal-card-body">
+                        <h3>STREET COMPACT / E36</h3>
+                        <p>Oldschool přístup s moderními vnitřnostmi. Syrová zadokolka postavená pro čistý řidičský zážitek a nekompromisní průjezdy zatáčkami.</p>
+                        <a href="#" class="brutal-btn btn-gold">Detail vozu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. SERVIS -->
+        <div id="servis" class="content-section">
+            <div class="section-header">
+                <h1 class="glitch-title">MECHANIKA & SERVIS</h1>
+                <span>// 02 ÚDRŽBA A DIAGNOSTIKA</span>
+            </div>
+            <div class="grid-3">
+                <div class="brutal-card">
+                    <div class="card-img-wrap" style="height: 220px;">
+                        <img src="hnipesevgolfu.jpg" alt="Hluboká mechanika">
+                    </div>
+                    <div class="brutal-card-body">
+                        <h3>HLUBOKÁ MECHANIKA</h3>
+                        <p>> Generálky motorů a rozvody<br>> Výměny spojek a převodovek<br>> Řešení fatálních poruch</p>
+                    </div>
+                </div>
+                <div class="brutal-card">
+                    <div class="card-img-wrap" style="height: 220px;">
+                        <img src="repje.jpg" alt="Běžný servis">
+                    </div>
+                    <div class="brutal-card-body">
+                        <h3>BĚŽNÝ SERVIS</h3>
+                        <p>> Výměny olejů a kapalin<br>> Brzdové systémy a filtry<br>> Příprava na STK</p>
+                    </div>
+                </div>
+                <div class="brutal-card">
+                    <div class="card-img-wrap" style="height: 220px;">
+                        <img src="schnilejgolfik.jpg" alt="Podvozek a konstrukce">
+                    </div>
+                    <div class="brutal-card-body">
+                        <h3>PODVOZEK & RÁM</h3>
+                        <p>> Repase náprav a uložení<br>> Kontrola konstrukce<br>> Svařování a vyztužování</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. ÚPRAVY -->
+        <div id="upravy" class="content-section">
+            <div class="section-header">
+                <h1 class="glitch-title">PERFORMANCE ÚPRAVY</h1>
+                <span>// 03 TUNING & EXHAUST</span>
+            </div>
+            <div class="grid-2">
+                <div class="brutal-card">
+                    <div class="card-img-wrap">
+                        <img src="e60zadecek.jpg" alt="Výfuky a aero">
+                    </div>
+                    <div class="brutal-card-body">
+                        <h3>CUSTOM EXHAUST & AERO</h3>
+                        <p>Svařování výfukových systémů na míru s dokonalým zvukovým projevem. Instalace difuzorů, spoilerů a bodykitů pro agresivní stance.</p>
+                        <a href="#" class="brutal-btn">Zjistit více</a>
+                    </div>
+                </div>
+                <div class="brutal-card">
+                    <div class="card-img-wrap">
+                        <img src="predni rozpera.jpg" alt="Přední rozběrová vzpěra">
+                    </div>
+                    <div class="brutal-card-body">
+                        <h3>VÝZTUHY & HANDLING</h3>
+                        <p>Montáž předních rozpěr, stavitelných podvozků a přesné nastavení odklonů pro maximální torzní tuhost a přilnavost v zatáčkách.</p>
+                        <a href="#" class="brutal-btn btn-gold">Zjistit více</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. LEŠTĚNÍ -->
+        <div id="lesteni" class="content-section">
+            <div class="section-header">
+                <h1 class="glitch-title">DETAILING LAKU</h1>
+                <span>// 04 ZRCADLOVÝ LESK</span>
+            </div>
+            <div class="grid-3">
+                <div class="brutal-card">
+                    <div class="card-img-wrap" style="height: 240px;">
+                        <img src="lestibawo dva.jpg" alt="Korekce laku">
+                    </div>
+                    <div class="brutal-card-body">
+                        <h3>KOREKCE LAKU</h3>
+                        <p>Vícestupňové leštění pro odstranění hologramů, sluníček a hlubokých škrábanců. Obnova hloubky a sytosti barvy.</p>
+                    </div>
+                </div>
+                <div class="brutal-card">
+                    <div class="card-img-wrap" style="height: 240px;">
+                        <img src="merglesti.jpg" alt="Keramická ochrana">
+                    </div>
+                    <div class="brutal-card-body">
+                        <h3>KERAMIKA & OCHRANA</h3>
+                        <p>Aplikace špičkové nano-keramiky s dlouhou životností. Extrémní hydrofobnost a ochrana před UV zářením a vlivy prostředí.</p>
+                    </div>
+                </div>
+                <div class="brutal-card">
+                    <div class="card-img-wrap" style="height: 240px;">
+                        <img src="fabkalesti.jpg" alt="Renovace světel">
+                    </div>
+                    <div class="brutal-card-body">
+                        <h3>SVĚTLA & SKLA</h3>
+                        <p>Kompletní renovace zažloutlých světlometů a rozleštění skel pro perfektní viditelnost a čistý vzhled vozu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. LAKOVNA -->
+        <div id="lakovna" class="content-section">
+            <div class="section-header">
+                <h1 class="glitch-title">LAKOVACÍ BOX</h1>
+                <span>// 05 PAINTJOB LAB</span>
+            </div>
+            <div style="border: 1px dashed var(--border-dark); padding: 70px 20px; text-align: center; background: var(--surface-color);">
+                <h2 style="color: var(--punk-red); font-size: 32px; letter-spacing: 2px;">[ STATUS: VE VÝSTAVBĚ ]</h2>
+                <p style="color: var(--text-dim); margin-top: 15px;">Instalujeme nový přetlakový lakovací box a kalibrujeme profesionální technologii.</p>
+                <div style="margin-top: 30px; font-size: 22px; color: var(--lux-gold);">
+                    <span id="blink">_</span> SYSTÉM SE PŘIPRAVUJE
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. KONTAKT -->
+        <div id="kontakt" class="content-section">
+            <div class="section-header">
+                <h1 class="glitch-title">SPOJTE SE S NÁMI</h1>
+                <span>// 06 DISPEČINK</span>
+            </div>
+            <div class="grid-2">
+                <div class="brutal-card">
+                    <div class="brutal-card-body">
+                        <h3>GARÁŽOVÉ KORDINÁTY</h3>
+                        <p style="margin-top: 15px; line-height: 1.8;">
+                            <strong style="color: var(--lux-gold);">TEL:</strong> <a href="tel:608607667" style="color: var(--text-main); text-decoration: none;">+420 608 607 667</a><br>
+                            <strong style="color: var(--lux-gold);">MAIL:</strong> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ" style="color: var(--text-main); text-decoration: none;">GRUZGARAGE66@SEZNAM.CZ</a><br>
+                            <strong style="color: var(--lux-gold);">BASE:</strong> Jičíněves 507 31<br>
+                            <strong style="color: var(--lux-gold);">IG:</strong> <a href="https://instagram.com" style="color: var(--text-main); text-decoration: none;">@GARAGE.GRUZ</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="brutal-card">
+                    <div class="card-img-wrap" style="height: 180px;">
+                        <img src="gruz.jpg" alt="Gruz Garage Base" style="object-position: center;">
+                    </div>
+                    <div class="brutal-card-body" style="padding-top: 20px;">
+                        <h3>OTEVÍRACÍ PROTOKOL</h3>
+                        <p style="font-size: 13px;">
+                            PO-PÁ // 16:00 - 0:00<br>
+                            SO // 10:00 - 18:00<br>
+                            NE // <span style="color: var(--punk-red); font-weight: bold;">OFFLINE</span>
+                        </p>
+                        <a href="tel:608607667" class="brutal-btn btn-gold" style="width: 100%; text-align: center;">ZAVOLAT HNED</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. FÓRUM -->
+        <div id="forum" class="content-section">
+            <div class="section-header">
+                <h1 class="glitch-title">UNDRGND COMMUNITY</h1>
+                <span>// 07 KOMUNITNÍ FÓRUM</span>
+            </div>
+            
+            <div class="forum-thread" style="border-left-color: var(--lux-gold);">
+                <div>
+                    <div class="thread-title" style="color: var(--lux-gold);">[PRAVIDLA] Přečti si než založíš vlákno</div>
+                    <div class="thread-meta">Autor: admin_gruz | Připnuto</div>
+                </div>
+                <div class="thread-stats">
+                    <span>📌 ADMIN</span>
+                </div>
+            </div>
+
+            <div class="forum-thread">
+                <div>
+                    <div class="thread-title">Projekt E60: Hledám radu ohledně podvozku</div>
+                    <div class="thread-meta">Autor: user_gruz | Před 2 hodinami v sekci: Projekty</div>
+                </div>
+                <div class="thread-stats">
+                    <span>💬 12</span>
+                    <span>👀 145</span>
+                </div>
+            </div>
+
+            <div class="forum-thread">
+                <div>
+                    <div class="thread-title">Jakou keramiku na černou metalízu?</div>
+                    <div class="thread-meta">Autor: paint_killer | Včera v sekci: Detailing</div>
+                </div>
+                <div class="thread-stats">
+                    <span>💬 34</span>
+                    <span>👀 512</span>
+                </div>
+            </div>
+
+            <div class="forum-thread">
+                <div>
+                    <div class="thread-title">[SRAZ] Sobotní noční vyjížďka Jičín a okolí</div>
+                    <div class="thread-meta">Autor: admin_gruz | 10. 9. 2026 v sekci: Akce</div>
+                </div>
+                <div class="thread-stats">
+                    <span>💬 89</span>
+                    <span>👀 1024</span>
+                </div>
+            </div>
+
+            <div style="text-align: right; margin-top: 30px;">
+                <a href="#" class="brutal-btn">+ NOVÉ VLÁKNO</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        setInterval(() => {
+            const cursor = document.getElementById('blink');
+            if(cursor) {
+                cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+            }
+        }, 500);
+
+        function switchTab(event, tabId) {
+            event.preventDefault();
+            
+            const sections = document.querySelectorAll('.content-section');
+            sections.export ? '' : sections.forEach(sec => sec.classList.remove('active-tab'));
+            
+            const buttons = document.querySelectorAll('nav a');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active-tab');
+            
+            if (event.currentTarget.tagName === 'A') {
+                event.currentTarget.classList.add('active');
+            } else {
+                buttons[0].classList.add('active');
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
