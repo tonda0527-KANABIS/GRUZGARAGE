@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRUZ GARAGE / TUNING / SERVIS</title>
+    <title>GRUZ GARAGE // SERVIS // TUNING</title>
     <link rel="icon" type="image/jpeg" href="gruz.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -167,8 +167,8 @@
 
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 35px;
         }
 
         .grid-3 {
@@ -177,92 +177,49 @@
             gap: 30px;
         }
 
-        /* --- 3D FLIP KARTY PRO SPECIFIKACE MOTORU --- */
-        .flip-card-container {
-            perspective: 1200px;
-            height: 480px;
-        }
-
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-            transform-style: preserve-3d;
-        }
-
-        .flip-card-container.flipped .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-
         .brutal-card {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
             border: 1px solid var(--border-dark);
             background: var(--surface-color);
+            position: relative;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .card-front {
-            z-index: 2;
-        }
-
-        .card-back {
-            transform: rotateY(180deg);
-            background: #060606;
-            border-color: var(--lux-gold);
-            padding: 35px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        /* Rohové detaily */
         .brutal-card::before, .brutal-card::after {
             content: ''; position: absolute; width: 12px; height: 12px; border: 1px solid var(--text-dim); transition: all 0.3s; z-index: 5;
         }
         .brutal-card::before { top: 0; left: 0; border-right: none; border-bottom: none; }
         .brutal-card::after { bottom: 0; right: 0; border-left: none; border-top: none; }
 
-        .flip-card-container:hover .brutal-card {
+        .brutal-card:hover {
             border-color: var(--lux-gold);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.9), 0 0 20px rgba(255, 0, 60, 0.2);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9), 0 0 15px rgba(255, 0, 60, 0.15);
         }
 
-        /* Zajištění plného zobrazení auta bez ořezu */
         .card-img-wrap {
             position: relative;
-            height: 310px;
-            background: #020202;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height: 320px;
             overflow: hidden;
-            border-bottom: 1px solid var(--border-dark);
         }
 
         .brutal-card img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Zabrání ořezu auta, ukáže ho celé */
-            padding: 10px;
-            filter: grayscale(20%) contrast(110%) brightness(0.95);
+            object-fit: cover;
+            filter: grayscale(30%) contrast(110%) brightness(0.9);
             transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .flip-card-container:hover img {
-            filter: grayscale(0%) contrast(1.15) brightness(1.05);
-            transform: scale(1.04);
+        .brutal-card:hover img {
+            filter: grayscale(0%) contrast(1.1) brightness(1.05);
+            transform: scale(1.06);
         }
 
         .brutal-card-body {
-            padding: 25px 30px;
+            padding: 30px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -279,46 +236,9 @@
         .brutal-card-body p {
             color: var(--text-dim);
             font-size: 13px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
-        /* Styl specifikací na zadní straně karty */
-        .specs-title {
-            color: var(--lux-gold);
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 26px;
-            border-bottom: 1px solid var(--border-dark);
-            padding-bottom: 10px;
-            letter-spacing: 2px;
-        }
-
-        .specs-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 15px 0;
-        }
-
-        .spec-row {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px dashed rgba(255,255,255,0.08);
-            padding-bottom: 6px;
-            font-size: 13px;
-        }
-
-        .spec-label {
-            color: var(--text-dim);
-            text-transform: uppercase;
-        }
-
-        .spec-value {
-            color: #fff;
-            font-weight: bold;
-            font-family: 'Space Mono', monospace;
-        }
-
-        /* --- TLAČÍTKA --- */
         .brutal-btn {
             display: inline-flex;
             align-items: center;
@@ -337,8 +257,7 @@
             overflow: hidden;
             transition: all 0.3s;
             cursor: pointer;
-            width: 100%;
-            text-align: center;
+            margin-top: 10px;
         }
 
         .brutal-btn::before {
@@ -404,7 +323,6 @@
             header { flex-direction: column; gap: 20px; padding: 15px; }
             nav { justify-content: center; }
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
-            .flip-card-container { height: 520px; }
             .forum-thread { flex-direction: column; align-items: flex-start; gap: 15px; }
             .thread-stats { margin-top: 5px; }
             .thread-stats span { margin-left: 0; margin-right: 15px; }
@@ -416,7 +334,7 @@
 
     <header>
         <div class="logo-nav">
-            <img src="gruz.jpg" alt="GRUZ LOGO" onclick="switchTab(event, 'crew')">
+            <img src="logo.jpg" alt="GRUZ LOGO" onclick="switchTab(event, 'crew')">
         </div>
         <nav>
             <a onclick="switchTab(event, 'crew')" class="active">GRUZ CREW</a>
@@ -431,86 +349,53 @@
 
     <div class="container">
         
+        <!-- 1. GRUZ CREW -->
         <div id="crew" class="content-section active-tab">
             <div class="section-header">
                 <h1 class="glitch-title">GRUZ CREW</h1>
-                <span>// 01 PROJEKTY & VÝSTAVA</span>
+                <span>//PROJEKTY</span>
             </div>
             <div class="grid-2">
-                <div class="flip-card-container" id="card-e46">
-                    <div class="flip-card-inner">
-                        <div class="brutal-card card-front">
-                            <div class="card-img-wrap">
-                                <img src="bawolesti.jpg" alt="BMW E46 Project">
-                            </div>
-                            <div class="brutal-card-body">
-                                <h3>STREET COMPACT E46</h3>
-                                <p>Nekompromisní street projekt postavený na syrovém základu.</p>
-                                <button class="brutal-btn" onclick="toggleFlip('card-e46')">SPECIFIKACE MOTORU</button>
-                            </div>
-                        </div>
-                        <div class="brutal-card card-back">
-                            <div>
-                                <div class="specs-title">// MOTOR & SPECIFIKACE</div>
-                                <div class="specs-grid">
-                                    <div class="spec-row"><span class="spec-label">Motor:</span><span class="spec-value">3.0L R6 (M54B30)</span></div>
-                                    <div class="spec-row"><span class="spec-label">Výkon:</span><span class="spec-value">245 HP / 310 Nm</span></div>
-                                    <div class="spec-row"><span class="spec-label">Pohon:</span><span class="spec-value">Zadní (Custom svor)</span></div>
-                                    <div class="spec-row"><span class="spec-label">Podvozek:</span><span class="spec-value">Stavitelný BC Racing</span></div>
-                                    <div class="spec-row"><span class="spec-label">Výfuk:</span><span class="spec-value">Custom nerez přímka</span></div>
-                                </div>
-                            </div>
-                            <button class="brutal-btn btn-gold" onclick="toggleFlip('card-e46')">ZPĚT NA NÁHLED</button>
-                        </div>
+                <div class="brutal-card">
+                    <div class="card-img-wrap">
+                        <img src="e60.jpg" alt="BMW E60">
+                    </div>
+                    <div class="brutal-card-body">
+                        <h3>PROJECT E60</h3>
+                        <p>Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a kompletní historie vývoje. Stroj, který budí respekt na ulici i na okruhu.</p>
+                        <a href="#" class="brutal-btn">Detail vozu</a>
                     </div>
                 </div>
-
-                <div class="flip-card-container" id="card-e60">
-                    <div class="flip-card-inner">
-                        <div class="brutal-card card-front">
-                            <div class="card-img-wrap">
-                                <img src="e60.jpg" alt="BMW E60">
-                            </div>
-                            <div class="brutal-card-body">
-                                <h3>PROJECT E60</h3>
-                                <p>Vlajková loď syndikátu. Brutální síla, agresivní aero elementy a kompletní omlazení vnitřností pro maximální výkon.</p>
-                                <button class="brutal-btn btn-gold" onclick="toggleFlip('card-e60')">SPECIFIKACE MOTORU</button>
-                            </div>
-                        </div>
-                        <div class="brutal-card card-back">
-                            <div>
-                                <div class="specs-title">// MOTOR & SPECIFIKACE</div>
-                                <div class="specs-grid">
-                                    <div class="spec-row"><span class="spec-label">Motor:</span><span class="spec-value">4.4L V8 TwinTurbo</span></div>
-                                    <div class="spec-row"><span class="spec-label">Výkon:</span><span class="spec-value">450+ HP / 650 Nm</span></div>
-                                    <div class="spec-row"><span class="spec-label">Převodovka:</span><span class="spec-value">Sportovní automat 6st.</span></div>
-                                    <div class="spec-row"><span class="spec-label">Brzdy:</span><span class="spec-value">Vícetpístkové sportovní</span></div>
-                                    <div class="spec-row"><span class="spec-label">Kola:</span><span class="spec-value">19" Custom konkávní</span></div>
-                                </div>
-                            </div>
-                            <button class="brutal-btn" onclick="toggleFlip('card-e60')">ZPĚT NA NÁHLED</button>
-                        </div>
+                <div class="brutal-card">
+                    <div class="card-img-wrap">
+                        <img src="prdelka.jpg" alt="BMW Compact">
+                    </div>
+                    <div class="brutal-card-body">
+                        <h3>STREET COMPACT / E46</h3>
+                        <p>Syrová zadokolka postavená pro čistý řidičský zážitek a nekompromisní průjezdy zatáčkami.</p>
+                        <a href="#" class="brutal-btn btn-gold">Detail vozu</a>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- 2. SERVIS -->
         <div id="servis" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">MECHANIKA & SERVIS</h1>
                 <span>// 02 ÚDRŽBA A DIAGNOSTIKA</span>
             </div>
             <div class="grid-3">
-                <div class="brutal-card" style="position:relative; height: 425px;">
+                <div class="brutal-card">
                     <div class="card-img-wrap" style="height: 220px;">
                         <img src="hnipesevgolfu.jpg" alt="Hluboká mechanika">
                     </div>
                     <div class="brutal-card-body">
-                        <h3>HLUBOKÁ MECHANIKA</h3>
-                        <p>> Generálky motorů a rozvody<br>> Výměny spojek a převodovek<br>> Řešení fatálních poruch</p>
+                        <h3>MECHANIKA</h3>
+                        <p>> Výměny spojek a převodovek<br>> Řešení fatálních poruch</p>
                     </div>
                 </div>
-                <div class="brutal-card" style="position:relative; height: 425px;">
+                <div class="brutal-card">
                     <div class="card-img-wrap" style="height: 220px;">
                         <img src="repje.jpg" alt="Běžný servis">
                     </div>
@@ -519,73 +404,75 @@
                         <p>> Výměny olejů a kapalin<br>> Brzdové systémy a filtry<br>> Příprava na STK</p>
                     </div>
                 </div>
-                <div class="brutal-card" style="position:relative; height: 425px;">
+                <div class="brutal-card">
                     <div class="card-img-wrap" style="height: 220px;">
-                        <img src="BAWECEKSD.jpg" alt="Podvozek a konstrukce">
+                        <img src="schnilejgolfik.jpg" alt="Podvozek a konstrukce">
                     </div>
                     <div class="brutal-card-body">
-                        <h3>PODVOZEK & RÁM</h3>
-                        <p>> Repase náprav a uložení<br>> Kontrola konstrukce<br>> Svařování a vyztužování</p>
+                        <h3>PODVOZEK</h3>
+                        <p>>Kontrola konstrukce<br>> Svařování a vyztužování</p>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- 3. ÚPRAVY -->
         <div id="upravy" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">PERFORMANCE ÚPRAVY</h1>
                 <span>// 03 TUNING & EXHAUST</span>
             </div>
             <div class="grid-2">
-                <div class="brutal-card" style="position:relative; height: 460px;">
+                <div class="brutal-card">
                     <div class="card-img-wrap">
                         <img src="e60zadecek.jpg" alt="Výfuky a aero">
                     </div>
                     <div class="brutal-card-body">
                         <h3>CUSTOM EXHAUST & AERO</h3>
                         <p>Svařování výfukových systémů na míru s dokonalým zvukovým projevem. Instalace difuzorů, spoilerů a bodykitů pro agresivní stance.</p>
-                        <a href="#kontakt" class="brutal-btn" onclick="switchTab(event, 'kontakt')">Poptat úpravu</a>
+                        <a href="#" class="brutal-btn">Zjistit více</a>
                     </div>
                 </div>
-                <div class="brutal-card" style="position:relative; height: 460px;">
+                <div class="brutal-card">
                     <div class="card-img-wrap">
-                        <img src="e60cigan.jpg" alt="Stance a podvozek">
+                        <img src="predni rozpera.jpg" alt="Přední rozběrová vzpěra">
                     </div>
                     <div class="brutal-card-body">
-                        <h3>STANCE & HANDLING</h3>
-                        <p>Montáž stavitelných podvozků, polyuretanových silentbloků a přesné nastavení odklonů pro maximální přilnavost v zatáčkách.</p>
-                        <a href="#kontakt" class="brutal-btn btn-gold" onclick="switchTab(event, 'kontakt')">Poptat úpravu</a>
+                        <h3>VÝZTUHY & HANDLING</h3>
+                        <p>Montáž předních rozpěr, stavitelných podvozků a přesné nastavení odklonů pro maximální torzní tuhost a přilnavost v zatáčkách.</p>
+                        <a href="#" class="brutal-btn btn-gold">Zjistit více</a>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- 4. LEŠTĚNÍ -->
         <div id="lesteni" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">DETAILING LAKU</h1>
                 <span>// 04 ZRCADLOVÝ LESK</span>
             </div>
             <div class="grid-3">
-                <div class="brutal-card" style="position:relative; height: 440px;">
-                    <div class="card-img-wrap" style="height: 230px;">
-                        <img src="prdelka.jpg" alt="Korekce laku">
+                <div class="brutal-card">
+                    <div class="card-img-wrap" style="height: 240px;">
+                        <img src="lestibawo dva.jpg" alt="Korekce laku">
                     </div>
                     <div class="brutal-card-body">
                         <h3>KOREKCE LAKU</h3>
                         <p>Vícestupňové leštění pro odstranění hologramů, sluníček a hlubokých škrábanců. Obnova hloubky a sytosti barvy.</p>
                     </div>
                 </div>
-                <div class="brutal-card" style="position:relative; height: 440px;">
-                    <div class="card-img-wrap" style="height: 230px;">
-                        <img src="TRI.jpg" alt="Keramická ochrana">
+                <div class="brutal-card">
+                    <div class="card-img-wrap" style="height: 240px;">
+                        <img src="merglesti.jpg" alt="Keramická ochrana">
                     </div>
                     <div class="brutal-card-body">
                         <h3>KERAMIKA & OCHRANA</h3>
                         <p>Aplikace špičkové nano-keramiky s dlouhou životností. Extrémní hydrofobnost a ochrana před UV zářením a vlivy prostředí.</p>
                     </div>
                 </div>
-                <div class="brutal-card" style="position:relative; height: 440px;">
-                    <div class="card-img-wrap" style="height: 230px;">
+                <div class="brutal-card">
+                    <div class="card-img-wrap" style="height: 240px;">
                         <img src="fabkalesti.jpg" alt="Renovace světel">
                     </div>
                     <div class="brutal-card-body">
@@ -596,6 +483,7 @@
             </div>
         </div>
 
+        <!-- 5. LAKOVNA -->
         <div id="lakovna" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">LAKOVACÍ BOX</h1>
@@ -610,13 +498,14 @@
             </div>
         </div>
 
+        <!-- 6. KONTAKT -->
         <div id="kontakt" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">SPOJTE SE S NÁMI</h1>
-                <span>// 06 DISPEČINK</span>
+                <span>// 06 KONTAKT</span>
             </div>
             <div class="grid-2">
-                <div class="brutal-card" style="position:relative; height: 320px;">
+                <div class="brutal-card">
                     <div class="brutal-card-body">
                         <h3>GARÁŽOVÉ KORDINÁTY</h3>
                         <p style="margin-top: 15px; line-height: 1.8;">
@@ -627,14 +516,16 @@
                         </p>
                     </div>
                 </div>
-                <div class="brutal-card" style="position:relative; height: 320px;">
-                    <div class="card-img-wrap" style="height: 140px;">
-                        <img src="JEDNICKA.jpg" alt="Gruz Garage Base" style="object-position: center;">
+                <div class="brutal-card">
+                    <div class="card-img-wrap" style="height: 180px;">
+                        <img src="gruz.jpg" alt="Gruz Garage Base" style="object-position: center;">
                     </div>
-                    <div class="brutal-card-body" style="padding-top: 15px;">
+                    <div class="brutal-card-body" style="padding-top: 20px;">
                         <h3>OTEVÍRACÍ PROTOKOL</h3>
-                        <p style="font-size: 13px; margin-bottom: 10px;">
-                            PO-PÁ // 16:00 - 0:00 | SO // 10:00 - 18:00
+                        <p style="font-size: 13px;">
+                            PO-PÁ // 16:00 - 0:00<br>
+                            SO // 10:00 - 18:00<br>
+                            NE // <span style="color: var(--punk-red); font-weight: bold;">OFFLINE</span>
                         </p>
                         <a href="tel:608607667" class="brutal-btn btn-gold" style="width: 100%; text-align: center;">ZAVOLAT HNED</a>
                     </div>
@@ -642,6 +533,7 @@
             </div>
         </div>
 
+        <!-- 7. FÓRUM -->
         <div id="forum" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">UNDRGND COMMUNITY</h1>
@@ -660,7 +552,7 @@
 
             <div class="forum-thread">
                 <div>
-                    <div class="thread-title">Projekt E46: Rady ohledně podvozku a odklonů</div>
+                    <div class="thread-title">Projekt E60: Hledám radu ohledně podvozku</div>
                     <div class="thread-meta">Autor: user_gruz | Před 2 hodinami v sekci: Projekty</div>
                 </div>
                 <div class="thread-stats">
@@ -699,7 +591,6 @@
     </div>
 
     <script>
-        // Blikající kurzor
         setInterval(() => {
             const cursor = document.getElementById('blink');
             if(cursor) {
@@ -707,12 +598,11 @@
             }
         }, 500);
 
-        // Přepínání záložek
         function switchTab(event, tabId) {
             event.preventDefault();
             
             const sections = document.querySelectorAll('.content-section');
-            sections.forEach(sec => sec.classList.remove('active-tab'));
+            sections.export ? '' : sections.forEach(sec => sec.classList.remove('active-tab'));
             
             const buttons = document.querySelectorAll('nav a');
             buttons.forEach(btn => btn.classList.remove('active'));
@@ -722,18 +612,10 @@
             if (event.currentTarget.tagName === 'A') {
                 event.currentTarget.classList.add('active');
             } else {
-                document.querySelector('nav a').classList.add('active');
+                buttons[0].classList.add('active');
             }
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Funkce pro otočení 3D karty (motor & specifikace)
-        function toggleFlip(cardId) {
-            const container = document.getElementById(cardId);
-            if(container) {
-                container.classList.toggle('flipped');
-            }
         }
     </script>
 </body>
