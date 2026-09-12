@@ -327,6 +327,81 @@
             .thread-stats { margin-top: 5px; }
             .thread-stats span { margin-left: 0; margin-right: 15px; }
         }
+
+        /* --- 3D FLIP KARTY (AUTA) --- */
+        .flip-card {
+            perspective: 1000px;
+            background: transparent;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-style: preserve-3d;
+            display: grid; /* Trik, aby obě strany sdílely stejný prostor bez padání výšky */
+        }
+
+        /* Třída, kterou přidá JavaScript po kliknutí */
+        .flip-card.is-flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            grid-area: 1 / 1; /* Překrytí přední a zadní strany */
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Zadní strana karty */
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, var(--surface-color) 0%, #000 100%);
+            border-color: var(--punk-red);
+            box-shadow: inset 0 0 20px rgba(255, 0, 60, 0.05);
+        }
+
+        .flip-card-back h3 {
+            color: var(--text-main);
+            border-bottom: 1px solid var(--border-dark);
+            padding-bottom: 10px;
+        }
+
+        .spec-list {
+            list-style: none;
+            margin: 20px 0;
+            flex-grow: 1;
+        }
+
+        .spec-list li {
+            border-bottom: 1px dotted var(--border-dark);
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-main);
+        }
+
+        .spec-list li span {
+            color: var(--lux-gold);
+            font-family: 'Syncopate', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .flip-card-back .btn-back {
+            background: var(--punk-red);
+            color: #fff;
+            border: none;
+        }
+        .flip-card-back .btn-back::before {
+            background: #fff;
+        }
+        .flip-card-back .btn-back:hover {
+            color: var(--bg-color);
+        }
     </style>
 </head>
 <body>
@@ -353,27 +428,71 @@
         <div id="crew" class="content-section active-tab">
             <div class="section-header">
                 <h1 class="glitch-title">GRUZ CREW</h1>
-                <span>//PROJEKTY</span>
+                <span>// 01 PROJEKTY & VÝSTAVA</span>
             </div>
+            
             <div class="grid-2">
-                <div class="brutal-card">
-                    <div class="card-img-wrap">
-                        <img src="e60.jpg" alt="BMW E60">
-                    </div>
-                    <div class="brutal-card-body">
-                        <h3>PROJECT E60</h3>
-                        <p>Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a kompletní historie vývoje. Stroj, který budí respekt na ulici i na okruhu.</p>
-                        <a href="#" class="brutal-btn">Detail vozu</a>
+                <!-- KARTA 1: BMW E60 535d -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <!-- PŘEDNÍ STRANA -->
+                        <div class="flip-card-front brutal-card">
+                            <div class="card-img-wrap">
+                                <img src="e60.jpg" alt="BMW E60 535d">
+                            </div>
+                            <div class="brutal-card-body">
+                                <h3>PROJECT E60 535d</h3>
+                                <p>Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a kompletní historie vývoje. Stroj, který budí respekt na ulici i na okruhu.</p>
+                                <a href="#" class="brutal-btn" onclick="toggleFlip(event, this)">Detail vozu</a>
+                            </div>
+                        </div>
+                        <!-- ZADNÍ STRANA -->
+                        <div class="flip-card-back brutal-card">
+                            <div class="brutal-card-body">
+                                <h3>SPECIFIKACE // E60</h3>
+                                <ul class="spec-list">
+                                    <li><span>MOTOR</span> 3.0L R6 Biturbo (M57)</li>
+                                    <li><span>VÝKON</span> 350+ HP // 700+ Nm</li>
+                                    <li><span>POHON</span> Zadní náprava (RWD)</li>
+                                    <li><span>PŘEVODOVKA</span> Automat + xHP Flash</li>
+                                    <li><span>PODVOZEK</span> M-Paket / Snížený</li>
+                                    <li><span>STATUS</span> Daily / Street Weapon</li>
+                                </ul>
+                                <a href="#" class="brutal-btn btn-back" onclick="toggleFlip(event, this)">< NÁVRAT</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="brutal-card">
-                    <div class="card-img-wrap">
-                        <img src="prdelka.jpg" alt="BMW Compact">
-                    </div>
-                    <div class="brutal-card-body">
-                        <h3>STREET COMPACT / E46</h3>
-                        <p>Syrová zadokolka postavená pro čistý řidičský zážitek a nekompromisní průjezdy zatáčkami.</p>
-                        <a href="#" class="brutal-btn btn-gold">Detail vozu</a>
+
+                <!-- KARTA 2: BMW E46ti 316i -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <!-- PŘEDNÍ STRANA -->
+                        <div class="flip-card-front brutal-card">
+                            <div class="card-img-wrap">
+                                <img src="prdelka.jpg" alt="BMW E46ti 316i">
+                            </div>
+                            <div class="brutal-card-body">
+                                <h3>COMPACT E46ti 316i</h3>
+                                <p>Oldschool přístup. Syrová zadokolka postavená pro čistý řidičský zážitek, winter pekáč a nekompromisní průjezdy zatáčkami.</p>
+                                <a href="#" class="brutal-btn btn-gold" onclick="toggleFlip(event, this)">Detail vozu</a>
+                            </div>
+                        </div>
+                        <!-- ZADNÍ STRANA -->
+                        <div class="flip-card-back brutal-card">
+                            <div class="brutal-card-body" style="border-color: var(--lux-gold);">
+                                <h3 style="color: var(--lux-gold);">SPECIFIKACE // E46ti</h3>
+                                <ul class="spec-list">
+                                    <li><span>MOTOR</span> 1.8L R4 (N42/N46)</li>
+                                    <li><span>VÝKON</span> 115 HP (85 kW)</li>
+                                    <li><span>POHON</span> RWD + Zavařenec (Welded diff)</li>
+                                    <li><span>PŘEVODOVKA</span> Manuál (5q)</li>
+                                    <li><span>VÁHA</span> Odlehčeno (Striktní dieta)</li>
+                                    <li><span>STATUS</span> Drift Missile / Fun car</li>
+                                </ul>
+                                <a href="#" class="brutal-btn btn-gold btn-back" onclick="toggleFlip(event, this)">< NÁVRAT</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -468,7 +587,7 @@
                     </div>
                     <div class="brutal-card-body">
                         <h3>KERAMIKA & OCHRANA</h3>
-                        <p>Aplikace špičkové nano-keramiky s dlouhou životností. Extrémní hydrofobnost a ochrana před UV zářením a vlivy prostředí.</p>
+                        <p>Aplikace špičkové nano-keramiky s dlouhou životností. Extrémní hydrofobnost a ochrana před UV záření a vlivy prostředí.</p>
                     </div>
                 </div>
                 <div class="brutal-card">
@@ -616,6 +735,14 @@
             }
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleFlip(event, buttonElement) {
+            event.preventDefault(); // Zabrání odskočení stránky nahoru (kvůli href="#")
+            // Najde nejbližší nadřazený element s třídou 'flip-card'
+            const card = buttonElement.closest('.flip-card');
+            // Přepne třídu, která spouští CSS animaci rotace
+            card.classList.toggle('is-flipped');
         }
     </script>
 </body>
