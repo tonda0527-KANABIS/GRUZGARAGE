@@ -246,6 +246,78 @@
             box-shadow: 0 0 15px rgba(197, 160, 89, 0.4) !important;
         }
 
+        /* --- NOVÁ PLYNULÁ CURTAIN / SLIDE-UP ANIMACE PRO SPECIFIKACE --- */
+        .car-card {
+            position: relative;
+            border: 1px solid var(--border-dark);
+            background: var(--surface-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .car-card:hover {
+            border-color: var(--lux-gold);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8), 0 0 10px rgba(255, 0, 60, 0.1);
+        }
+
+        .spec-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(6, 6, 6, 0.97);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .car-card.specs-active .spec-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .spec-overlay h3 {
+            color: var(--text-main);
+            border-bottom: 1px solid var(--border-dark);
+            padding-bottom: 12px;
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+
+        .spec-list {
+            list-style: none;
+            margin: 10px 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .spec-list li {
+            border-bottom: 1px dotted var(--border-dark);
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-main);
+        }
+
+        .spec-list li span {
+            color: var(--lux-gold);
+            font-family: 'Syncopate', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
         .forum-thread {
             border-left: 2px solid var(--border-dark);
             border-bottom: 1px solid #111;
@@ -294,71 +366,6 @@
             .thread-stats { margin-top: 5px; }
             .thread-stats span { margin-left: 0; margin-right: 15px; }
         }
-
-        /* --- 3D FLIP KARTY --- */
-        .flip-card {
-            perspective: 1000px;
-            background: transparent;
-        }
-
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.5s ease;
-            transform-style: preserve-3d;
-        }
-
-        .flip-card.is-flipped .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .flip-card-front, .flip-card-back {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .flip-card-back {
-            position: absolute;
-            top: 0;
-            left: 0;
-            transform: rotateY(180deg);
-            background: var(--surface-color);
-            border-color: var(--punk-red);
-        }
-
-        .flip-card-back h3 {
-            color: var(--text-main);
-            border-bottom: 1px solid var(--border-dark);
-            padding-bottom: 10px;
-        }
-
-        .spec-list {
-            list-style: none;
-            margin: 20px 0;
-            flex-grow: 1;
-        }
-
-        .spec-list li {
-            border-bottom: 1px dotted var(--border-dark);
-            padding: 10px 0;
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            color: var(--text-main);
-        }
-
-        .spec-list li span {
-            color: var(--lux-gold);
-            font-family: 'Syncopate', sans-serif;
-            font-size: 10px;
-            font-weight: 700;
-        }
     </style>
 </head>
 <body>
@@ -388,61 +395,53 @@
             </div>
             
             <div class="grid-2">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front brutal-card">
-                            <div class="card-img-wrap">
-                                <img src="e60.jpg" alt="BMW E60 535d" loading="lazy">
-                            </div>
-                            <div class="brutal-card-body">
-                                <h3>PROJECT E60 535d</h3>
-                                <p>Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a kompletní historie vývoje. Stroj, který budí respekt na ulici i na okruhu.</p>
-                                <a href="#" class="brutal-btn" onclick="toggleFlip(event, this)">Detail vozu</a>
-                            </div>
-                        </div>
-                        <div class="flip-card-back brutal-card">
-                            <div class="brutal-card-body">
-                                <h3>SPECIFIKACE // E60</h3>
-                                <ul class="spec-list">
-                                    <li><span>MOTOR</span> 3.0L R6 Biturbo (M57)</li>
-                                    <li><span>VÝKON</span> 350+ HP // 700+ Nm</li>
-                                    <li><span>POHON</span> Zadní náprava (RWD)</li>
-                                    <li><span>PŘEVODOVKA</span> Automat + xHP Flash</li>
-                                    <li><span>PODVOZEK</span> M-Paket / Snížený</li>
-                                    <li><span>STATUS</span> Daily / Street Weapon</li>
-                                </ul>
-                                <a href="#" class="brutal-btn btn-back" onclick="toggleFlip(event, this)">< NÁVRAT</a>
-                            </div>
-                        </div>
+                <!-- KARTA 1: BMW E60 535d -->
+                <div class="car-card">
+                    <div class="card-img-wrap">
+                        <img src="e60.jpg" alt="BMW E60 535d" loading="lazy">
+                    </div>
+                    <div class="brutal-card-body">
+                        <h3>PROJECT E60 535d</h3>
+                        <p>Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a kompletní historie vývoje. Stroj, který budí respekt na ulici i na okruhu.</p>
+                        <a href="#" class="brutal-btn" onclick="toggleSpecs(event, this)">Detail vozu</a>
+                    </div>
+                    <!-- Specifikace Overlay (Slide-up panel) -->
+                    <div class="spec-overlay">
+                        <h3>SPECIFIKACE // E60</h3>
+                        <ul class="spec-list">
+                            <li><span>MOTOR</span> 3.0L R6 Biturbo (M57)</li>
+                            <li><span>VÝKON</span> 350+ HP // 700+ Nm</li>
+                            <li><span>POHON</span> Zadní náprava (RWD)</li>
+                            <li><span>PŘEVODOVKA</span> Automat + xHP Flash</li>
+                            <li><span>PODVOZEK</span> M-Paket / Snížený</li>
+                            <li><span>STATUS</span> Daily / Street Weapon</li>
+                        </ul>
+                        <a href="#" class="brutal-btn" onclick="toggleSpecs(event, this)">< NÁVRAT</a>
                     </div>
                 </div>
 
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front brutal-card">
-                            <div class="card-img-wrap">
-                                <img src="prdelka.jpg" alt="BMW E46ti 316i" loading="lazy">
-                            </div>
-                            <div class="brutal-card-body">
-                                <h3>COMPACT E46ti 316i</h3>
-                                <p>Oldschool přístup. Syrová zadokolka postavená pro čistý řidičský zážitek, winter pekáč a nekompromisní průjezdy zatáčkami.</p>
-                                <a href="#" class="brutal-btn btn-gold" onclick="toggleFlip(event, this)">Detail vozu</a>
-                            </div>
-                        </div>
-                        <div class="flip-card-back brutal-card">
-                            <div class="brutal-card-body" style="border-color: var(--lux-gold);">
-                                <h3 style="color: var(--lux-gold);">SPECIFIKACE // E46ti</h3>
-                                <ul class="spec-list">
-                                    <li><span>MOTOR</span> 1.8L R4 (N42/N46)</li>
-                                    <li><span>VÝKON</span> 115 HP (85 kW)</li>
-                                    <li><span>POHON</span> RWD + Zavařenec (Welded diff)</li>
-                                    <li><span>PŘEVODOVKA</span> Manuál (5q)</li>
-                                    <li><span>VÁHA</span> Odlehčeno (Striktní dieta)</li>
-                                    <li><span>STATUS</span> Drift Missile / Fun car</li>
-                                </ul>
-                                <a href="#" class="brutal-btn btn-gold btn-back" onclick="toggleFlip(event, this)">< NÁVRAT</a>
-                            </div>
-                        </div>
+                <!-- KARTA 2: BMW E46ti 316i -->
+                <div class="car-card">
+                    <div class="card-img-wrap">
+                        <img src="prdelka.jpg" alt="BMW E46ti 316i" loading="lazy">
+                    </div>
+                    <div class="brutal-card-body">
+                        <h3>COMPACT E46ti 316i</h3>
+                        <p>Oldschool přístup. Syrová zadokolka postavená pro čistý řidičský zážitek, winter pekáč a nekompromisní průjezdy zatáčkami.</p>
+                        <a href="#" class="brutal-btn btn-gold" onclick="toggleSpecs(event, this)">Detail vozu</a>
+                    </div>
+                    <!-- Specifikace Overlay (Slide-up panel) -->
+                    <div class="spec-overlay" style="border-top: 2px solid var(--lux-gold);">
+                        <h3 style="color: var(--lux-gold);">SPECIFIKACE // E46ti</h3>
+                        <ul class="spec-list">
+                            <li><span>MOTOR</span> 1.8L R4 (N42/N46)</li>
+                            <li><span>VÝKON</span> 115 HP (85 kW)</li>
+                            <li><span>POHON</span> RWD + Zavařenec (Welded diff)</li>
+                            <li><span>PŘEVODOVKA</span> Manuál (5q)</li>
+                            <li><span>VÁHA</span> Odlehčeno (Striktní dieta)</li>
+                            <li><span>STATUS</span> Drift Missile / Fun car</li>
+                        </ul>
+                        <a href="#" class="brutal-btn btn-gold" onclick="toggleSpecs(event, this)">< NÁVRAT</a>
                     </div>
                 </div>
             </div>
@@ -682,10 +681,10 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function toggleFlip(event, buttonElement) {
+        function toggleSpecs(event, buttonElement) {
             event.preventDefault();
-            const card = buttonElement.closest('.flip-card');
-            card.classList.toggle('is-flipped');
+            const card = buttonElement.closest('.car-card');
+            card.classList.toggle('specs-active');
         }
     </script>
 </body>
