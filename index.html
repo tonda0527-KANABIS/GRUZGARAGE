@@ -107,7 +107,7 @@
             grid-column: 2;
             justify-self: center;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
@@ -116,9 +116,9 @@
             text-decoration: none;
             font-family: 'Syncopate', sans-serif;
             font-weight: 700;
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 1px;
-            padding: 9px 16px;
+            padding: 9px 14px;
             border: 1px solid var(--border-dark);
             background: rgba(15, 17, 24, 0.6);
             transition: all 0.25s ease;
@@ -449,7 +449,7 @@
             text-shadow: 0 0 8px var(--punk-red-glow);
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 1050px) {
             header { grid-template-columns: 1fr; gap: 20px; padding: 15px; justify-items: center; }
             .logo-nav { justify-self: center; grid-column: 1; }
             nav { grid-column: 1; justify-content: center; }
@@ -469,6 +469,7 @@
         </div>
         <nav>
             <a onclick="switchTab(event, 'crew')" class="active">GRUZ CREW</a>
+            <a onclick="switchTab(event, 'projekty')">PROJEKTY</a>
             <a onclick="switchTab(event, 'servis')">SERVIS</a>
             <a onclick="switchTab(event, 'upravy')">ÚPRAVY</a>
             <a onclick="switchTab(event, 'lesteni')">LEŠTĚNÍ</a>
@@ -488,11 +489,47 @@
 
     <div class="container">
         
-        <!-- 1. GRUZ CREW -->
+        <!-- 1. GRUZ CREW (ÚVODNÍ MANIFESTO) -->
         <div id="crew" class="content-section active-tab">
             <div class="section-header">
                 <h1 class="glitch-title">GRUZ CREW</h1>
-                <span>// 01 PROJEKTY & VÝSTAVA</span>
+                <span>// 01 VÍTEJTE V GRUZ.GARAGE</span>
+            </div>
+            
+            <div class="brutal-card" style="max-width: 950px; margin: 0 auto;">
+                <div class="brutal-card-body" style="padding: 45px;">
+                    <h3 style="font-size: 28px; color: var(--lux-gold); margin-bottom: 25px; text-shadow: 0 0 10px var(--lux-gold-glow);">VÍTEJTE V GRUZ.GARAGE</h3>
+                    
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 20px; font-size: 14px; color: var(--text-dim); line-height: 1.8;">
+                        <li style="border-left: 3px solid var(--punk-red); padding-left: 15px; background: rgba(255,0,68,0.03); padding-top: 10px; padding-bottom: 10px;">
+                            <strong style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-size: 18px; display: block; margin-bottom: 40px/4; letter-spacing: 1px;">KOMPLEXNÍ AUTOSERVIS</strong>
+                            Poskytujeme komplexní autoservis vašeho vozu, od pravidelné údržby včetně výměny olejů a brzdových destiček až po menší mechanické opravy a úpravy.
+                        </li>
+                        <li style="border-left: 3px solid var(--lux-gold); padding-left: 15px; background: rgba(212,175,55,0.03); padding-top: 10px; padding-bottom: 10px;">
+                            <strong style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-size: 18px; display: block; margin-bottom: 4px; letter-spacing: 1px;">DETAILY & INTERIÉRY</strong>
+                            Specializujeme se také na detaily, jako je profesionální čištění interiéru, renovace a rozleštění zašlých světlometů pro lepší vzhled i bezpečnost.
+                        </li>
+                        <li style="border-left: 3px solid var(--punk-red); padding-left: 15px; background: rgba(255,0,68,0.03); padding-top: 10px; padding-bottom: 10px;">
+                            <strong style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-size: 18px; display: block; margin-bottom: 4px; letter-spacing: 1px;">TUNING & LAK</strong>
+                            Realizujeme menší vizuální tak lehké tuningové úpravy a do budoucna pro vás připravujeme také kompletní lakýrnické práce.
+                        </li>
+                    </ul>
+
+                    <div style="margin-top: 35px; padding-top: 20px; border-top: 1px solid var(--border-dark); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                        <span style="font-family: 'Syncopate', sans-serif; font-size: 11px; font-weight: bold; color: var(--lux-gold); text-shadow: 0 0 8px var(--lux-gold-glow);">
+                            // AUTOSERVIS GRUZ.GARAGE
+                        </span>
+                        <a href="#" class="brutal-btn btn-gold" onclick="switchTab(event, 'projekty')">PROHLÉDNOUT PROJEKTY -></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. PROJEKTY & VÝSTAVA -->
+        <div id="projekty" class="content-section">
+            <div class="section-header">
+                <h1 class="glitch-title">PROJEKTY & VÝSTAVA</h1>
+                <span>// 02 GANG STROJE</span>
             </div>
             
             <div class="grid-2">
@@ -546,11 +583,11 @@
             </div>
         </div>
 
-        <!-- 2. SERVIS -->
+        <!-- 3. SERVIS -->
         <div id="servis" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">MECHANIKA & SERVIS</h1>
-                <span>// 02 ÚDRŽBA A DIAGNOSTIKA</span>
+                <span>// 03 ÚDRŽBA A DIAGNOSTIKA</span>
             </div>
             <div class="grid-3">
                 <div class="brutal-card">
@@ -583,11 +620,11 @@
             </div>
         </div>
 
-        <!-- 3. ÚPRAVY -->
+        <!-- 4. ÚPRAVY -->
         <div id="upravy" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">PERFORMANCE ÚPRAVY</h1>
-                <span>// 03 TUNING & EXHAUST</span>
+                <span>// 04 TUNING & EXHAUST</span>
             </div>
             <div class="grid-2">
                 <div class="brutal-card">
@@ -596,7 +633,7 @@
                     </div>
                     <div class="brutal-card-body">
                         <h3>CUSTOM EXHAUST & AERO</h3>
-                        <p>Svařování výfukových systémů na míru. Instalace difuzorů, spoilerů a bodykitů pro agresivní stance.</p>
+                        <p>Svařování výfukových systémů na míru s dokonalým zvukovým projevem. Instalace difuzorů, spoilerů a bodykitů pro agresivní stance.</p>
                         <a href="#" class="brutal-btn">Zjistit více</a>
                     </div>
                 </div>
@@ -613,11 +650,11 @@
             </div>
         </div>
 
-        <!-- 4. LEŠTĚNÍ -->
+        <!-- 5. LEŠTĚNÍ -->
         <div id="lesteni" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">DETAILING LAKU</h1>
-                <span>// 04 ZRCADLOVÝ LESK</span>
+                <span>// 05 ZRCADLOVÝ LESK</span>
             </div>
             <div class="grid-3">
                 <div class="brutal-card">
@@ -650,11 +687,11 @@
             </div>
         </div>
 
-        <!-- 5. LAKOVNA -->
+        <!-- 6. LAKOVNA -->
         <div id="lakovna" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">LAKOVACÍ BOX</h1>
-                <span>// 05 PAINTJOB LAB</span>
+                <span>// 06 PAINTJOB LAB</span>
             </div>
             <div style="border: 1px dashed var(--border-accent); padding: 70px 20px; text-align: center; background: var(--surface-color); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
                 <h2 style="color: var(--punk-red); font-size: 32px; letter-spacing: 2px; text-shadow: 0 0 12px var(--punk-red-glow);">[ STATUS: VE VÝSTAVBĚ ]</h2>
@@ -665,11 +702,11 @@
             </div>
         </div>
 
-        <!-- 6. KONTAKT -->
+        <!-- 7. KONTAKT -->
         <div id="kontakt" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">SPOJTE SE S NÁMI</h1>
-                <span>// 06 KONTAKT</span>
+                <span>// 07 KONTAKT</span>
             </div>
             <div style="max-width: 900px; margin: 0 auto;">
                 <div class="brutal-card">
@@ -699,11 +736,11 @@
             </div>
         </div>
 
-        <!-- 7. FÓRUM -->
+        <!-- 8. FÓRUM -->
         <div id="forum" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">UNDRGND COMMUNITY</h1>
-                <span>// 07 KOMUNITNÍ FÓRUM</span>
+                <span>// 08 KOMUNITNÍ FÓRUM</span>
             </div>
             
             <div class="forum-thread" style="border-left-color: var(--lux-gold);">
