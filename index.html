@@ -57,13 +57,18 @@
             background-color: rgba(3, 3, 3, 0.95);
             border-bottom: 1px solid var(--border-dark);
             padding: 18px 40px;
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        }
+
+        .logo-nav {
+            grid-column: 1;
+            justify-self: start;
         }
 
         .logo-nav img {
@@ -79,6 +84,8 @@
         }
 
         nav {
+            grid-column: 2;
+            justify-self: center;
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
@@ -181,29 +188,26 @@
         .card-img-wrap {
             position: relative;
             width: 100%;
-            height: 280px;
+            height: auto;
             overflow: hidden;
-            background-color: #050505;
+            background-color: var(--surface-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .card-img-wrap img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
+            height: auto;
+            display: block;
+            object-fit: contain;
             filter: contrast(105%) brightness(0.98);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .brutal-card:hover .card-img-wrap img {
             filter: contrast(1.1) brightness(1.05);
-            transform: scale(1.04);
-        }
-
-        /* CELÁ AUTA BEZ OŘEZU NA PRVNÍ STRÁNCE */
-        .car-card .card-img-wrap img {
-            object-fit: contain;
-            background-color: #030303;
+            transform: scale(1.02);
         }
 
         .brutal-card-body {
@@ -373,8 +377,9 @@
         }
 
         @media (max-width: 900px) {
-            header { flex-direction: column; gap: 20px; padding: 15px; }
-            nav { justify-content: center; }
+            header { grid-template-columns: 1fr; gap: 20px; padding: 15px; justify-items: center; }
+            .logo-nav { justify-self: center; grid-column: 1; }
+            nav { grid-column: 1; justify-content: center; }
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
             .forum-thread { flex-direction: column; align-items: flex-start; gap: 15px; }
             .thread-stats { margin-top: 5px; }
