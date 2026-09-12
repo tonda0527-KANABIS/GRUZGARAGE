@@ -188,19 +188,15 @@
         .card-img-wrap {
             position: relative;
             width: 100%;
-            height: auto;
+            height: 320px;
             overflow: hidden;
             background-color: var(--surface-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .card-img-wrap img {
             width: 100%;
-            height: auto;
-            display: block;
-            object-fit: contain;
+            height: 100%;
+            object-fit: cover;
             filter: contrast(105%) brightness(0.98);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -376,6 +372,47 @@
             font-weight: bold;
         }
 
+        /* Spodní levý kontakt widget pro každou stránku */
+        .page-contact-bar {
+            margin-top: 60px;
+            border-top: 1px solid var(--border-dark);
+            padding-top: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .page-contact-bar h4 {
+            color: var(--punk-red);
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .page-contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        .page-contact-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .page-contact-links a:hover {
+            color: var(--lux-gold);
+        }
+
+        .page-contact-links span {
+            color: var(--lux-gold);
+            font-weight: bold;
+        }
+
         @media (max-width: 900px) {
             header { grid-template-columns: 1fr; gap: 20px; padding: 15px; justify-items: center; }
             .logo-nav { justify-self: center; grid-column: 1; }
@@ -384,6 +421,7 @@
             .forum-thread { flex-direction: column; align-items: flex-start; gap: 15px; }
             .thread-stats { margin-top: 5px; }
             .thread-stats span { margin-left: 0; margin-right: 15px; }
+            .page-contact-links { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
@@ -417,14 +455,13 @@
                 <!-- KARTA 1: BMW E60 535d -->
                 <div class="car-card">
                     <div class="card-img-wrap">
-                        <img src="e60.jpg" alt="BMW E60 535d" loading="lazy">
+                        <img src="e60.jpg" alt="BMW E60 535d" style="object-position: center;" loading="lazy">
                     </div>
                     <div class="brutal-card-body">
                         <h3>PROJECT E60 535d</h3>
                         <p>Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a kompletní historie vývoje. Stroj, který budí respekt na ulici i na okruhu.</p>
                         <a href="#" class="brutal-btn" onclick="toggleSpecs(event, this)">Detail vozu</a>
                     </div>
-                    <!-- Specifikace Overlay (Slide-up panel) -->
                     <div class="spec-overlay">
                         <h3>SPECIFIKACE // E60</h3>
                         <ul class="spec-list">
@@ -439,17 +476,16 @@
                     </div>
                 </div>
 
-                <!-- KARTA 2: BMW E46ti 316i -->
+                <!-- KARTA 2: BMW E46ti 316i (Oříznutý vršek) -->
                 <div class="car-card">
                     <div class="card-img-wrap">
-                        <img src="prdelka.jpg" alt="BMW E46ti 316i" loading="lazy">
+                        <img src="prdelka.jpg" alt="BMW E46ti 316i" style="object-position: center 85%;" loading="lazy">
                     </div>
                     <div class="brutal-card-body">
                         <h3>COMPACT E46ti 316i</h3>
                         <p>Oldschool přístup. Syrová zadokolka postavená pro čistý řidičský zážitek, winter pekáč a nekompromisní průjezdy zatáčkami.</p>
                         <a href="#" class="brutal-btn btn-gold" onclick="toggleSpecs(event, this)">Detail vozu</a>
                     </div>
-                    <!-- Specifikace Overlay (Slide-up panel) -->
                     <div class="spec-overlay" style="border-top: 2px solid var(--lux-gold);">
                         <h3 style="color: var(--lux-gold);">SPECIFIKACE // E46ti</h3>
                         <ul class="spec-list">
@@ -462,6 +498,17 @@
                         </ul>
                         <a href="#" class="brutal-btn btn-gold" onclick="toggleSpecs(event, this)">< NÁVRAT</a>
                     </div>
+                </div>
+            </div>
+
+            <!-- Kontaktní lišta dole vlevo -->
+            <div class="page-contact-bar">
+                <h4>GARÁŽOVÉ KOORDINÁTY</h4>
+                <div class="page-contact-links">
+                    <div><span>TEL:</span> <a href="tel:608607667">+420 608 607 667</a></div>
+                    <div><span>MAIL:</span> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a></div>
+                    <div><span>BASE:</span> Jičíněves 507 31</div>
+                    <div><span>IG:</span> <a href="https://instagram.com" target="_blank">@GARAGE.GRUZ</a></div>
                 </div>
             </div>
         </div>
@@ -501,6 +548,16 @@
                     </div>
                 </div>
             </div>
+
+            <div class="page-contact-bar">
+                <h4>GARÁŽOVÉ KOORDINÁTY</h4>
+                <div class="page-contact-links">
+                    <div><span>TEL:</span> <a href="tel:608607667">+420 608 607 667</a></div>
+                    <div><span>MAIL:</span> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a></div>
+                    <div><span>BASE:</span> Jičíněves 507 31</div>
+                    <div><span>IG:</span> <a href="https://instagram.com" target="_blank">@GARAGE.GRUZ</a></div>
+                </div>
+            </div>
         </div>
 
         <!-- 3. ÚPRAVY -->
@@ -529,6 +586,16 @@
                         <p>Montáž předních rozpěr, stavitelných podvozků a přesné nastavení odklonů pro maximální torzní tuhost a přilnavost v zatáčkách.</p>
                         <a href="#" class="brutal-btn btn-gold">Zjistit více</a>
                     </div>
+                </div>
+            </div>
+
+            <div class="page-contact-bar">
+                <h4>GARÁŽOVÉ KOORDINÁTY</h4>
+                <div class="page-contact-links">
+                    <div><span>TEL:</span> <a href="tel:608607667">+420 608 607 667</a></div>
+                    <div><span>MAIL:</span> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a></div>
+                    <div><span>BASE:</span> Jičíněves 507 31</div>
+                    <div><span>IG:</span> <a href="https://instagram.com" target="_blank">@GARAGE.GRUZ</a></div>
                 </div>
             </div>
         </div>
@@ -568,6 +635,16 @@
                     </div>
                 </div>
             </div>
+
+            <div class="page-contact-bar">
+                <h4>GARÁŽOVÉ KOORDINÁTY</h4>
+                <div class="page-contact-links">
+                    <div><span>TEL:</span> <a href="tel:608607667">+420 608 607 667</a></div>
+                    <div><span>MAIL:</span> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a></div>
+                    <div><span>BASE:</span> Jičíněves 507 31</div>
+                    <div><span>IG:</span> <a href="https://instagram.com" target="_blank">@GARAGE.GRUZ</a></div>
+                </div>
+            </div>
         </div>
 
         <!-- 5. LAKOVNA -->
@@ -583,6 +660,16 @@
                     <span id="blink">_</span> SYSTÉM SE PŘIPRAVUJE
                 </div>
             </div>
+
+            <div class="page-contact-bar">
+                <h4>GARÁŽOVÉ KOORDINÁTY</h4>
+                <div class="page-contact-links">
+                    <div><span>TEL:</span> <a href="tel:608607667">+420 608 607 667</a></div>
+                    <div><span>MAIL:</span> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a></div>
+                    <div><span>BASE:</span> Jičíněves 507 31</div>
+                    <div><span>IG:</span> <a href="https://instagram.com" target="_blank">@GARAGE.GRUZ</a></div>
+                </div>
+            </div>
         </div>
 
         <!-- 6. KONTAKT -->
@@ -591,31 +678,40 @@
                 <h1 class="glitch-title">SPOJTE SE S NÁMI</h1>
                 <span>// 06 KONTAKT</span>
             </div>
-            <div class="grid-2">
+            <div style="max-width: 900px; margin: 0 auto;">
                 <div class="brutal-card">
-                    <div class="brutal-card-body">
-                        <h3>GARÁŽOVÉ KOORDINÁTY</h3>
-                        <p style="margin-top: 15px; line-height: 1.8;">
-                            <strong style="color: var(--lux-gold);">TEL:</strong> <a href="tel:608607667" style="color: var(--text-main); text-decoration: none;">+420 608 607 667</a><br>
-                            <strong style="color: var(--lux-gold);">MAIL:</strong> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ" style="color: var(--text-main); text-decoration: none;">GRUZGARAGE66@SEZNAM.CZ</a><br>
-                            <strong style="color: var(--lux-gold);">BASE:</strong> Jičíněves 507 31<br>
-                            <strong style="color: var(--lux-gold);">IG:</strong> <a href="https://instagram.com" style="color: var(--text-main); text-decoration: none;">@GARAGE.GRUZ</a>
-                        </p>
+                    <div class="brutal-card-body" style="padding: 40px;">
+                        <h3>GARÁŽOVÉ KOORDINÁTY & OTEVÍRACÍ DOBA</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px;">
+                            <div>
+                                <p style="line-height: 2.2;">
+                                    <strong style="color: var(--lux-gold);">TEL:</strong> <a href="tel:608607667" style="color: var(--text-main); text-decoration: none;">+420 608 607 667</a><br>
+                                    <strong style="color: var(--lux-gold);">MAIL:</strong> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ" style="color: var(--text-main); text-decoration: none;">GRUZGARAGE66@SEZNAM.CZ</a><br>
+                                    <strong style="color: var(--lux-gold);">BASE:</strong> Jičíněves 507 31<br>
+                                    <strong style="color: var(--lux-gold);">IG:</strong> <a href="https://instagram.com" style="color: var(--text-main); text-decoration: none;">@GARAGE.GRUZ</a>
+                                </p>
+                            </div>
+                            <div>
+                                <p style="line-height: 2.2; font-size: 13px;">
+                                    <strong style="color: var(--lux-gold);">OTEVÍRACÍ PROTOKOL:</strong><br>
+                                    PO-PÁ // 16:00 - 0:00<br>
+                                    SO // 10:00 - 18:00<br>
+                                    NE // <span style="color: var(--punk-red); font-weight: bold;">OFFLINE</span>
+                                </p>
+                                <a href="tel:608607667" class="brutal-btn btn-gold" style="width: 100%; text-align: center; margin-top: 15px;">ZAVOLAT HNED</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="brutal-card">
-                    <div class="card-img-wrap">
-                        <img src="gruz.jpg" alt="Gruz Garage Base" style="object-position: center;" loading="lazy">
-                    </div>
-                    <div class="brutal-card-body" style="padding-top: 20px;">
-                        <h3>OTEVÍRACÍ PROTOKOL</h3>
-                        <p style="font-size: 13px;">
-                            PO-PÁ // 16:00 - 0:00<br>
-                            SO // 10:00 - 18:00<br>
-                            NE // <span style="color: var(--punk-red); font-weight: bold;">OFFLINE</span>
-                        </p>
-                        <a href="tel:608607667" class="brutal-btn btn-gold" style="width: 100%; text-align: center;">ZAVOLAT HNED</a>
-                    </div>
+            </div>
+
+            <div class="page-contact-bar">
+                <h4>GARÁŽOVÉ KOORDINÁTY</h4>
+                <div class="page-contact-links">
+                    <div><span>TEL:</span> <a href="tel:608607667">+420 608 607 667</a></div>
+                    <div><span>MAIL:</span> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a></div>
+                    <div><span>BASE:</span> Jičíněves 507 31</div>
+                    <div><span>IG:</span> <a href="https://instagram.com" target="_blank">@GARAGE.GRUZ</a></div>
                 </div>
             </div>
         </div>
@@ -672,6 +768,16 @@
 
             <div style="text-align: right; margin-top: 30px;">
                 <a href="#" class="brutal-btn">+ NOVÉ VLÁKNO</a>
+            </div>
+
+            <div class="page-contact-bar">
+                <h4>GARÁŽOVÉ KOORDINÁTY</h4>
+                <div class="page-contact-links">
+                    <div><span>TEL:</span> <a href="tel:608607667">+420 608 607 667</a></div>
+                    <div><span>MAIL:</span> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a></div>
+                    <div><span>BASE:</span> Jičíněves 507 31</div>
+                    <div><span>IG:</span> <a href="https://instagram.com" target="_blank">@GARAGE.GRUZ</a></div>
+                </div>
             </div>
         </div>
 
