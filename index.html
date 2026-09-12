@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRUZ.GARAGE/SERVIS/TUNING</title>
+    <title>GRUZ GARAGE // SERVIS // TUNING</title>
     <link rel="icon" type="image/jpeg" href="gruz.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,26 +35,6 @@
             overflow-x: hidden;
         }
 
-        body::before {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
-            z-index: 9999;
-            background-size: 100% 4px, 6px 100%;
-            pointer-events: none;
-        }
-
-        .noise {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 0.03;
-            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-        }
-
         h1, h2, h3, h4 {
             font-family: 'Rajdhani', sans-serif;
             text-transform: uppercase;
@@ -68,7 +48,7 @@
         ::-webkit-scrollbar-thumb:hover { background: var(--punk-red); }
 
         header {
-            background-color: rgba(3, 3, 3, 0.9);
+            background-color: rgba(3, 3, 3, 0.95);
             border-bottom: 1px solid var(--border-dark);
             padding: 18px 40px;
             display: flex;
@@ -77,7 +57,6 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
             box-shadow: 0 4px 20px rgba(0,0,0,0.8);
         }
 
@@ -108,7 +87,7 @@
             letter-spacing: 1px;
             padding: 8px 14px;
             border: 1px solid transparent;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             cursor: pointer;
             text-transform: uppercase;
         }
@@ -116,7 +95,7 @@
         nav a:hover, nav a.active {
             color: var(--text-main);
             border: 1px solid var(--lux-gold);
-            background: linear-gradient(180deg, rgba(197, 160, 89, 0.1) 0%, transparent 100%);
+            background: rgba(197, 160, 89, 0.1);
             box-shadow: 0 0 10px rgba(197, 160, 89, 0.2);
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
         }
@@ -133,12 +112,12 @@
 
         .content-section.active-tab {
             display: block;
-            animation: glitchFadeIn 0.5s ease-in-out forwards;
+            animation: fadeIn 0.3s ease-in-out forwards;
         }
 
-        @keyframes glitchFadeIn {
-            0% { opacity: 0; transform: translateY(15px); filter: contrast(150%); }
-            100% { opacity: 1; transform: translateY(0); filter: contrast(100%); }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .section-header {
@@ -181,22 +160,16 @@
             border: 1px solid var(--border-dark);
             background: var(--surface-color);
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
 
-        .brutal-card::before, .brutal-card::after {
-            content: ''; position: absolute; width: 12px; height: 12px; border: 1px solid var(--text-dim); transition: all 0.3s; z-index: 5;
-        }
-        .brutal-card::before { top: 0; left: 0; border-right: none; border-bottom: none; }
-        .brutal-card::after { bottom: 0; right: 0; border-left: none; border-top: none; }
-
         .brutal-card:hover {
             border-color: var(--lux-gold);
-            transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.9), 0 0 15px rgba(255, 0, 60, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8), 0 0 10px rgba(255, 0, 60, 0.1);
         }
 
         .card-img-wrap {
@@ -209,13 +182,13 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(30%) contrast(110%) brightness(0.9);
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            filter: grayscale(20%) contrast(105%) brightness(0.95);
+            transition: all 0.4s ease;
         }
 
         .brutal-card:hover img {
             filter: grayscale(0%) contrast(1.1) brightness(1.05);
-            transform: scale(1.06);
+            transform: scale(1.03);
         }
 
         .brutal-card-body {
@@ -224,7 +197,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            background: linear-gradient(0deg, #020202 0%, var(--surface-color) 100%);
+            background: var(--surface-color);
         }
 
         .brutal-card-body h3 {
@@ -255,29 +228,23 @@
             letter-spacing: 2px;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s;
+            transition: all 0.2s;
             cursor: pointer;
             margin-top: 10px;
         }
 
-        .brutal-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 100%; height: 100%;
-            background: var(--punk-red);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            z-index: -1;
-        }
-
         .brutal-btn:hover {
             color: #fff;
+            background: var(--punk-red);
             border-color: var(--punk-red);
             box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
         }
 
-        .brutal-btn:hover::before { left: 0; }
-        .btn-gold:hover::before { background: var(--lux-gold); }
-        .btn-gold:hover { border-color: var(--lux-gold); box-shadow: 0 0 15px rgba(197, 160, 89, 0.4); }
+        .btn-gold:hover {
+            background: var(--lux-gold) !important;
+            border-color: var(--lux-gold) !important;
+            box-shadow: 0 0 15px rgba(197, 160, 89, 0.4) !important;
+        }
 
         .forum-thread {
             border-left: 2px solid var(--border-dark);
@@ -328,7 +295,7 @@
             .thread-stats span { margin-left: 0; margin-right: 15px; }
         }
 
-        /* --- 3D FLIP KARTY (AUTA) --- */
+        /* --- 3D FLIP KARTY --- */
         .flip-card {
             perspective: 1000px;
             background: transparent;
@@ -338,7 +305,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.5s ease;
             transform-style: preserve-3d;
         }
 
@@ -361,9 +328,8 @@
             top: 0;
             left: 0;
             transform: rotateY(180deg);
-            background: linear-gradient(135deg, var(--surface-color) 0%, #000 100%);
+            background: var(--surface-color);
             border-color: var(--punk-red);
-            box-shadow: inset 0 0 20px rgba(255, 0, 60, 0.05);
         }
 
         .flip-card-back h3 {
@@ -393,22 +359,9 @@
             font-size: 10px;
             font-weight: 700;
         }
-
-        .flip-card-back .btn-back {
-            background: var(--punk-red);
-            color: #fff;
-            border: none;
-        }
-        .flip-card-back .btn-back::before {
-            background: #fff;
-        }
-        .flip-card-back .btn-back:hover {
-            color: var(--bg-color);
-        }
     </style>
 </head>
 <body>
-    <div class="noise"></div>
 
     <header>
         <div class="logo-nav">
@@ -435,13 +388,11 @@
             </div>
             
             <div class="grid-2">
-                <!-- KARTA 1: BMW E60 535d -->
                 <div class="flip-card">
                     <div class="flip-card-inner">
-                        <!-- PŘEDNÍ STRANA -->
                         <div class="flip-card-front brutal-card">
                             <div class="card-img-wrap">
-                                <img src="e60.jpg" alt="BMW E60 535d">
+                                <img src="e60.jpg" alt="BMW E60 535d" loading="lazy">
                             </div>
                             <div class="brutal-card-body">
                                 <h3>PROJECT E60 535d</h3>
@@ -449,7 +400,6 @@
                                 <a href="#" class="brutal-btn" onclick="toggleFlip(event, this)">Detail vozu</a>
                             </div>
                         </div>
-                        <!-- ZADNÍ STRANA -->
                         <div class="flip-card-back brutal-card">
                             <div class="brutal-card-body">
                                 <h3>SPECIFIKACE // E60</h3>
@@ -467,13 +417,11 @@
                     </div>
                 </div>
 
-                <!-- KARTA 2: BMW E46ti 316i -->
                 <div class="flip-card">
                     <div class="flip-card-inner">
-                        <!-- PŘEDNÍ STRANA -->
                         <div class="flip-card-front brutal-card">
                             <div class="card-img-wrap">
-                                <img src="prdelka.jpg" alt="BMW E46ti 316i">
+                                <img src="prdelka.jpg" alt="BMW E46ti 316i" loading="lazy">
                             </div>
                             <div class="brutal-card-body">
                                 <h3>COMPACT E46ti 316i</h3>
@@ -481,7 +429,6 @@
                                 <a href="#" class="brutal-btn btn-gold" onclick="toggleFlip(event, this)">Detail vozu</a>
                             </div>
                         </div>
-                        <!-- ZADNÍ STRANA -->
                         <div class="flip-card-back brutal-card">
                             <div class="brutal-card-body" style="border-color: var(--lux-gold);">
                                 <h3 style="color: var(--lux-gold);">SPECIFIKACE // E46ti</h3>
@@ -510,7 +457,7 @@
             <div class="grid-3">
                 <div class="brutal-card">
                     <div class="card-img-wrap" style="height: 220px;">
-                        <img src="hnipesevgolfu.jpg" alt="Hluboká mechanika">
+                        <img src="hnipesevgolfu.jpg" alt="Hluboká mechanika" loading="lazy">
                     </div>
                     <div class="brutal-card-body">
                         <h3>MECHANIKA</h3>
@@ -519,7 +466,7 @@
                 </div>
                 <div class="brutal-card">
                     <div class="card-img-wrap" style="height: 220px;">
-                        <img src="repje.jpg" alt="Běžný servis">
+                        <img src="repje.jpg" alt="Běžný servis" loading="lazy">
                     </div>
                     <div class="brutal-card-body">
                         <h3>BĚŽNÝ SERVIS</h3>
@@ -528,11 +475,11 @@
                 </div>
                 <div class="brutal-card">
                     <div class="card-img-wrap" style="height: 220px;">
-                        <img src="schnilejgolfik.jpg" alt="Podvozek a konstrukce">
+                        <img src="schnilejgolfik.jpg" alt="Podvozek a konstrukce" loading="lazy">
                     </div>
                     <div class="brutal-card-body">
                         <h3>PODVOZEK</h3>
-                        <p>>Kontrola konstrukce<br>> Svařování a vyztužování</p>
+                        <p>> Kontrola konstrukce<br>> Svařování a vyztužování</p>
                     </div>
                 </div>
             </div>
@@ -547,7 +494,7 @@
             <div class="grid-2">
                 <div class="brutal-card">
                     <div class="card-img-wrap">
-                        <img src="e60zadecek.jpg" alt="Výfuky a aero">
+                        <img src="e60zadecek.jpg" alt="Výfuky a aero" loading="lazy">
                     </div>
                     <div class="brutal-card-body">
                         <h3>CUSTOM EXHAUST & AERO</h3>
@@ -557,7 +504,7 @@
                 </div>
                 <div class="brutal-card">
                     <div class="card-img-wrap">
-                        <img src="predni rozpera.jpg" alt="Přední rozběrová vzpěra">
+                        <img src="predni rozpera.jpg" alt="Přední rozpěra" loading="lazy">
                     </div>
                     <div class="brutal-card-body">
                         <h3>VÝZTUHY & HANDLING</h3>
@@ -577,7 +524,7 @@
             <div class="grid-3">
                 <div class="brutal-card">
                     <div class="card-img-wrap" style="height: 240px;">
-                        <img src="lestibawo dva.jpg" alt="Korekce laku">
+                        <img src="lestibawo dva.jpg" alt="Korekce laku" loading="lazy">
                     </div>
                     <div class="brutal-card-body">
                         <h3>KOREKCE LAKU</h3>
@@ -586,16 +533,16 @@
                 </div>
                 <div class="brutal-card">
                     <div class="card-img-wrap" style="height: 240px;">
-                        <img src="merglesti.jpg" alt="Keramická ochrana">
+                        <img src="merglesti.jpg" alt="Keramická ochrana" loading="lazy">
                     </div>
                     <div class="brutal-card-body">
                         <h3>KERAMIKA & OCHRANA</h3>
-                        <p>Aplikace špičkové nano-keramiky s dlouhou životností. Extrémní hydrofobnost a ochrana před UV záření a vlivy prostředí.</p>
+                        <p>Aplikace špičkové nano-keramiky s dlouhou životností. Extrémní hydrofobnost a ochrana před UV zářením a vlivy prostředí.</p>
                     </div>
                 </div>
                 <div class="brutal-card">
                     <div class="card-img-wrap" style="height: 240px;">
-                        <img src="fabkalesti.jpg" alt="Renovace světel">
+                        <img src="fabkalesti.jpg" alt="Renovace světel" loading="lazy">
                     </div>
                     <div class="brutal-card-body">
                         <h3>SVĚTLA & SKLA</h3>
@@ -629,7 +576,7 @@
             <div class="grid-2">
                 <div class="brutal-card">
                     <div class="brutal-card-body">
-                        <h3>GARÁŽOVÉ KORDINÁTY</h3>
+                        <h3>GARÁŽOVÉ KOORDINÁTY</h3>
                         <p style="margin-top: 15px; line-height: 1.8;">
                             <strong style="color: var(--lux-gold);">TEL:</strong> <a href="tel:608607667" style="color: var(--text-main); text-decoration: none;">+420 608 607 667</a><br>
                             <strong style="color: var(--lux-gold);">MAIL:</strong> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ" style="color: var(--text-main); text-decoration: none;">GRUZGARAGE66@SEZNAM.CZ</a><br>
@@ -640,7 +587,7 @@
                 </div>
                 <div class="brutal-card">
                     <div class="card-img-wrap" style="height: 180px;">
-                        <img src="gruz.jpg" alt="Gruz Garage Base" style="object-position: center;">
+                        <img src="gruz.jpg" alt="Gruz Garage Base" style="object-position: center;" loading="lazy">
                     </div>
                     <div class="brutal-card-body" style="padding-top: 20px;">
                         <h3>OTEVÍRACÍ PROTOKOL</h3>
@@ -724,27 +671,20 @@
             event.preventDefault();
             
             const sections = document.querySelectorAll('.content-section');
-            sections.export ? '' : sections.forEach(sec => sec.classList.remove('active-tab'));
+            sections.forEach(sec => sec.classList.remove('active-tab'));
             
             const buttons = document.querySelectorAll('nav a');
             buttons.forEach(btn => btn.classList.remove('active'));
             
             document.getElementById(tabId).classList.add('active-tab');
-            
-            if (event.currentTarget.tagName === 'A') {
-                event.currentTarget.classList.add('active');
-            } else {
-                buttons[0].classList.add('active');
-            }
+            event.currentTarget.classList.add('active');
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleFlip(event, buttonElement) {
-            event.preventDefault(); // Zabrání odskočení stránky nahoru (kvůli href="#")
-            // Najde nejbližší nadřazený element s třídou 'flip-card'
+            event.preventDefault();
             const card = buttonElement.closest('.flip-card');
-            // Přepne třídu, která spouští CSS animaci rotace
             card.classList.toggle('is-flipped');
         }
     </script>
