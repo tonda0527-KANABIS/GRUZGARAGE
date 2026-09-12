@@ -10,17 +10,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #06070a;
-            --surface-color: #0f1118;
-            --surface-hover: #151821;
-            --text-main: #f4f5f8;
-            --text-dim: #949ca8;
-            --punk-red: #ff0044;
-            --punk-red-glow: rgba(255, 0, 68, 0.25);
-            --lux-gold: #d4af37;
-            --lux-gold-glow: rgba(212, 175, 55, 0.25);
-            --border-dark: #202430;
-            --border-accent: #2c3242;
+            --bg-color: #040507;
+            --surface-color: #0c0e14;
+            --surface-hover: #131722;
+            --text-main: #f8f9fc;
+            --text-dim: #8b93a5;
+            --punk-red: #ff0055;
+            --punk-red-glow: rgba(255, 0, 85, 0.3);
+            --lux-gold: #f3c653;
+            --lux-gold-glow: rgba(243, 198, 83, 0.3);
+            --border-dark: #1b202e;
+            --border-accent: #2c354d;
         }
 
         /* Custom Cyber Cursor */
@@ -30,43 +30,36 @@
 
         .custom-cursor {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 12px;
-            height: 12px;
+            top: 0; left: 0;
+            width: 10px; height: 10px;
             background: var(--punk-red);
             border-radius: 50%;
             pointer-events: none;
             transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
             z-index: 10000;
-            box-shadow: 0 0 10px var(--punk-red);
+            box-shadow: 0 0 12px var(--punk-red);
+            transition: transform 0.05s linear;
         }
 
         .custom-cursor-follower {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 36px;
-            height: 36px;
-            border: 1px solid rgba(212, 175, 55, 0.5);
+            top: 0; left: 0;
+            width: 36px; height: 36px;
+            border: 1px solid rgba(243, 198, 83, 0.4);
             border-radius: 50%;
             pointer-events: none;
             transform: translate(-50%, -50%);
-            transition: transform 0.08s ease-out, width 0.2s, height 0.2s, border-color 0.2s;
+            transition: transform 0.12s ease-out, width 0.2s, height 0.2s, border-color 0.2s;
             z-index: 9999;
         }
 
         body.cursor-hover .custom-cursor {
-            width: 20px;
-            height: 20px;
             background: var(--lux-gold);
             box-shadow: 0 0 15px var(--lux-gold);
         }
 
         body.cursor-hover .custom-cursor-follower {
-            width: 50px;
-            height: 50px;
+            width: 55px; height: 55px;
             border-color: var(--punk-red);
         }
 
@@ -79,81 +72,74 @@
         body {
             background-color: var(--bg-color);
             background-image: 
-                radial-gradient(circle at 15% 10%, rgba(255, 0, 68, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 90%, rgba(212, 175, 55, 0.07) 0%, transparent 45%),
-                radial-gradient(circle at 50% 50%, rgba(20, 25, 40, 0.4) 0%, transparent 80%),
-                linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+                radial-gradient(circle at 10% 10%, rgba(255, 0, 85, 0.06) 0%, transparent 45%),
+                radial-gradient(circle at 90% 90%, rgba(243, 198, 83, 0.05) 0%, transparent 50%),
+                linear-gradient(to right, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
             color: var(--text-main);
             font-family: 'Space Mono', monospace;
             font-size: 14px;
             line-height: 1.6;
             min-height: 100vh;
             overflow-x: hidden;
-            padding-bottom: 80px;
+            padding-bottom: 90px;
         }
 
-        /* CRT Scanlines and subtle flicker */
+        /* Subtilní CRT mřížka */
         body::before {
             content: " ";
             display: block;
             position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
-            background-size: 100% 3px;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
             z-index: 9998;
             pointer-events: none;
-            opacity: 0.5;
+            opacity: 0.4;
         }
 
         h1, h2, h3, h4 {
             font-family: 'Rajdhani', sans-serif;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 15px;
         }
 
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: var(--border-dark); border-left: 1px solid var(--punk-red); }
+        ::-webkit-scrollbar-thumb { background: var(--border-accent); }
         ::-webkit-scrollbar-thumb:hover { background: var(--punk-red); }
 
         header {
-            background-color: rgba(6, 7, 10, 0.92);
-            backdrop-filter: blur(10px);
+            background-color: rgba(4, 5, 7, 0.95);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-dark);
-            padding: 16px 40px;
+            padding: 14px 40px;
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.7);
-        }
-
-        .logo-nav {
-            grid-column: 1;
-            justify-self: start;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
         .logo-nav img {
-            height: 72px;
-            filter: drop-shadow(0 0 8px rgba(255, 0, 68, 0.5));
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            height: 64px;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 85, 0.4));
+            transition: all 0.3s ease;
         }
 
         .logo-nav img:hover {
-            filter: drop-shadow(0 0 18px var(--punk-red));
-            transform: scale(1.06);
+            filter: drop-shadow(0 0 20px var(--punk-red));
+            transform: scale(1.05);
         }
 
         nav {
             grid-column: 2;
             justify-self: center;
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
@@ -164,25 +150,24 @@
             font-weight: 700;
             font-size: 10px;
             letter-spacing: 1px;
-            padding: 9px 14px;
+            padding: 8px 14px;
             border: 1px solid var(--border-dark);
-            background: rgba(15, 17, 24, 0.6);
-            transition: all 0.25s ease;
+            background: var(--surface-color);
+            transition: all 0.2s ease;
             text-transform: uppercase;
         }
 
         nav a:hover, nav a.active {
             color: var(--text-main);
             border-color: var(--lux-gold);
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(15, 17, 24, 0.8));
+            background: linear-gradient(135deg, rgba(243, 198, 83, 0.15), var(--surface-hover));
             box-shadow: 0 0 15px var(--lux-gold-glow);
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
         }
 
         .container {
-            max-width: 1350px;
-            margin: 50px auto;
-            padding: 0 25px;
+            max-width: 1300px;
+            margin: 45px auto;
+            padding: 0 20px;
         }
 
         .content-section {
@@ -191,124 +176,128 @@
 
         .content-section.active-tab {
             display: block;
-            animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(12px); filter: blur(4px); }
+            0% { opacity: 0; transform: translateY(10px); filter: blur(4px); }
             100% { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
         .section-header {
             border-bottom: 2px solid var(--punk-red);
-            background: linear-gradient(90deg, rgba(255, 0, 68, 0.1), transparent);
-            padding: 10px 15px 15px 15px;
-            margin-bottom: 40px;
+            background: linear-gradient(90deg, rgba(255, 0, 85, 0.08), transparent);
+            padding: 12px 18px;
+            margin-bottom: 35px;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            box-shadow: inset 0 -2px 0 rgba(255, 0, 68, 0.3);
         }
 
-        /* Glitch Title Animation */
         .glitch-title {
-            font-size: 38px;
+            font-size: 36px;
             margin: 0;
             color: #fff;
-            position: relative;
             letter-spacing: 3px;
-            text-shadow: 0 0 15px rgba(255, 0, 68, 0.4);
-            animation: glitch-anim 4s infinite;
-        }
-
-        @keyframes glitch-anim {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            21% { transform: translate(0); }
-            60% { transform: translate(1px, -1px); }
-            61% { transform: translate(0); }
-            95% { transform: translate(-1px, 1px); }
-            100% { transform: translate(0); }
+            text-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
         }
 
         .section-header span {
             color: var(--lux-gold);
-            font-size: 13px;
+            font-size: 12px;
             font-family: 'Syncopate', sans-serif;
             letter-spacing: 2px;
-            text-shadow: 0 0 8px var(--lux-gold-glow);
         }
 
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 35px;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 30px;
         }
 
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
         }
 
-        .brutal-card {
+        /* ŠPIČKOVÝ DESIGN KARET S OBRÁZKY */
+        .brutal-card, .car-card {
             border: 1px solid var(--border-dark);
             background: var(--surface-color);
             position: relative;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
 
-        .brutal-card:hover {
+        .brutal-card:hover, .car-card:hover {
             border-color: var(--lux-gold);
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             background: var(--surface-hover);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 20px var(--lux-gold-glow);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 20px var(--lux-gold-glow);
         }
 
         .card-img-wrap {
             position: relative;
             width: 100%;
-            height: 340px;
+            height: 280px;
+            background-color: #020305;
             overflow: hidden;
-            background-color: #030406;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             border-bottom: 1px solid var(--border-dark);
         }
 
         .card-img-wrap img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            object-fit: cover; /* Zabraňuje deformaci a rozbití poměru stran! */
+            object-position: center;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+            filter: brightness(0.9) contrast(1.05);
         }
 
-        .brutal-card:hover .card-img-wrap img {
-            transform: scale(1.04);
+        .brutal-card:hover .card-img-wrap img, .car-card:hover .card-img-wrap img {
+            transform: scale(1.06);
+            filter: brightness(1) contrast(1.1);
+        }
+
+        /* Fallback, pokud obrázek chybí */
+        .card-img-wrap img:not([src]), .card-img-wrap img[src=""] {
+            display: none;
+        }
+        .card-img-wrap::after {
+            content: "[ IMAGE OFFLINE // GRUZ ARCHIVE ]";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: var(--text-dim);
+            background: #080a0f;
+            z-index: 1;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .card-img-wrap img[src=""] + ::after, .card-img-wrap img:not([src]) + ::after {
+            opacity: 1;
         }
 
         .brutal-card-body {
-            padding: 30px;
+            padding: 25px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            background: var(--surface-color);
-        }
-
-        .brutal-card:hover .brutal-card-body {
-            background: var(--surface-hover);
         }
 
         .brutal-card-body h3 {
-            font-size: 24px;
+            font-size: 22px;
             color: var(--punk-red);
             letter-spacing: 1px;
+            margin-bottom: 10px;
             text-shadow: 0 0 10px var(--punk-red-glow);
         }
 
@@ -322,68 +311,46 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: rgba(20, 24, 33, 0.8);
+            background: var(--surface-hover);
             color: var(--text-main);
             border: 1px solid var(--border-accent);
-            padding: 12px 25px;
+            padding: 11px 20px;
             font-family: 'Syncopate', sans-serif;
             font-size: 10px;
             font-weight: 700;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 2px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.25s ease;
-            margin-top: 10px;
+            transition: all 0.2s ease;
         }
 
         .brutal-btn:hover {
             color: #fff;
             background: var(--punk-red);
             border-color: var(--punk-red);
-            box-shadow: 0 0 20px var(--punk-red-glow);
+            box-shadow: 0 0 15px var(--punk-red-glow);
         }
 
         .btn-gold:hover {
             background: var(--lux-gold) !important;
             border-color: var(--lux-gold) !important;
-            box-shadow: 0 0 20px var(--lux-gold-glow) !important;
-            color: #060710 !important;
+            box-shadow: 0 0 15px var(--lux-gold-glow) !important;
+            color: #040507 !important;
         }
 
-        .car-card {
-            position: relative;
-            border: 1px solid var(--border-dark);
-            background: var(--surface-color);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .car-card:hover {
-            border-color: var(--lux-gold);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 20px var(--lux-gold-glow);
-        }
-
+        /* Spec Overlay pro projekty */
         .spec-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(8, 10, 15, 0.97);
-            backdrop-filter: blur(8px);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(6, 8, 12, 0.98);
+            backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 30px;
+            padding: 25px;
             transform: translateY(100%);
             opacity: 0;
-            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
             z-index: 10;
         }
 
@@ -395,27 +362,21 @@
         .spec-overlay h3 {
             color: var(--text-main);
             border-bottom: 1px solid var(--border-dark);
-            padding-bottom: 12px;
-            font-size: 22px;
-            letter-spacing: 1px;
+            padding-bottom: 10px;
+            font-size: 20px;
         }
 
         .spec-list {
             list-style: none;
             margin: 10px 0;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
 
         .spec-list li {
             border-bottom: 1px dotted var(--border-dark);
-            padding: 10px 0;
+            padding: 8px 0;
             display: flex;
             justify-content: space-between;
             font-size: 13px;
-            color: var(--text-main);
         }
 
         .spec-list li span {
@@ -423,33 +384,26 @@
             font-family: 'Syncopate', sans-serif;
             font-size: 10px;
             font-weight: 700;
-            text-shadow: 0 0 6px var(--lux-gold-glow);
         }
 
         .fixed-contacts {
             position: fixed;
-            bottom: 25px;
-            left: 25px;
+            bottom: 20px; left: 20px;
             z-index: 997;
-            background: rgba(8, 10, 15, 0.92);
+            background: rgba(12, 14, 20, 0.9);
             border: 1px solid var(--border-accent);
             border-left: 3px solid var(--punk-red);
-            padding: 16px 20px;
-            font-family: 'Space Mono', monospace;
+            padding: 14px 18px;
             font-size: 11px;
             line-height: 1.8;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
             backdrop-filter: blur(8px);
         }
 
         .fixed-contacts div span {
             color: var(--lux-gold);
             font-weight: 700;
-            margin-right: 8px;
-            text-shadow: 0 0 6px var(--lux-gold-glow);
+            margin-right: 6px;
         }
 
         .fixed-contacts div a {
@@ -460,15 +414,12 @@
 
         .fixed-contacts div a:hover {
             color: var(--punk-red);
-            text-shadow: 0 0 8px var(--punk-red-glow);
         }
 
         @media (max-width: 1050px) {
-            header { grid-template-columns: 1fr; gap: 20px; padding: 15px; justify-items: center; }
-            .logo-nav { justify-self: center; grid-column: 1; }
-            nav { grid-column: 1; justify-content: center; }
+            header { grid-template-columns: 1fr; gap: 15px; padding: 12px; justify-items: center; }
+            nav { justify-content: center; }
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
-            .fixed-contacts { bottom: 12px; left: 12px; font-size: 10px; padding: 12px 14px; }
             .custom-cursor, .custom-cursor-follower { display: none; }
             body, a, button, input { cursor: auto !important; }
         }
@@ -476,7 +427,6 @@
 </head>
 <body>
 
-    <!-- Custom Cursor Elements -->
     <div class="custom-cursor" id="cursor"></div>
     <div class="custom-cursor-follower" id="cursor-follower"></div>
 
@@ -499,7 +449,7 @@
     <div class="fixed-contacts">
         <div><span>TEL:</span> <a href="tel:608607667">+420 608 607 667</a></div>
         <div><span>MAIL:</span> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a></div>
-        <div><span>BASE:</span> <a href="https://mapy.com/s/gajejatepe" target="_blank" style="color: inherit; text-decoration: none;">Jičíněves 507 31</a></div>
+        <div><span>BASE:</span> <a href="https://mapy.com/s/gajejatepe" target="_blank" style="color: inherit;">Jičíněves 507 31</a></div>
         <div><span>IG:</span> <a href="https://instagram.com" target="_blank">@GARAGE.GRUZ</a></div>
     </div>
 
@@ -511,31 +461,26 @@
                 <span>// 01 VÍTEJTE V GRUZ.GARAGE</span>
             </div>
             
-            <div class="brutal-card" style="max-width: 950px; margin: 0 auto;">
-                <div class="brutal-card-body" style="padding: 45px;">
-                    <h3 style="font-size: 28px; color: var(--lux-gold); margin-bottom: 25px; text-shadow: 0 0 10px var(--lux-gold-glow);">VÍTEJTE V GRUZ.GARAGE</h3>
-                    
-                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 20px; font-size: 14px; color: var(--text-dim); line-height: 1.8;">
-                        <li style="border-left: 3px solid var(--punk-red); padding-left: 15px; background: rgba(255,0,68,0.03); padding-top: 10px; padding-bottom: 10px;">
-                            <strong style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-size: 18px; display: block; margin-bottom: 4px; letter-spacing: 1px;">KOMPLEXNÍ AUTOSERVIS</strong>
-                            Poskytujeme komplexní autoservis vašeho vozu, od pravidelné údržby včetně výměny olejů a brzdových destiček až po menší mechanické opravy a úpravy.
+            <div class="brutal-card" style="max-width: 900px; margin: 0 auto;">
+                <div class="brutal-card-body" style="padding: 40px;">
+                    <h3 style="font-size: 26px; color: var(--lux-gold); margin-bottom: 20px;">VÍTEJTE V GRUZ.GARAGE</h3>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 15px; color: var(--text-dim);">
+                        <li style="border-left: 3px solid var(--punk-red); padding-left: 15px;">
+                            <strong style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-size: 17px; display: block;">KOMPLEXNÍ AUTOSERVIS</strong>
+                            Pravidelná údržba, výměny olejů, brzdových destiček a mechanické opravy všeho druhu.
                         </li>
-                        <li style="border-left: 3px solid var(--lux-gold); padding-left: 15px; background: rgba(212,175,55,0.03); padding-top: 10px; padding-bottom: 10px;">
-                            <strong style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-size: 18px; display: block; margin-bottom: 4px; letter-spacing: 1px;">DETAILY & INTERIÉRY</strong>
-                            Specializujeme se také na detaily, jako je profesionální čištění interiéru, renovace a rozleštění zašlých světlometů pro lepší vzhled i bezpečnost.
+                        <li style="border-left: 3px solid var(--lux-gold); padding-left: 15px;">
+                            <strong style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-size: 17px; display: block;">DETAILY & INTERIÉRY</strong>
+                            Profesionální čištění interiéru a renovace/rozleštění zašlých světlometů.
                         </li>
-                        <li style="border-left: 3px solid var(--punk-red); padding-left: 15px; background: rgba(255,0,68,0.03); padding-top: 10px; padding-bottom: 10px;">
-                            <strong style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-size: 18px; display: block; margin-bottom: 4px; letter-spacing: 1px;">TUNING & LAK</strong>
-                            Realizujeme menší vizuální tak lehké tuningové úpravy a do budoucna pro vás připravujeme také kompletní lakýrnické práce.
+                        <li style="border-left: 3px solid var(--punk-red); padding-left: 15px;">
+                            <strong style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-size: 17px; display: block;">TUNING & PROJEKTY</strong>
+                            Vizuální i výkonové úpravy aut stavěných pro radost i ostré nasazení.
                         </li>
                     </ul>
-
-                    <div style="margin-top: 35px; padding-top: 20px; border-top: 1px solid var(--border-dark); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-                        <span style="font-family: 'Syncopate', sans-serif; font-size: 11px; font-weight: bold; color: var(--lux-gold); text-shadow: 0 0 8px var(--lux-gold-glow);">
-                            // AUTOSERVIS GRUZ.GARAGE
-                        </span>
-                        
-                        <a href="#" class="brutal-btn btn-gold" onclick="playClickSound(); switchTab(event, 'projekty')">PROHLÉDNOUT PROJEKTY -></a>
+                    <div style="margin-top: 30px; pt: 20px; border-top: 1px solid var(--border-dark); display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-family: 'Syncopate', sans-serif; font-size: 10px; color: var(--lux-gold);">// JIČÍNĚVES BASE</span>
+                        <a href="#" class="brutal-btn btn-gold" onclick="playClickSound(); switchTab(event, 'projekty')">PROJEKTY -></a>
                     </div>
                 </div>
             </div>
@@ -550,11 +495,11 @@
             <div class="grid-2">
                 <div class="car-card">
                     <div class="card-img-wrap">
-                        <img src="e60.jpg" alt="BMW E60 535d" loading="lazy">
+                        <img src="e60.jpg" alt="BMW E60 535d">
                     </div>
                     <div class="brutal-card-body">
                         <h3>PROJECT E60 535d</h3>
-                        <p>Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a kompletní historie vývoje. Stroj, který budí respekt na ulici i na okruhu.</p>
+                        <p>Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a silný zátah.</p>
                         <a href="#" class="brutal-btn" onclick="playClickSound(); toggleSpecs(event, this)">Detail vozu</a>
                     </div>
                     <div class="spec-overlay">
@@ -564,7 +509,6 @@
                             <li><span>VÝKON</span> 350+ HP // 700+ Nm</li>
                             <li><span>POHON</span> Zadní náprava (RWD)</li>
                             <li><span>PŘEVODOVKA</span> Automat + xHP Flash</li>
-                            <li><span>PODVOZEK</span> M-Paket / Snížený</li>
                             <li><span>STATUS</span> Daily / Street Weapon</li>
                         </ul>
                         <a href="#" class="brutal-btn" onclick="playClickSound(); toggleSpecs(event, this)">< NÁVRAT</a>
@@ -573,11 +517,11 @@
 
                 <div class="car-card">
                     <div class="card-img-wrap">
-                        <img src="prdelka.jpg" alt="BMW E46ti 316i" loading="lazy">
+                        <img src="prdelka.jpg" alt="BMW E46ti 316i">
                     </div>
                     <div class="brutal-card-body">
                         <h3>COMPACT E46ti 316i</h3>
-                        <p>Oldschool přístup. Syrová zadokolka postavená pro čistý řidičský zážitek, winter pekáč a nekompromisní průjezdy zatáčkami.</p>
+                        <p>Oldschool přístup. Syrová zadokolka postavená pro čistou zábavu na silnici i sněhu.</p>
                         <a href="#" class="brutal-btn btn-gold" onclick="playClickSound(); toggleSpecs(event, this)">Detail vozu</a>
                     </div>
                     <div class="spec-overlay" style="border-top: 2px solid var(--lux-gold);">
@@ -587,7 +531,6 @@
                             <li><span>VÝKON</span> 115 HP (85 kW)</li>
                             <li><span>POHON</span> RWD + Zavařenec (Welded diff)</li>
                             <li><span>PŘEVODOVKA</span> Manuál (5q)</li>
-                            <li><span>VÁHA</span> Odlehčeno (Striktní dieta)</li>
                             <li><span>STATUS</span> Drift Missile / Fun car</li>
                         </ul>
                         <a href="#" class="brutal-btn btn-gold" onclick="playClickSound(); toggleSpecs(event, this)">< NÁVRAT</a>
@@ -604,29 +547,29 @@
             <div class="grid-3">
                 <div class="brutal-card">
                     <div class="card-img-wrap">
-                        <img src="hnipesevgolfu.jpg" alt="Hluboká mechanika" loading="lazy">
+                        <img src="hnipesevgolfu.jpg" alt="Hluboká mechanika">
                     </div>
                     <div class="brutal-card-body">
                         <h3>MECHANIKA</h3>
-                        <p>> Výměny spojek a převodovek<br>> Řešení fatálních poruch</p>
+                        <p>> Výměny spojek a převodovek<br>> Řešení složitějších závad</p>
                     </div>
                 </div>
                 <div class="brutal-card">
                     <div class="card-img-wrap">
-                        <img src="repje.jpg" alt="Běžný servis" loading="lazy">
+                        <img src="repje.jpg" alt="Běžný servis">
                     </div>
                     <div class="brutal-card-body">
                         <h3>BĚŽNÝ SERVIS</h3>
-                        <p>> Výměny olejů a kapalin<br>> Brzdové systémy a filtry<br>> Příprava na STK</p>
+                        <p>> Oleje a provozní kapaliny<br>> Brzdové soustavy a filtry</p>
                     </div>
                 </div>
                 <div class="brutal-card">
                     <div class="card-img-wrap">
-                        <img src="schnilejgolfik.jpg" alt="Podvozek a konstrukce" loading="lazy">
+                        <img src="schnilejgolfik.jpg" alt="Podvozek" style="object-position: bottom;">
                     </div>
                     <div class="brutal-card-body">
                         <h3>PODVOZEK</h3>
-                        <p>> Kontrola konstrukce<br>> Svařování a vyztužování</p>
+                        <p>> Kontrola a výměna dílů<br>> Svařování a vyztužování</p>
                     </div>
                 </div>
             </div>
@@ -640,21 +583,21 @@
             <div class="grid-2">
                 <div class="brutal-card">
                     <div class="card-img-wrap">
-                        <img src="e60zadecek.jpg" alt="Výfuky a aero" loading="lazy">
+                        <img src="e60zadecek.jpg" alt="Výfuky a aero">
                     </div>
                     <div class="brutal-card-body">
                         <h3>CUSTOM EXHAUST & AERO</h3>
-                        <p>Svařování výfukových systémů na míru s dokonalým zvukovým projevem. Instalace difuzorů, spoilerů a bodykitů pro agresivní stance.</p>
+                        <p>Výfukové systémy na míru s dokonalým zvukem. Montáž difuzorů a křídel.</p>
                         <a href="#" class="brutal-btn" onclick="playClickSound()">Zjistit více</a>
                     </div>
                 </div>
                 <div class="brutal-card">
                     <div class="card-img-wrap">
-                        <img src="predni rozpera.jpg" alt="Přední rozpěra" loading="lazy">
+                        <img src="predni rozpera.jpg" alt="Přední rozpěra">
                     </div>
                     <div class="brutal-card-body">
                         <h3>VÝZTUHY & HANDLING</h3>
-                        <p>Montáž předních rozpěr, stavitelných podvozků a přesné nastavení odklonů pro maximální torzní tuhost a přilnavost v zatáčkách.</p>
+                        <p>Instalace rozpěr, stavitelných podvozků a nastavení geometrie.</p>
                         <a href="#" class="brutal-btn btn-gold" onclick="playClickSound()">Zjistit více</a>
                     </div>
                 </div>
@@ -669,29 +612,29 @@
             <div class="grid-3">
                 <div class="brutal-card">
                     <div class="card-img-wrap">
-                        <img src="lestibawo dva.jpg" alt="Korekce laku" loading="lazy">
+                        <img src="lestibawo dva.jpg" alt="Korekce laku">
                     </div>
                     <div class="brutal-card-body">
                         <h3>KOREKCE LAKU</h3>
-                        <p>Vícestupňové leštění pro odstranění hologramů, sluníček a hlubokých škrábanců. Obnova hloubky a sytosti barvy.</p>
+                        <p>Vícestupňové leštění pro odstranění škrábanců a obnovení hloubky barvy.</p>
                     </div>
                 </div>
                 <div class="brutal-card">
                     <div class="card-img-wrap">
-                        <img src="merglesti.jpg" alt="Keramická ochrana" loading="lazy">
+                        <img src="merglesti.jpg" alt="Keramika">
                     </div>
                     <div class="brutal-card-body">
                         <h3>KERAMIKA & OCHRANA</h3>
-                        <p>Aplikace špičkové nano-keramiky s dlouhou životností. Extrémní hydrofobnost a ochrana před UV zářením a vlivy prostředí.</p>
+                        <p>Odolná nano-keramika pro extrémní odtok vody a ochranu laku.</p>
                     </div>
                 </div>
                 <div class="brutal-card">
                     <div class="card-img-wrap">
-                        <img src="fabkalesti.jpg" alt="Renovace světel" loading="lazy">
+                        <img src="fabkalesti.jpg" alt="Renovace světel">
                     </div>
                     <div class="brutal-card-body">
                         <h3>SVĚTLA & SKLA</h3>
-                        <p>Kompletní renovace zažloutlých světlometů a rozleštění skel pro perfektní viditelnost a čistý vzhled vozu.</p>
+                        <p>Rozleštění zažloutlých světel pro čistý vzhled a bezpečné svícení.</p>
                     </div>
                 </div>
             </div>
@@ -702,10 +645,10 @@
                 <h1 class="glitch-title">LAKOVACÍ BOX</h1>
                 <span>// 06 PAINTJOB LAB</span>
             </div>
-            <div style="border: 1px dashed var(--border-accent); padding: 70px 20px; text-align: center; background: var(--surface-color); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                <h2 style="color: var(--punk-red); font-size: 32px; letter-spacing: 2px; text-shadow: 0 0 12px var(--punk-red-glow);">[ STATUS: VE VÝSTAVBĚ ]</h2>
-                <p style="color: var(--text-dim); margin-top: 15px;">Instalujeme nový přetlakový lakovací box a kalibrujeme profesionální technologii.</p>
-                <div style="margin-top: 30px; font-size: 22px; color: var(--lux-gold); text-shadow: 0 0 10px var(--lux-gold-glow);">
+            <div style="border: 1px dashed var(--border-accent); padding: 70px 20px; text-align: center; background: var(--surface-color);">
+                <h2 style="color: var(--punk-red); font-size: 32px; letter-spacing: 2px;">[ STATUS: VE VÝSTAVBĚ ]</h2>
+                <p style="color: var(--text-dim); margin-top: 15px;">Instalujeme nový přetlakový lakovací box a kalibrujeme technologie.</p>
+                <div style="margin-top: 30px; font-size: 20px; color: var(--lux-gold);">
                     <span id="blink">_</span> SYSTÉM SE PŘIPRAVUJE
                 </div>
             </div>
@@ -725,7 +668,7 @@
                                 <p style="line-height: 2.2;">
                                     <strong style="color: var(--lux-gold);">TEL:</strong> <a href="tel:608607667" style="color: var(--text-main); text-decoration: none;">+420 608 607 667</a><br>
                                     <strong style="color: var(--lux-gold);">MAIL:</strong> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ" style="color: var(--text-main); text-decoration: none;">GRUZGARAGE66@SEZNAM.CZ</a><br>
-                                    <strong style="color: var(--lux-gold);">BASE:</strong> <a href="https://mapy.cz/s/gajejatepe" target="_blank" style="color: var(--text-main); text-decoration: none; transition: color 0.2s;">Jičíněves 507 31</a><br>
+                                    <strong style="color: var(--lux-gold);">BASE:</strong> <a href="https://mapy.cz/s/gajejatepe" target="_blank" style="color: var(--text-main); text-decoration: none;">Jičíněves 507 31</a><br>
                                     <strong style="color: var(--lux-gold);">IG:</strong> <a href="https://instagram.com" style="color: var(--text-main); text-decoration: none;">@GARAGE.GRUZ</a>
                                 </p>
                             </div>
@@ -749,17 +692,13 @@
                 <h1 class="glitch-title">UNDRGND LIVE CHAT</h1>
                 <span>// 08 KOMUNITNÍ KECÁRNA</span>
             </div>
-            
-            <div class="brutal-card" style="max-width: 900px; margin: 0 auto; height: 550px; display: flex; flex-direction: column;">
+            <div class="brutal-card" style="max-width: 900px; margin: 0 auto; height: 500px; display: flex; flex-direction: column;">
                 <div class="brutal-card-body" style="padding: 25px; display: flex; flex-direction: column; height: 100%; justify-content: space-between;">
-                    
-                    <div id="chat-messages" style="flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border-dark);">
-                    </div>
-
+                    <div id="chat-messages" style="flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border-dark);"></div>
                     <form id="chat-form" onsubmit="handleChatSubmit(event)" style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <input type="text" id="chat-name" placeholder="TVŮJ NICK..." required maxlength="25" style="background: var(--bg-color); border: 1px solid var(--border-accent); color: var(--text-main); padding: 12px 15px; font-family: 'Space Mono', monospace; font-size: 13px; width: 160px; outline: none;">
-                        <input type="text" id="chat-input" placeholder="NAPIŠ ZPRÁVU DO CHATU..." required autocomplete="off" style="flex-grow: 1; background: var(--bg-color); border: 1px solid var(--border-accent); color: var(--text-main); padding: 12px 15px; font-family: 'Space Mono', monospace; font-size: 13px; outline: none;">
-                        <button type="submit" class="brutal-btn btn-gold" style="margin-top: 0; padding: 12px 25px;" onclick="playClickSound()">ODESLAT</button>
+                        <input type="text" id="chat-name" placeholder="TVŮJ NICK..." required maxlength="25" style="background: var(--bg-color); border: 1px solid var(--border-accent); color: var(--text-main); padding: 12px; font-family: 'Space Mono', monospace; font-size: 13px; width: 150px; outline: none;">
+                        <input type="text" id="chat-input" placeholder="NAPIŠ ZPRÁVU..." required autocomplete="off" style="flex-grow: 1; background: var(--bg-color); border: 1px solid var(--border-accent); color: var(--text-main); padding: 12px; font-family: 'Space Mono', monospace; font-size: 13px; outline: none;">
+                        <button type="submit" class="brutal-btn btn-gold" style="margin-top: 0;" onclick="playClickSound()">ODESLAT</button>
                     </form>
                 </div>
             </div>
@@ -771,9 +710,7 @@
         // Custom Cursor Motion
         const cursor = document.getElementById('cursor');
         const cursorFollower = document.getElementById('cursor-follower');
-
-        let mouseX = 0, mouseY = 0;
-        let followerX = 0, followerY = 0;
+        let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
 
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
@@ -782,103 +719,72 @@
         });
 
         function animateFollower() {
-            followerX += (mouseX - followerX) * 0.15;
-            followerY += (mouseY - followerY) * 0.15;
+            followerX += (mouseX - followerX) * 0.2;
+            followerY += (mouseY - followerY) * 0.2;
             cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
             requestAnimationFrame(animateFollower);
         }
         animateFollower();
 
-        // Hover Effect on Interactive Elements
         const interactiveElements = document.querySelectorAll('a, button, input, img');
         interactiveElements.forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
         });
 
-        // Web Audio API for Retro Synth Click Sound (No external files needed)
+        // Synth Click Audio
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playClickSound() {
             try {
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
+                if (audioCtx.state === 'suspended') audioCtx.resume();
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = 'triangle';
-                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.05);
-                
-                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
-
+                osc.frequency.setValueAtTime(380, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(90, audioCtx.currentTime + 0.04);
+                gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
-
                 osc.start();
-                osc.stop(audioCtx.currentTime + 0.05);
-            } catch(e) {
-                // Audio Context might be restricted before user interaction
-            }
+                osc.stop(audioCtx.currentTime + 0.04);
+            } catch(e) {}
         }
 
-        // Blinking system status cursor
         setInterval(() => {
             const blinker = document.getElementById('blink');
-            if(blinker) {
-                blinker.style.opacity = blinker.style.opacity === '0' ? '1' : '0';
-            }
+            if(blinker) blinker.style.opacity = blinker.style.opacity === '0' ? '1' : '0';
         }, 500);
 
         function switchTab(event, tabId) {
             event.preventDefault();
-            
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(sec => sec.classList.remove('active-tab'));
-            
-            const buttons = document.querySelectorAll('nav a');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
+            document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active-tab'));
+            document.querySelectorAll('nav a').forEach(btn => btn.classList.remove('active'));
             document.getElementById(tabId).classList.add('active-tab');
             event.currentTarget.classList.add('active');
-            
             window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            if (tabId === 'forum') {
-                scrollToBottom();
-            }
+            if (tabId === 'forum') scrollToBottom();
         }
 
         function toggleSpecs(event, element) {
             event.preventDefault();
-            const card = element.closest('.car-card');
-            card.classList.toggle('specs-active');
+            element.closest('.car-card').classList.toggle('specs-active');
         }
 
         const chatMessages = document.getElementById('chat-messages');
-
         function scrollToBottom() {
-            if (chatMessages) {
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
+            if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
         function handleChatSubmit(event) {
             event.preventDefault();
             const nameInput = document.getElementById('chat-name');
             const messageInput = document.getElementById('chat-input');
-            
             if (nameInput.value.trim() && messageInput.value.trim()) {
                 const messageDiv = document.createElement('div');
-                messageDiv.style.padding = '8px 12px';
-                messageDiv.style.background = 'rgba(255, 255, 255, 0.02)';
-                messageDiv.style.borderLeft = '2px solid var(--lux-gold)';
-                messageDiv.style.fontSize = '12px';
-                
+                messageDiv.style.cssText = 'padding: 8px 12px; background: rgba(255,255,255,0.02); border-left: 2px solid var(--lux-gold); font-size: 12px;';
                 const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                
                 messageDiv.innerHTML = `<span style="color: var(--lux-gold); font-weight: bold;">[${timeStr}] ${escapeHtml(nameInput.value)}:</span> ${escapeHtml(messageInput.value)}`;
-                
                 chatMessages.appendChild(messageDiv);
                 messageInput.value = '';
                 scrollToBottom();
@@ -886,14 +792,8 @@
         }
 
         function escapeHtml(text) {
-            const map = {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#039;'
-            };
-            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+            const map = {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'};
+            return text.replace(/[&<>"']/g, m => map[m]);
         }
     </script>
 </body>
