@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRUZ.GARAGE/SERVIS/TUNING</title>
+    <title>GRUZ GARAGE // SERVIS // TUNING</title>
     <link rel="icon" type="image/jpeg" href="gruz.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,6 @@
             padding-bottom: 80px;
         }
 
-        /* Scanline efekty pro oldschool / underground atmosféru */
         body::before {
             content: " ";
             display: block;
@@ -370,48 +369,6 @@
             text-shadow: 0 0 6px var(--lux-gold-glow);
         }
 
-        .forum-thread {
-            border-left: 3px solid var(--border-dark);
-            border-bottom: 1px solid var(--border-dark);
-            padding: 20px 25px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(12, 15, 22, 0.7);
-            transition: all 0.25s ease;
-            cursor: pointer;
-        }
-
-        .forum-thread:hover {
-            border-left: 5px solid var(--lux-gold);
-            background: rgba(20, 24, 35, 0.9);
-            padding-left: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-        }
-
-        .thread-title {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 20px;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .thread-meta {
-            font-size: 11px;
-            color: var(--text-dim);
-            margin-top: 4px;
-        }
-
-        .thread-stats span {
-            margin-left: 20px;
-            color: var(--lux-gold);
-            font-family: 'Syncopate', sans-serif;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        /* Pevné kontakty vlevo dole pod sebou na každé stránce */
         .fixed-contacts {
             position: fixed;
             bottom: 25px;
@@ -454,9 +411,6 @@
             .logo-nav { justify-self: center; grid-column: 1; }
             nav { grid-column: 1; justify-content: center; }
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
-            .forum-thread { flex-direction: column; align-items: flex-start; gap: 15px; }
-            .thread-stats { margin-top: 5px; }
-            .thread-stats span { margin-left: 0; margin-right: 15px; }
             .fixed-contacts { bottom: 12px; left: 12px; font-size: 10px; padding: 12px 14px; }
         }
     </style>
@@ -479,7 +433,6 @@
         </nav>
     </header>
 
-    <!-- Pevné kontakty vlevo dole pod sebou na každé stránce -->
     <div class="fixed-contacts">
         <div><span>TEL:</span> <a href="tel:608607667">+420 608 607 667</a></div>
         <div><span>MAIL:</span> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a></div>
@@ -489,7 +442,6 @@
 
     <div class="container">
         
-        <!-- 1. GRUZ CREW (ÚVODNÍ MANIFESTO) -->
         <div id="crew" class="content-section active-tab">
             <div class="section-header">
                 <h1 class="glitch-title">GRUZ CREW</h1>
@@ -502,7 +454,7 @@
                     
                     <ul style="list-style: none; display: flex; flex-direction: column; gap: 20px; font-size: 14px; color: var(--text-dim); line-height: 1.8;">
                         <li style="border-left: 3px solid var(--punk-red); padding-left: 15px; background: rgba(255,0,68,0.03); padding-top: 10px; padding-bottom: 10px;">
-                            <strong style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-size: 18px; display: block; margin-bottom: 40px/4; letter-spacing: 1px;">KOMPLEXNÍ AUTOSERVIS</strong>
+                            <strong style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-size: 18px; display: block; margin-bottom: 4px; letter-spacing: 1px;">KOMPLEXNÍ AUTOSERVIS</strong>
                             Poskytujeme komplexní autoservis vašeho vozu, od pravidelné údržby včetně výměny olejů a brzdových destiček až po menší mechanické opravy a úpravy.
                         </li>
                         <li style="border-left: 3px solid var(--lux-gold); padding-left: 15px; background: rgba(212,175,55,0.03); padding-top: 10px; padding-bottom: 10px;">
@@ -525,7 +477,6 @@
             </div>
         </div>
 
-        <!-- 2. PROJEKTY & VÝSTAVA -->
         <div id="projekty" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">PROJEKTY & VÝSTAVA</h1>
@@ -533,7 +484,6 @@
             </div>
             
             <div class="grid-2">
-                <!-- KARTA 1: BMW E60 535d -->
                 <div class="car-card">
                     <div class="card-img-wrap">
                         <img src="e60.jpg" alt="BMW E60 535d" loading="lazy">
@@ -557,7 +507,6 @@
                     </div>
                 </div>
 
-                <!-- KARTA 2: BMW E46ti 316i -->
                 <div class="car-card">
                     <div class="card-img-wrap">
                         <img src="prdelka.jpg" alt="BMW E46ti 316i" loading="lazy">
@@ -583,7 +532,6 @@
             </div>
         </div>
 
-        <!-- 3. SERVIS -->
         <div id="servis" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">MECHANIKA & SERVIS</h1>
@@ -620,7 +568,6 @@
             </div>
         </div>
 
-        <!-- 4. ÚPRAVY -->
         <div id="upravy" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">PERFORMANCE ÚPRAVY</h1>
@@ -650,7 +597,6 @@
             </div>
         </div>
 
-        <!-- 5. LEŠTĚNÍ -->
         <div id="lesteni" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">DETAILING LAKU</h1>
@@ -687,7 +633,6 @@
             </div>
         </div>
 
-        <!-- 6. LAKOVNA -->
         <div id="lakovna" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">LAKOVACÍ BOX</h1>
@@ -702,7 +647,6 @@
             </div>
         </div>
 
-        <!-- 7. KONTAKT -->
         <div id="kontakt" class="content-section">
             <div class="section-header">
                 <h1 class="glitch-title">SPOJTE SE S NÁMI</h1>
@@ -736,58 +680,24 @@
             </div>
         </div>
 
-        <!-- 8. FÓRUM -->
         <div id="forum" class="content-section">
             <div class="section-header">
-                <h1 class="glitch-title">UNDRGND COMMUNITY</h1>
-                <span>// 08 KOMUNITNÍ FÓRUM</span>
+                <h1 class="glitch-title">UNDRGND LIVE CHAT</h1>
+                <span>// 08 KOMUNITNÍ KECÁRNA</span>
             </div>
             
-            <div class="forum-thread" style="border-left-color: var(--lux-gold);">
-                <div>
-                    <div class="thread-title" style="color: var(--lux-gold);">[PRAVIDLA] Přečti si než založíš vlákno</div>
-                    <div class="thread-meta">Autor: admin_gruz | Připnuto</div>
-                </div>
-                <div class="thread-stats">
-                    <span>📌 ADMIN</span>
-                </div>
-            </div>
+            <div class="brutal-card" style="max-width: 900px; margin: 0 auto; height: 550px; display: flex; flex-direction: column;">
+                <div class="brutal-card-body" style="padding: 25px; display: flex; flex-direction: column; height: 100%; justify-content: space-between;">
+                    
+                    <div id="chat-messages" style="flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border-dark);">
+                        </div>
 
-            <div class="forum-thread">
-                <div>
-                    <div class="thread-title">Projekt E60: Hledám radu ohledně podvozku</div>
-                    <div class="thread-meta">Autor: user_gruz | Před 2 hodinami v sekci: Projekty</div>
+                    <form id="chat-form" onsubmit="handleChatSubmit(event)" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <input type="text" id="chat-name" placeholder="TVŮJ NICK..." required maxlength="25" style="background: var(--bg-color); border: 1px solid var(--border-accent); color: var(--text-main); padding: 12px 15px; font-family: 'Space Mono', monospace; font-size: 13px; width: 160px; outline: none;">
+                        <input type="text" id="chat-input" placeholder="NAPIŠ ZPRÁVU DO CHATU..." required autocomplete="off" style="flex-grow: 1; background: var(--bg-color); border: 1px solid var(--border-accent); color: var(--text-main); padding: 12px 15px; font-family: 'Space Mono', monospace; font-size: 13px; outline: none;">
+                        <button type="submit" class="brutal-btn btn-gold" style="margin-top: 0; padding: 12px 25px;">ODESLAT</button>
+                    </form>
                 </div>
-                <div class="thread-stats">
-                    <span>💬 12</span>
-                    <span>👀 145</span>
-                </div>
-            </div>
-
-            <div class="forum-thread">
-                <div>
-                    <div class="thread-title">Jakou keramiku na černou metalízu?</div>
-                    <div class="thread-meta">Autor: paint_killer | Včera v sekci: Detailing</div>
-                </div>
-                <div class="thread-stats">
-                    <span>💬 34</span>
-                    <span>👀 512</span>
-                </div>
-            </div>
-
-            <div class="forum-thread">
-                <div>
-                    <div class="thread-title">[SRAZ] Sobotní noční vyjížďka Jičín a okolí</div>
-                    <div class="thread-meta">Autor: admin_gruz | 10. 9. 2026 v sekci: Akce</div>
-                </div>
-                <div class="thread-stats">
-                    <span>💬 89</span>
-                    <span>👀 1024</span>
-                </div>
-            </div>
-
-            <div style="text-align: right; margin-top: 30px;">
-                <a href="#" class="brutal-btn">+ NOVÉ VLÁKNO</a>
             </div>
         </div>
 
@@ -814,12 +724,97 @@
             event.currentTarget.classList.add('active');
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (tabId === 'forum') {
+                scrollToBottom();
+            }
         }
 
         function toggleSpecs(event, buttonElement) {
             event.preventDefault();
             const card = buttonElement.closest('.car-card');
             card.classList.toggle('specs-active');
+        }
+
+        // Live Chat Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMessages();
+        });
+
+        function loadMessages() {
+            const chatContainer = document.getElementById('chat-messages');
+            if (!chatContainer) return;
+            
+            const savedMessages = JSON.parse(localStorage.getItem('gruz_chat_messages')) || [
+                { name: 'ADMIN', text: 'Vítejte v live chatu GRUZ.GARAGE! Pište své dotazy a vzkazy sem.', time: 'Dnes 12:00' }
+            ];
+            
+            chatContainer.innerHTML = '';
+            savedMessages.forEach(msg => {
+                appendMessageToDOM(msg.name, msg.text, msg.time, false);
+            });
+            scrollToBottom();
+        }
+
+        function handleChatSubmit(event) {
+            event.preventDefault();
+            const nameInput = document.getElementById('chat-name');
+            const messageInput = document.getElementById('chat-input');
+            
+            const name = nameInput.value.trim();
+            const text = messageInput.value.trim();
+            
+            if (!name || !text) return;
+            
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            const newMessage = { name, text, time: timeStr };
+            
+            const savedMessages = JSON.parse(localStorage.getItem('gruz_chat_messages')) || [
+                { name: 'ADMIN', text: 'Vítejte v live chatu GRUZ.GARAGE! Pište své dotazy a vzkazy sem.', time: 'Dnes 12:00' }
+            ];
+            savedMessages.push(newMessage);
+            localStorage.setItem('gruz_chat_messages', JSON.stringify(savedMessages));
+            
+            appendMessageToDOM(name, text, timeStr, true);
+            messageInput.value = '';
+            scrollToBottom();
+        }
+
+        function appendMessageToDOM(name, text, time, animate = false) {
+            const chatContainer = document.getElementById('chat-messages');
+            if (!chatContainer) return;
+            
+            const msgDiv = document.createElement('div');
+            msgDiv.style.background = 'rgba(15, 17, 24, 0.7)';
+            msgDiv.style.border = '1px solid var(--border-dark)';
+            msgDiv.style.padding = '10px 14px';
+            msgDiv.style.borderLeft = name.toUpperCase() === 'ADMIN' ? '3px solid var(--lux-gold)' : '3px solid var(--punk-red)';
+            if (animate) {
+                msgDiv.style.animation = 'fadeIn 0.25s ease forwards';
+            }
+            
+            msgDiv.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px;">
+                    <span style="font-family: 'Rajdhani', sans-serif; font-weight: bold; font-size: 15px; color: ${name.toUpperCase() === 'ADMIN' ? 'var(--lux-gold)' : 'var(--text-main)'};">${escapeHtml(name)}</span>
+                    <span style="font-size: 10px; color: var(--text-dim);">${escapeHtml(time)}</span>
+                </div>
+                <div style="font-size: 13px; color: var(--text-dim); word-break: break-word;">${escapeHtml(text)}</div>
+            `;
+            
+            chatContainer.appendChild(msgDiv);
+        }
+
+        function scrollToBottom() {
+            const chatContainer = document.getElementById('chat-messages');
+            if (chatContainer) {
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
     </script>
 </body>
