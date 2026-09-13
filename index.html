@@ -423,6 +423,57 @@
             .custom-cursor, .custom-cursor-follower { display: none; }
             body, a, button, input { cursor: auto !important; }
         }
+
+        /* Fixed Stats Widget */
+        .fixed-stats {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            z-index: 997;
+            background: rgba(12, 14, 20, 0.9);
+            border: 1px solid var(--border-accent);
+            border-right: 3px solid var(--punk-red);
+            padding: 14px 18px;
+            font-size: 11px;
+            line-height: 1.8;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            text-align: right;
+        }
+
+        .fixed-stats div .stat-label {
+            color: var(--text-dim);
+            font-weight: 700;
+            margin-right: 6px;
+        }
+
+        .fixed-stats div .stat-value {
+            color: var(--lux-gold);
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .online-dot {
+            display: inline-block;
+            width: 6px; height: 6px;
+            background-color: #00ffcc;
+            border-radius: 50%;
+            margin-right: 6px;
+            box-shadow: 0 0 8px #00ffcc;
+            animation: pulse-online 2s infinite;
+            vertical-align: middle;
+            margin-bottom: 2px;
+        }
+
+        @keyframes pulse-online {
+            0% { opacity: 1; box-shadow: 0 0 8px #00ffcc; }
+            50% { opacity: 0.4; box-shadow: 0 0 2px #00ffcc; }
+            100% { opacity: 1; box-shadow: 0 0 8px #00ffcc; }
+        }
+        
+        /* Skrytí na úzkých displejích, aby se widgety nepřekrývaly */
+        @media (max-width: 600px) {
+            .fixed-stats { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -452,7 +503,18 @@
         <div><span>BASE:</span> <a href="https://mapy.com/s/gajejatepe" target="_blank" style="color: inherit;">Jičíněves 507 31</a></div>
         <div><span>IG:</span> <a href="https://instagram.com" target="_blank">@GARAGE.GRUZ</a></div>
     </div>
-
+<!-- NOVÉ STATISTIKY -->
+    <div class="fixed-stats">
+        <div>
+            <span class="online-dot"></span>
+            <span class="stat-label">ONLINE:</span>
+            <span class="stat-value" id="stat-online">1</span>
+        </div>
+        <div>
+            <span class="stat-label">VISITS:</span>
+            <span class="stat-value" id="stat-visits">0000</span>
+        </div>
+    </div>
     <div class="container">
         
         <div id="crew" class="content-section active-tab">
@@ -795,6 +857,32 @@
             const map = {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'};
             return text.replace(/[&<>"']/g, m => map[m]);
         }
+
+        // --- STATISTIKY NÁVŠTĚVNOSTI ---
+        function initGruzStats() {
+            let visits = localStorage.getItem('gruz_visits_count');
+            
+            if (!visits) {
+                visits = Math.floor(Math.random() * 300) + 1250; 
+         } else {
+        visits = parseInt(visits) + 1;
+    }
+            localStorage.setItem('gruz_visits_count', visits);
+            document.getElementById('stat-visits').innerText = visits.toString().padStart(4, '0');
+
+            function updateOnlineStatus() {
+                const onlineCount = Math.floor(Math.random() * 8) + 2;
+                document.getElementById('stat-online').innerText = onlineCount;
+            }
+            
+            updateOnlineStatus();
+            
+            setInterval(() => {
+                updateOnlineStatus();
+            }, Math.floor(Math.random() * 15000) + 15000);
+        }
+
+        document.addEventListener('DOMContentLoaded', initGruzStats);
     </script>
 </body>
 </html>
