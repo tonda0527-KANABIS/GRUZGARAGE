@@ -4,568 +4,774 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GRUZ GARAGE | Autoservis, Tuning & Detailing Jičíněves</title>
-    <link rel="icon" type="image/jpeg" href="logo.jpg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href__="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/ee4c23c4a_logo.jpg">
+    <link rel="preconnect" href__="https://fonts.googleapis.com">
+    <link rel="preconnect" href__="https://fonts.gstatic.com" crossorigin>
+    <link href__="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #040507;
-            --surface-color: #0c0e14;
-            --surface-hover: #131722;
-            --text-main: #f8f9fc;
-            --text-dim: #8b93a5;
-            --punk-red: #ff0055;
-            --punk-red-glow: rgba(255, 0, 85, 0.3);
-            --lux-gold: #f3c653;
-            --lux-gold-glow: rgba(243, 198, 83, 0.3);
-            --border-dark: #1b202e;
-            --border-accent: #2c354d;
+            --gruz-obsidian: #0A0A0B;
+            --gruz-steel: #E2E8F0;
+            --gruz-hazard: #FF4D00;
+            --gruz-blueprint: #27272A;
+            --gruz-dim: #71717A;
+            --gruz-card-bg: #0E0E11;
+            --gruz-sidebar-bg: #08080A;
+            --gruz-img-bg: #050506;
         }
 
-        /* Custom Cyber Cursor */
-        body, a, button, input {
-            cursor: none !important;
-        }
-
-        .custom-cursor {
-            position: fixed;
-            top: 0; left: 0;
-            width: 10px; height: 10px;
-            background: var(--punk-red);
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 10000;
-            box-shadow: 0 0 12px var(--punk-red);
-            transition: transform 0.05s linear;
-        }
-
-        .custom-cursor-follower {
-            position: fixed;
-            top: 0; left: 0;
-            width: 36px; height: 36px;
-            border: 1px solid rgba(243, 198, 83, 0.4);
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            transition: transform 0.12s ease-out, width 0.2s, height 0.2s, border-color 0.2s;
-            z-index: 9999;
-        }
-
-        body.cursor-hover .custom-cursor {
-            background: var(--lux-gold);
-            box-shadow: 0 0 15px var(--lux-gold);
-        }
-
-        body.cursor-hover .custom-cursor-follower {
-            width: 55px; height: 55px;
-            border-color: var(--punk-red);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(circle at 10% 10%, rgba(255, 0, 85, 0.06) 0%, transparent 45%),
-                radial-gradient(circle at 90% 90%, rgba(243, 198, 83, 0.05) 0%, transparent 50%),
-                linear-gradient(to right, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
-            color: var(--text-main);
-            font-family: 'Space Mono', monospace;
+            background-color: var(--gruz-obsidian);
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,0.018) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.018) 1px, transparent 1px);
+            background-size: 48px 48px;
+            color: var(--gruz-steel);
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
             font-size: 14px;
             line-height: 1.6;
             min-height: 100vh;
             overflow-x: hidden;
-            padding-bottom: 90px;
         }
 
-        /* Subtilní CRT mřížka */
-        body::before {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-            background-size: 100% 4px;
-            z-index: 9998;
-            pointer-events: none;
-            opacity: 0.4;
-        }
-
-        h1, h2, h3, h4 {
-            font-family: 'Rajdhani', sans-serif;
+        .gruz-headline {
+            font-family: 'Unbounded', sans-serif;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 0.04em;
         }
 
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: var(--border-accent); }
-        ::-webkit-scrollbar-thumb:hover { background: var(--punk-red); }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--gruz-obsidian); }
+        ::-webkit-scrollbar-thumb { background: var(--gruz-blueprint); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gruz-hazard); }
 
-        header {
-            background-color: rgba(4, 5, 7, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-dark);
-            padding: 14px 40px;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        /* ===== SIDEBAR ===== */
+        aside {
+            position: fixed; left: 0; top: 0; bottom: 0;
+            width: 256px;
+            background: var(--gruz-sidebar-bg);
+            border-right: 1px solid var(--gruz-blueprint);
+            display: flex; flex-direction: column;
+            z-index: 40;
         }
 
-        .logo-nav img {
-            height: 64px;
-            filter: drop-shadow(0 0 10px rgba(255, 0, 85, 0.4));
-            transition: all 0.3s ease;
+        .sidebar-head {
+            padding: 24px 20px;
+            border-bottom: 1px solid var(--gruz-blueprint);
         }
 
-        .logo-nav img:hover {
-            filter: drop-shadow(0 0 20px var(--punk-red));
-            transform: scale(1.05);
+        .sidebar-head img {
+            display: block;
+            width: 100%;
+            max-width: 160px;
+            object-fit: contain;
         }
 
-        nav {
-            grid-column: 2;
-            justify-self: center;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: var(--text-dim);
-            text-decoration: none;
-            font-family: 'Syncopate', sans-serif;
-            font-weight: 700;
+        .sidebar-head .telemetry {
+            margin-top: 8px;
             font-size: 10px;
-            letter-spacing: 1px;
-            padding: 8px 14px;
-            border: 1px solid var(--border-dark);
-            background: var(--surface-color);
-            transition: all 0.2s ease;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
+            color: var(--gruz-dim);
         }
 
-        nav a:hover, nav a.active {
-            color: var(--text-main);
-            border-color: var(--lux-gold);
-            background: linear-gradient(135deg, rgba(243, 198, 83, 0.15), var(--surface-hover));
-            box-shadow: 0 0 15px var(--lux-gold-glow);
+        aside nav {
+            display: flex; flex-direction: column;
+            padding: 16px 0;
+            flex: 1;
+            overflow-y: auto;
         }
 
+        .nav-item {
+            display: flex; align-items: center;
+            padding: 11px 14px;
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-left: 2px solid transparent;
+            color: var(--gruz-dim);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .nav-item:hover {
+            color: var(--gruz-steel);
+            border-left-color: var(--gruz-steel);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .nav-item.active {
+            color: var(--gruz-hazard);
+            border-left-color: var(--gruz-hazard);
+            background: rgba(255,77,0,0.06);
+        }
+
+        .sidebar-foot {
+            padding: 16px 20px;
+            border-top: 1px solid var(--gruz-blueprint);
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gruz-dim);
+        }
+
+        .online-dot {
+            display: inline-block;
+            width: 7px; height: 7px;
+            background: var(--gruz-hazard);
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 8px #FF4D00;
+            animation: gruzPulse 2s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes gruzPulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 8px #FF4D00; }
+            50% { opacity: 0.35; box-shadow: 0 0 2px #FF4D00; }
+        }
+
+        /* ===== MAIN ===== */
         .container {
-            max-width: 1300px;
-            margin: 45px auto;
-            padding: 0 20px;
+            margin-left: 256px;
+            padding: 32px 40px 64px;
+            max-width: 1152px;
         }
 
-        .content-section {
-            display: none;
-        }
+        .content-section { display: none; }
+        .content-section.active-tab { display: block; animation: gruzFadeIn 0.28s cubic-bezier(0.16,1,0.3,1) forwards; }
 
-        .content-section.active-tab {
-            display: block;
-            animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(10px); filter: blur(4px); }
-            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+        @keyframes gruzFadeIn {
+            0% { opacity: 0; transform: translateY(8px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .section-header {
-            border-bottom: 2px solid var(--punk-red);
-            background: linear-gradient(90deg, rgba(255, 0, 85, 0.08), transparent);
-            padding: 12px 18px;
-            margin-bottom: 35px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+            border-bottom: 1px solid var(--gruz-blueprint);
+            padding-bottom: 14px;
+            margin-bottom: 32px;
+            display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
         }
 
-        .glitch-title {
-            font-size: 36px;
-            margin: 0;
-            color: #fff;
-            letter-spacing: 3px;
-            text-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
+        .section-header h1 {
+            font-size: 30px;
+            font-weight: 900;
+            color: var(--gruz-steel);
         }
 
-        .section-header span {
-            color: var(--lux-gold);
-            font-size: 12px;
-            font-family: 'Syncopate', sans-serif;
-            letter-spacing: 2px;
-        }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 24px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-            gap: 30px;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 25px;
-        }
-
-        /* ŠPIČKOVÝ DESIGN KARET S OBRÁZKY */
-        .brutal-card, .car-card {
-            border: 1px solid var(--border-dark);
-            background: var(--surface-color);
+        /* ===== CARDS ===== */
+        .gruz-card {
+            border: 1px solid var(--gruz-blueprint);
+            background: var(--gruz-card-bg);
             position: relative;
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            transition: border-color 0.2s ease, transform 0.2s ease;
         }
 
-        .brutal-card:hover, .car-card:hover {
-            border-color: var(--lux-gold);
-            transform: translateY(-4px);
-            background: var(--surface-hover);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 20px var(--lux-gold-glow);
+        .gruz-card:hover {
+            border-color: var(--gruz-hazard);
+            transform: translateY(-3px);
         }
 
         .card-img-wrap {
             position: relative;
-            width: 100%;
-            height: 280px;
-            background-color: #020305;
+            width: 100%; height: 260px;
             overflow: hidden;
-            border-bottom: 1px solid var(--border-dark);
+            border-bottom: 1px solid var(--gruz-blueprint);
+            background: var(--gruz-img-bg);
         }
 
         .card-img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Zabraňuje deformaci a rozbití poměru stran! */
+            width: 100%; height: 100%;
+            object-fit: cover;
             object-position: center;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
-            filter: brightness(0.9) contrast(1.05);
+            filter: brightness(0.82) contrast(1.08) saturate(0.9);
+            transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), filter 0.3s ease;
         }
 
-        .brutal-card:hover .card-img-wrap img, .car-card:hover .card-img-wrap img {
-            transform: scale(1.06);
-            filter: brightness(1) contrast(1.1);
+        .gruz-card:hover .card-img-wrap img {
+            transform: scale(1.05);
+            filter: brightness(1) contrast(1.12) saturate(1);
         }
 
-        /* Fallback, pokud obrázek chybí */
-        .card-img-wrap img:not([src]), .card-img-wrap img[src=""] {
-            display: none;
-        }
-        .card-img-wrap::after {
-            content: "[ IMAGE OFFLINE // GRUZ ARCHIVE ]";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            color: var(--text-dim);
-            background: #080a0f;
-            z-index: 1;
-            opacity: 0;
-            pointer-events: none;
-        }
-        .card-img-wrap img[src=""] + ::after, .card-img-wrap img:not([src]) + ::after {
-            opacity: 1;
+        .card-body {
+            padding: 24px;
+            flex: 1;
+            display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
         }
 
-        .brutal-card-body {
-            padding: 25px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+        .card-body h3 {
+            font-size: 20px; font-weight: 700;
+            color: var(--gruz-hazard);
+            margin-bottom: 8px;
         }
 
-        .brutal-card-body h3 {
-            font-size: 22px;
-            color: var(--punk-red);
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px var(--punk-red-glow);
-        }
+        .card-body p { color: var(--gruz-dim); font-size: 13px; }
+        .card-body p span { display: block; }
 
-        .brutal-card-body p {
-            color: var(--text-dim);
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
-
-        .brutal-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--surface-hover);
-            color: var(--text-main);
-            border: 1px solid var(--border-accent);
-            padding: 11px 20px;
-            font-family: 'Syncopate', sans-serif;
-            font-size: 10px;
-            font-weight: 700;
-            text-decoration: none;
+        /* ===== BUTTONS ===== */
+        .gruz-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: transparent;
+            color: var(--gruz-steel);
+            border: 1px solid var(--gruz-blueprint);
+            padding: 13px 22px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.2s ease;
+            letter-spacing: 0.12em;
+            text-decoration: none;
+            min-height: 48px;
+            cursor: pointer;
+            transition: all 0.18s ease;
         }
 
-        .brutal-btn:hover {
-            color: #fff;
-            background: var(--punk-red);
-            border-color: var(--punk-red);
-            box-shadow: 0 0 15px var(--punk-red-glow);
+        .gruz-btn:hover {
+            color: #0A0A0B;
+            background: var(--gruz-steel);
+            border-color: var(--gruz-steel);
         }
 
-        .btn-gold:hover {
-            background: var(--lux-gold) !important;
-            border-color: var(--lux-gold) !important;
-            box-shadow: 0 0 15px var(--lux-gold-glow) !important;
-            color: #040507 !important;
+        .gruz-btn-hazard {
+            background: var(--gruz-hazard);
+            border-color: var(--gruz-hazard);
+            color: #0A0A0B;
         }
 
-        /* Spec Overlay pro projekty */
+        .gruz-btn-hazard:hover {
+            background: #FF6A2B;
+            border-color: #FF6A2B;
+            color: #0A0A0B;
+        }
+
+        .gruz-btn-outline-hazard {
+            border-color: var(--gruz-hazard);
+            color: var(--gruz-hazard);
+        }
+
+        .gruz-btn-outline-hazard:hover {
+            background: var(--gruz-hazard);
+            color: #0A0A0B;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: clamp(280px, 50vh, 460px);
+            overflow: hidden;
+            border: 1px solid var(--gruz-blueprint);
+            margin-bottom: 40px;
+        }
+
+        .hero img { width: 100%; height: 100%; object-fit: cover; }
+
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(10,10,11,0.4) 0%, rgba(10,10,11,0.85) 100%);
+        }
+
+        .hero-content {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 24px 40px;
+        }
+
+        .hero-telemetry {
+            font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--gruz-dim);
+            margin-bottom: 12px;
+        }
+
+        .hero-telemetry .live { color: var(--gruz-hazard); }
+
+        .hero-content h1 {
+            font-size: clamp(36px, 5vw, 60px);
+            font-weight: 900;
+            line-height: 1;
+            color: var(--gruz-steel);
+        }
+
+        .hero-content h1 span { color: var(--gruz-hazard); }
+
+        .hero-content p {
+            margin-top: 16px; max-width: 560px;
+            font-size: 13px;
+            color: var(--gruz-dim);
+        }
+
+        /* ===== CREW LIST ===== */
+        .crew-card {
+            padding: 40px;
+            max-width: 768px;
+        }
+
+        .crew-card h3 {
+            font-size: 24px; font-weight: 700;
+            color: var(--gruz-steel);
+            margin-bottom: 24px;
+        }
+
+        .crew-card ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+
+        .crew-card li { padding-left: 16px; }
+        .crew-card li.border-red { border-left: 3px solid var(--gruz-hazard); }
+        .crew-card li.border-steel { border-left: 3px solid var(--gruz-steel); }
+
+        .crew-card li strong {
+            display: block;
+            font-family: 'Unbounded', sans-serif;
+            text-transform: uppercase;
+            font-size: 15px; font-weight: 700;
+            color: var(--gruz-steel);
+            margin-bottom: 4px;
+        }
+
+        .crew-card li span { font-size: 13px; color: var(--gruz-dim); }
+
+        .crew-footer {
+            margin-top: 32px; padding-top: 24px;
+            border-top: 1px solid var(--gruz-blueprint);
+            display: flex; flex-wrap: wrap; gap: 16px;
+            justify-content: space-between; align-items: center;
+        }
+
+        .crew-footer .telemetry {
+            font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--gruz-hazard);
+        }
+
+        /* ===== SPEC OVERLAY ===== */
         .spec-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(6, 8, 12, 0.98);
-            backdrop-filter: blur(10px);
-            display: flex;
-            flex-direction: column;
+            position: absolute; inset: 0;
+            background: rgba(10,10,11,0.97);
+            display: flex; flex-direction: column;
             justify-content: space-between;
-            padding: 25px;
+            padding: 24px;
             transform: translateY(100%);
             opacity: 0;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease;
             z-index: 10;
         }
 
-        .car-card.specs-active .spec-overlay {
+        .gruz-card.specs-active .spec-overlay {
             transform: translateY(0);
             opacity: 1;
         }
 
         .spec-overlay h3 {
-            color: var(--text-main);
-            border-bottom: 1px solid var(--border-dark);
-            padding-bottom: 10px;
-            font-size: 20px;
+            font-size: 17px; font-weight: 700;
+            color: var(--gruz-steel);
+            border-bottom: 1px solid var(--gruz-blueprint);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
         }
 
-        .spec-list {
-            list-style: none;
-            margin: 10px 0;
-        }
+        .spec-list { list-style: none; flex: 1; margin: 12px 0; }
 
         .spec-list li {
-            border-bottom: 1px dotted var(--border-dark);
+            display: flex; justify-content: space-between;
             padding: 8px 0;
-            display: flex;
-            justify-content: space-between;
+            border-bottom: 1px dotted var(--gruz-blueprint);
             font-size: 13px;
+            color: var(--gruz-steel);
         }
 
         .spec-list li span {
-            color: var(--lux-gold);
-            font-family: 'Syncopate', sans-serif;
-            font-size: 10px;
-            font-weight: 700;
+            font-size: 12px; font-weight: 700;
+            color: var(--gruz-hazard);
         }
 
-        .fixed-contacts {
-            position: fixed;
-            bottom: 20px; left: 20px;
-            z-index: 997;
-            background: rgba(12, 14, 20, 0.9);
-            border: 1px solid var(--border-accent);
-            border-left: 3px solid var(--punk-red);
-            padding: 14px 18px;
-            font-size: 11px;
-            line-height: 1.8;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        .spec-list li.gold span { color: var(--gruz-steel); }
+
+        /* ===== LAKOVNA ===== */
+        .build-box {
+            border: 1px dashed var(--gruz-blueprint);
+            background: var(--gruz-card-bg);
+            padding: 64px 20px;
+            text-align: center;
+        }
+
+        .build-box h2 {
+            font-size: clamp(22px, 3vw, 30px);
+            font-weight: 900;
+            color: var(--gruz-hazard);
+        }
+
+        .build-box p { margin-top: 16px; font-size: 13px; color: var(--gruz-dim); }
+
+        .build-box .blink-wrap {
+            margin-top: 24px; font-size: 17px;
+            color: var(--gruz-steel);
+        }
+
+        .gruz-blink { animation: gruzBlink 1s step-end infinite; }
+
+        @keyframes gruzBlink { 50% { opacity: 0; } }
+
+        /* ===== KONTAKT ===== */
+        .kontakt-card {
+            padding: 40px;
+            max-width: 768px;
+        }
+
+        .kontakt-card h3 {
+            font-size: 20px; font-weight: 700;
+            color: var(--gruz-steel);
+            margin-bottom: 24px;
+        }
+
+        .kontakt-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+            font-size: 13px; line-height: 2.1;
+        }
+
+        .kontakt-grid strong { color: var(--gruz-hazard); }
+        .kontakt-grid a { color: var(--gruz-steel); text-decoration: none; }
+        .kontakt-grid a:hover { color: var(--gruz-hazard); }
+        .kontakt-grid .offline { color: var(--gruz-hazard); font-weight: 700; }
+        .kontakt-grid .gruz-btn { width: 100%; margin-top: 16px; }
+
+        /* ===== CHAT ===== */
+        .chat-card {
+            max-width: 768px;
+            height: 480px;
+            display: flex; flex-direction: column;
+            padding: 20px;
+        }
+
+        #chat-messages {
+            flex: 1; overflow-y: auto;
+            display: flex; flex-direction: column; gap: 8px;
+            margin-bottom: 16px; padding-bottom: 16px;
+            border-bottom: 1px solid var(--gruz-blueprint);
+        }
+
+        .chat-msg {
+            padding: 8px 12px;
+            font-size: 12px;
+            background: rgba(255,255,255,0.02);
+            border-left: 2px solid var(--gruz-hazard);
+        }
+
+        .chat-msg .name { color: var(--gruz-hazard); font-weight: 700; }
+        .chat-msg .text { color: var(--gruz-steel); }
+
+        #chat-form { display: flex; gap: 8px; flex-wrap: wrap; }
+
+        .gruz-input {
+            background: var(--gruz-img-bg);
+            border: 1px solid var(--gruz-blueprint);
+            color: var(--gruz-steel);
+            padding: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.15s ease;
+        }
+
+        .gruz-input:focus { border-color: var(--gruz-hazard); }
+        .gruz-input::placeholder { color: var(--gruz-dim); }
+        #chat-name { width: 140px; }
+        #chat-input { flex: 1; min-width: 180px; }
+
+        /* ===== CONTACT DOCK ===== */
+        .contact-dock {
+            position: fixed; bottom: 20px; right: 20px;
+            z-index: 30;
+            border: 1px solid var(--gruz-blueprint);
+            background: rgba(8,8,10,0.92);
             backdrop-filter: blur(8px);
+            padding: 16px 20px;
+            font-size: 12px;
         }
 
-        .fixed-contacts div span {
-            color: var(--lux-gold);
-            font-weight: 700;
-            margin-right: 6px;
+        .contact-dock .telemetry {
+            font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--gruz-steel);
+            margin-bottom: 8px;
         }
 
-        .fixed-contacts div a {
-            color: var(--text-main);
+        .contact-dock a {
+            display: block;
+            color: var(--gruz-dim);
             text-decoration: none;
-            transition: color 0.2s;
+            transition: color 0.15s ease;
         }
 
-        .fixed-contacts div a:hover {
-            color: var(--punk-red);
-        }
+        .contact-dock a:hover { color: var(--gruz-hazard); }
 
-        @media (max-width: 1050px) {
-            header { grid-template-columns: 1fr; gap: 15px; padding: 12px; justify-items: center; }
-            nav { justify-content: center; }
-            .grid-2, .grid-3 { grid-template-columns: 1fr; }
-            .custom-cursor, .custom-cursor-follower { display: none; }
-            body, a, button, input { cursor: auto !important; }
-        }
+        /* ===== MOBILE ===== */
+        .mobile-nav { display: none; }
 
-        /* Fixed Stats Widget */
-        .fixed-stats {
-            position: fixed;
-            bottom: 20px; right: 20px;
-            z-index: 997;
-            background: rgba(12, 14, 20, 0.9);
-            border: 1px solid var(--border-accent);
-            border-right: 3px solid var(--punk-red);
-            padding: 14px 18px;
-            font-size: 11px;
-            line-height: 1.8;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            backdrop-filter: blur(8px);
-            text-align: right;
-        }
-
-        .fixed-stats div .stat-label {
-            color: var(--text-dim);
-            font-weight: 700;
-            margin-right: 6px;
-        }
-
-        .fixed-stats div .stat-value {
-            color: var(--lux-gold);
-            font-weight: 700;
-            font-family: 'Space Mono', monospace;
-        }
-
-        .online-dot {
-            display: inline-block;
-            width: 6px; height: 6px;
-            background-color: #00ffcc;
-            border-radius: 50%;
-            margin-right: 6px;
-            box-shadow: 0 0 8px #00ffcc;
-            animation: pulse-online 2s infinite;
-            vertical-align: middle;
-            margin-bottom: 2px;
-        }
-
-        @keyframes pulse-online {
-            0% { opacity: 1; box-shadow: 0 0 8px #00ffcc; }
-            50% { opacity: 0.4; box-shadow: 0 0 2px #00ffcc; }
-            100% { opacity: 1; box-shadow: 0 0 8px #00ffcc; }
-        }
-        
-        /* Skrytí na úzkých displejích, aby se widgety nepřekrývaly */
-        @media (max-width: 600px) {
-            .fixed-stats { display: none; }
+        @media (max-width: 1023px) {
+            aside { display: none; }
+            .container { margin-left: 0; padding: 32px 20px 140px; }
+            .hero-content { padding: 20px; }
+            .mobile-nav {
+                display: flex;
+                position: fixed; bottom: 0; left: 0; right: 0;
+                z-index: 40;
+                border-top: 1px solid var(--gruz-blueprint);
+                background: var(--gruz-sidebar-bg);
+                overflow-x: auto;
+            }
+            .mobile-nav .nav-item {
+                border-left: none;
+                border-bottom: 2px solid transparent;
+                border-top: none;
+                white-space: nowrap;
+                flex: 0 0 auto;
+                width: auto;
+            }
+            .mobile-nav .nav-item.active { border-bottom-color: var(--gruz-hazard); background: transparent; }
+            .contact-dock { display: none; }
+            .kontakt-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="custom-cursor" id="cursor"></div>
-    <div class="custom-cursor-follower" id="cursor-follower"></div>
-
-    <header>
-        <div class="logo-nav">
-            <img src="logo.jpg" alt="GRUZ LOGO" onclick="playClickSound(); switchTab(event, 'crew')">
+    <!-- SIDEBAR -->
+    <aside>
+        <div class="sidebar-head">
+            <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/ee4c23c4a_logo.jpg" alt="GRUZ GARAGE" style="cursor:pointer" onclick="switchTab(event, 'crew')">
+            <div class="telemetry">// JIČÍNĚVES BASE</div>
         </div>
         <nav>
-            <a onclick="playClickSound(); switchTab(event, 'crew')" class="active">GRUZ CREW</a>
-            <a onclick="playClickSound(); switchTab(event, 'projekty')">PROJEKTY</a>
-            <a onclick="playClickSound(); switchTab(event, 'servis')">SERVIS</a>
-            <a onclick="playClickSound(); switchTab(event, 'upravy')">ÚPRAVY</a>
-            <a onclick="playClickSound(); switchTab(event, 'lesteni')">LEŠTĚNÍ</a>
-            <a onclick="playClickSound(); switchTab(event, 'lakovna')">LAKOVNA</a>
-            <a onclick="playClickSound(); switchTab(event, 'kontakt')">KONTAKT</a>
-            <a onclick="playClickSound(); switchTab(event, 'forum')">FÓRUM</a>
+            <button class="nav-item active" onclick="switchTab(event, 'crew')">GRUZ CREW</button>
+            <button class="nav-item" onclick="switchTab(event, 'servis')">SERVIS</button>
+            <button class="nav-item" onclick="switchTab(event, 'upravy')">ÚPRAVY</button>
+            <button class="nav-item" onclick="switchTab(event, 'lesteni')">LEŠTĚNÍ</button>
+            <button class="nav-item" onclick="switchTab(event, 'detailing')">DETAILING</button>
+            <button class="nav-item" onclick="switchTab(event, 'lakovna')">LAKOVNA</button>
+            <button class="nav-item" onclick="switchTab(event, 'projekty')">PROJEKTY</button>
+            <button class="nav-item" onclick="switchTab(event, 'kontakt')">KONTAKT</button>
+            <button class="nav-item" onclick="switchTab(event, 'forum')">FÓRUM</button>
         </nav>
-    </header>
+        <div class="sidebar-foot">
+            <span class="online-dot"></span>GARÁŽ V PŘÍPRAVĚ
+        </div>
+    </aside>
 
-    <div class="fixed-contacts">
-        <div><span>TEL:</span> <a href="tel:608607667">+420 608 607 667</a></div>
-        <div><span>MAIL:</span> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a></div>
-        <div><span>BASE:</span> <a href="https://mapy.com/s/gajejatepe" target="_blank">Jičíněves 507 31</a></div>
-        <div><span>IG:</span> <a href="https://instagram.com" target="_blank">@GARAGE.GRUZ</a></div>
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav">
+        <button class="nav-item active" onclick="switchTab(event, 'crew')">GRUZ CREW</button>
+        <button class="nav-item" onclick="switchTab(event, 'servis')">SERVIS</button>
+        <button class="nav-item" onclick="switchTab(event, 'upravy')">ÚPRAVY</button>
+        <button class="nav-item" onclick="switchTab(event, 'lesteni')">LEŠTĚNÍ</button>
+        <button class="nav-item" onclick="switchTab(event, 'detailing')">DETAILING</button>
+        <button class="nav-item" onclick="switchTab(event, 'lakovna')">LAKOVNA</button>
+        <button class="nav-item" onclick="switchTab(event, 'projekty')">PROJEKTY</button>
+        <button class="nav-item" onclick="switchTab(event, 'kontakt')">KONTAKT</button>
+        <button class="nav-item" onclick="switchTab(event, 'forum')">FÓRUM</button>
+    </nav>
+
+    <!-- CONTACT DOCK -->
+    <div class="contact-dock">
+        <div class="telemetry">// JIČÍNĚVES</div>
+        <a href__="tel:608607667">+420 608 607 667</a>
+        <a href__="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a>
     </div>
-<!-- NOVÉ STATISTIKY -->
-    <div class="fixed-stats">
-        <div>
-            <span class="online-dot"></span>
-            <span class="stat-label">ONLINE:</span>
-            <span class="stat-value" id="stat-online">1</span>
-        </div>
-        <div>
-            <span class="stat-label">VISITS:</span>
-            <span class="stat-value" id="stat-visits">0000</span>
-        </div>
-    </div>
+
     <div class="container">
-        
+
+        <!-- CREW -->
         <div id="crew" class="content-section active-tab">
-            <div class="section-header">
-                <h1 class="glitch-title">GRUZ CREW</h1>
-                <span>// 01 VÍTEJTE V GRUZ GARAGE</span>
+            <div class="hero">
+                <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/b732a3f7e_prednirozpera.jpg" alt="BMW motor — GRUZ Garage">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <div class="hero-telemetry"><span class="live">[JIČÍNĚVES]</span></div>
+                    <h1 class="gruz-headline">GRUZ<br><span>GARAGE</span></h1>
+                    <p>Autoservis v Jičíněvsi, čištění interiéru, lehké úpravy, kvalitní a čistá práce.</p>
+                </div>
             </div>
-            
-            <div class="brutal-card" style="max-width: 900px; margin: 0 auto;">
-                <div class="brutal-card-body" style="padding: 40px;">
-                    <h3 style="font-size: 26px; color: var(--lux-gold); margin-bottom: 20px;">VÍTEJTE V GRUZ.GARAGE</h3>
-                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 15px; color: var(--text-dim);">
-                        <li style="border-left: 3px solid var(--punk-red); padding-left: 15px;">
-                            <strong style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-size: 17px; display: block;">KOMPLEXNÍ AUTOSERVIS</strong>
-                            Pravidelná údržba, výměny olejů, brzdových destiček a mechanické opravy všeho druhu.
-                        </li>
-                        <li style="border-left: 3px solid var(--lux-gold); padding-left: 15px;">
-                            <strong style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-size: 17px; display: block;">DETAILY & INTERIÉRY</strong>
-                            Profesionální čištění interiéru a renovace/rozleštění zašlých světlometů.
-                        </li>
-                        <li style="border-left: 3px solid var(--punk-red); padding-left: 15px;">
-                            <strong style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-size: 17px; display: block;">TUNING & PROJEKTY</strong>
-                            Vizuální i výkonové úpravy aut stavěných pro radost i ostré nasazení.
-                        </li>
-                    </ul>
-                    <div style="margin-top: 30px; pt: 20px; border-top: 1px solid var(--border-dark); display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-family: 'Syncopate', sans-serif; font-size: 10px; color: var(--lux-gold);">// JIČÍNĚVES BASE</span>
-                        <a href="#" class="brutal-btn btn-gold" onclick="playClickSound(); switchTab(event, 'projekty')">PROJEKTY -></a>
+
+            <div class="section-header">
+                <h1 class="gruz-headline">GRUZ CREW</h1>
+            </div>
+
+            <div class="gruz-card crew-card">
+                <h3 class="gruz-headline">VÍTEJTE V GRUZ.GARAGE</h3>
+                <ul>
+                    <li class="border-red">
+                        <strong>KOMPLEXNÍ AUTOSERVIS</strong>
+                        <span>Pravidelná údržba, výměny olejů, brzdových destiček a mechanické opravy všeho druhu.</span>
+                    </li>
+                    <li class="border-steel">
+                        <strong>DETAILY & INTERIÉRY</strong>
+                        <span>Profesionální čištění interiéru a renovace/rozleštění zašlých světlometů.</span>
+                    </li>
+                    <li class="border-red">
+                        <strong>TUNING & PROJEKTY</strong>
+                        <span>Vizuální i výkonové úpravy aut stavěných pro radost i ostré nasazení.</span>
+                    </li>
+                </ul>
+                <div class="crew-footer">
+                    <span class="telemetry">// JIČÍNĚVES</span>
+                    <button class="gruz-btn gruz-btn-hazard" onclick="switchTab(event, 'projekty')">PROJEKTY →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SERVIS -->
+        <div id="servis" class="content-section">
+            <div class="section-header">
+                <h1 class="gruz-headline">MECHANIKA & SERVIS</h1>
+            </div>
+            <div class="grid-3">
+                <div class="gruz-card">
+                    <div class="card-img-wrap">
+                        <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/ddccc08b2_e60cigan.jpg" alt="Hluboká mechanika">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="gruz-headline">MECHANIKA</h3>
+                        <p><span>&gt; Výměny spojek a převodovek</span><span>&gt; Řešení složitějších závad</span></p>
+                    </div>
+                </div>
+                <div class="gruz-card">
+                    <div class="card-img-wrap">
+                        <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/12c986775_like.png" alt="Běžný servis — svíčky a filtry">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="gruz-headline">BĚŽNÝ SERVIS</h3>
+                        <p><span>&gt; Oleje a provozní kapaliny</span><span>&gt; Brzdové soustavy a filtry</span></p>
+                    </div>
+                </div>
+                <div class="gruz-card">
+                    <div class="card-img-wrap">
+                        <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/447e7ca1f_schnilejgolfik.jpg" alt="Podvozek" style="object-position: bottom;">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="gruz-headline">PODVOZEK</h3>
+                        <p><span>&gt; Kontrola a výměna dílů</span><span>&gt; Svařování a vyztužování</span></p>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- ÚPRAVY -->
+        <div id="upravy" class="content-section">
+            <div class="section-header">
+                <h1 class="gruz-headline">PERFORMANCE ÚPRAVY</h1>
+            </div>
+            <div style="max-width: 640px;">
+                <div class="gruz-card">
+                    <div class="card-img-wrap">
+                        <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/b732a3f7e_prednirozpera.jpg" alt="Výztuhy a handling">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="gruz-headline">VÝZTUHY & HANDLING</h3>
+                        <p style="margin-bottom: 16px;">Instalace rozpěr, stavitelných podvozků a geometrie.</p>
+                        <a href__="tel:608607667" class="gruz-btn gruz-btn-outline-hazard" style="align-self: flex-start;">ZJISTIT VÍCE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LEŠTĚNÍ -->
+        <div id="lesteni" class="content-section">
+            <div class="section-header">
+                <h1 class="gruz-headline">DETAILING LAKU</h1>
+            </div>
+            <div class="grid-2">
+                <div class="gruz-card">
+                    <div class="card-img-wrap">
+                        <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/9fdcac02d_merglesti.jpg" alt="Keramika">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="gruz-headline">KERAMIKA & OCHRANA</h3>
+                        <p>Odolná nano-keramika pro extrémní odtok vody a ochranu laku.</p>
+                    </div>
+                </div>
+                <div class="gruz-card">
+                    <div class="card-img-wrap">
+                        <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/b47c7af2e_lestibawodva.jpg" alt="Renovace světel">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="gruz-headline">SVĚTLA & SKLA</h3>
+                        <p>Rozleštění zažloutlých světel pro čistý vzhled a bezpečné svícení.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DETAILING -->
+        <div id="detailing" class="content-section">
+            <div class="section-header">
+                <h1 class="gruz-headline">DETAILING</h1>
+            </div>
+            <div class="grid-2">
+                <div class="gruz-card">
+                    <div class="card-img-wrap">
+                        <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/79b84bbbf_detailing2.png" alt="Čištění interiéru auta">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="gruz-headline">INTERIÉR</h3>
+                        <p>
+                            <span>&gt; Hloubkové čištění čalounění</span>
+                            <span>&gt; Ošetření plastů a kůže</span>
+                            <span>&gt; Čištění a impregnace potahů</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="gruz-card">
+                    <div class="card-img-wrap">
+                        <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/50a43b348_detailing.png" alt="Čištění autokoberců">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="gruz-headline">KOBERCE & PODLAHY</h3>
+                        <p>
+                            <span>&gt; Vysávání a extrakce koberců</span>
+                            <span>&gt; Odstranění nečistot a chlupů</span>
+                            <span>&gt; Ošetření textilních dílů</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LAKOVNA -->
+        <div id="lakovna" class="content-section">
+            <div class="section-header">
+                <h1 class="gruz-headline">LAKOVACÍ BOX</h1>
+            </div>
+            <div class="build-box">
+                <h2 class="gruz-headline">[ STATUS: VE VÝSTAVBĚ ]</h2>
+                <p>Připravujeme lakovací box.</p>
+                <div class="blink-wrap"><span class="gruz-blink">_</span> SYSTÉM SE PŘIPRAVUJE</div>
+            </div>
+        </div>
+
+        <!-- PROJEKTY -->
         <div id="projekty" class="content-section">
             <div class="section-header">
-                <h1 class="glitch-title">PROJEKTY & VÝSTAVA</h1>
-                <span>// 02 GRUZ STROJE</span>
+                <h1 class="gruz-headline">PROJEKTY & VÝSTAVA</h1>
             </div>
-            
             <div class="grid-2">
-                <div class="car-card">
+                <div class="gruz-card">
                     <div class="card-img-wrap">
-                        <img src="e60.jpg" alt="BMW E60 535d">
+                        <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/b252b4b75_e60.jpg" alt="BMW E60 535d">
                     </div>
-                    <div class="brutal-card-body">
-                        <h3>PROJECT E60 535d</h3>
-                        <p>Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a silný zátah.</p>
-                        <a href="#" class="brutal-btn" onclick="playClickSound(); toggleSpecs(event, this)">Detail vozu</a>
+                    <div class="card-body">
+                        <h3 class="gruz-headline">PROJECT E60 535d</h3>
+                        <p style="margin-bottom: 16px;">Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a silný zátah.</p>
+                        <button class="gruz-btn" onclick="toggleSpecs(this)">DETAIL VOZU</button>
                     </div>
                     <div class="spec-overlay">
-                        <h3>SPECIFIKACE // E60</h3>
+                        <h3 class="gruz-headline">SPEC // PROJECT E60 535d</h3>
                         <ul class="spec-list">
                             <li><span>MOTOR</span> 3.0L R6 Biturbo (M57)</li>
                             <li><span>VÝKON</span> 350+ HP // 700+ Nm</li>
@@ -573,264 +779,136 @@
                             <li><span>PŘEVODOVKA</span> Automat + xHP Flash</li>
                             <li><span>STATUS</span> Daily / Street Weapon</li>
                         </ul>
-                        <a href="#" class="brutal-btn" onclick="playClickSound(); toggleSpecs(event, this)">< NÁVRAT</a>
+                        <button class="gruz-btn" onclick="toggleSpecs(this)">← NÁVRAT</button>
                     </div>
                 </div>
 
-                <div class="car-card">
+                <div class="gruz-card">
                     <div class="card-img-wrap">
-                        <img src="prdelka.jpg" alt="BMW E46ti 316i">
+                        <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/9ae6f30af_prdelka.jpg" alt="BMW E46ti 316i">
                     </div>
-                    <div class="brutal-card-body">
-                        <h3>COMPACT E46ti 316i</h3>
-                        <p>Oldschool přístup. Syrová zadokolka postavená pro čistou zábavu na silnici i sněhu.</p>
-                        <a href="#" class="brutal-btn btn-gold" onclick="playClickSound(); toggleSpecs(event, this)">Detail vozu</a>
+                    <div class="card-body">
+                        <h3 class="gruz-headline" style="color: var(--gruz-steel);">COMPACT E46ti 316i</h3>
+                        <p style="margin-bottom: 16px;">Oldschool přístup. Syrová zadokolka postavená pro čistou zábavu na silnici i sněhu.</p>
+                        <button class="gruz-btn gruz-btn-outline-hazard" onclick="toggleSpecs(this)">DETAIL VOZU</button>
                     </div>
-                    <div class="spec-overlay" style="border-top: 2px solid var(--lux-gold);">
-                        <h3 style="color: var(--lux-gold);">SPECIFIKACE // E46ti</h3>
+                    <div class="spec-overlay">
+                        <h3 class="gruz-headline">SPEC // COMPACT E46ti 316i</h3>
                         <ul class="spec-list">
-                            <li><span>MOTOR</span> 1.8L R4 (N42/N46)</li>
-                            <li><span>VÝKON</span> 115 HP (85 kW)</li>
-                            <li><span>POHON</span> RWD + Zavařenec (Welded diff)</li>
-                            <li><span>PŘEVODOVKA</span> Manuál (5q)</li>
-                            <li><span>STATUS</span> Drift Missile / Fun car</li>
+                            <li class="gold"><span>MOTOR</span> 1.8L R4 (N42/N46)</li>
+                            <li class="gold"><span>VÝKON</span> 115 HP (85 kW)</li>
+                            <li class="gold"><span>POHON</span> RWD + Zavařenec</li>
+                            <li class="gold"><span>PŘEVODOVKA</span> Manuál (5q)</li>
+                            <li class="gold"><span>STATUS</span> Drift Missile / Fun car</li>
                         </ul>
-                        <a href="#" class="brutal-btn btn-gold" onclick="playClickSound(); toggleSpecs(event, this)">< NÁVRAT</a>
+                        <button class="gruz-btn gruz-btn-outline-hazard" onclick="toggleSpecs(this)">← NÁVRAT</button>
+                    </div>
+                </div>
+
+                <div class="gruz-card">
+                    <div class="card-img-wrap">
+                        <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/16bcdc158_e36.jpg" alt="BMW E36 na sněhu">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="gruz-headline">E36 SNOW UNIT</h3>
+                        <p style="margin-bottom: 16px;">Noční jízdy po sněhu. Klasika, která se nebojí zimy ani tmy.</p>
+                        <button class="gruz-btn" onclick="toggleSpecs(this)">DETAIL VOZU</button>
+                    </div>
+                    <div class="spec-overlay">
+                        <h3 class="gruz-headline">SPEC // E36 SNOW UNIT</h3>
+                        <ul class="spec-list">
+                            <li><span>MOTOR</span> BMW řadová šestka</li>
+                            <li><span>POHON</span> Zadokolka (RWD)</li>
+                            <li><span>PROSTŘEDÍ</span> Sníh / Noc</li>
+                            <li><span>STATUS</span> Winter Fun Unit</li>
+                        </ul>
+                        <button class="gruz-btn" onclick="toggleSpecs(this)">← NÁVRAT</button>
+                    </div>
+                </div>
+
+                <div class="gruz-card">
+                    <div class="card-img-wrap">
+                        <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/c0e8dc066_LADA.png" alt="Lada — GRUZ Garage">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="gruz-headline">LADA LOW UNIT</h3>
+                        <p style="margin-bottom: 16px;">Only fast, only low. Surová východní klasika s velkým výfuchem a postaveným stylem.</p>
+                        <button class="gruz-btn" onclick="toggleSpecs(this)">DETAIL VOZU</button>
+                    </div>
+                    <div class="spec-overlay">
+                        <h3 class="gruz-headline">SPEC // LADA LOW UNIT</h3>
+                        <ul class="spec-list">
+                            <li><span>KAROSERIE</span> Hatchback</li>
+                            <li><span>BAREVNÉ LAKOVÁNÍ</span> Satin šedá</li>
+                            <li><span>VÝFUK</span> Velká custom koncovka</li>
+                            <li><span>STICKER</span> ONLY FAST ONLY LOW</li>
+                            <li><span>STATUS</span> Style Unit</li>
+                        </ul>
+                        <button class="gruz-btn" onclick="toggleSpecs(this)">← NÁVRAT</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="servis" class="content-section">
-            <div class="section-header">
-                <h1 class="glitch-title">MECHANIKA & SERVIS</h1>
-                <span>// 03 ÚDRŽBA A DIAGNOSTIKA</span>
-            </div>
-            <div class="grid-3">
-                <div class="brutal-card">
-                    <div class="card-img-wrap">
-                        <img src="hnipesevgolfu.jpg" alt="Hluboká mechanika">
-                    </div>
-                    <div class="brutal-card-body">
-                        <h3>MECHANIKA</h3>
-                        <p>> Výměny spojek a převodovek<br>> Řešení složitějších závad</p>
-                    </div>
-                </div>
-                <div class="brutal-card">
-                    <div class="card-img-wrap">
-                        <img src="repje.jpg" alt="Běžný servis">
-                    </div>
-                    <div class="brutal-card-body">
-                        <h3>BĚŽNÝ SERVIS</h3>
-                        <p>> Oleje a provozní kapaliny<br>> Brzdové soustavy a filtry</p>
-                    </div>
-                </div>
-                <div class="brutal-card">
-                    <div class="card-img-wrap">
-                        <img src="schnilejgolfik.jpg" alt="Podvozek" style="object-position: bottom;">
-                    </div>
-                    <div class="brutal-card-body">
-                        <h3>PODVOZEK</h3>
-                        <p>> Kontrola a výměna dílů<br>> Svařování a vyztužování</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="upravy" class="content-section">
-            <div class="section-header">
-                <h1 class="glitch-title">PERFORMANCE ÚPRAVY</h1>
-                <span>// 04 TUNING & EXHAUST</span>
-            </div>
-            <div class="grid-2">
-                <div class="brutal-card">
-                    <div class="card-img-wrap">
-                        <img src="e60zadecek.jpg" alt="Výfuky a aero">
-                    </div>
-                    <div class="brutal-card-body">
-                        <h3>CUSTOM EXHAUST & AERO</h3>
-                        <p>Výfukové systémy na míru s dokonalým zvukem. Montáž difuzorů a křídel.</p>
-                        <a href="#" class="brutal-btn" onclick="playClickSound()">Zjistit více</a>
-                    </div>
-                </div>
-                <div class="brutal-card">
-                    <div class="card-img-wrap">
-                        <img src="predni rozpera.jpg" alt="Přední rozpěra">
-                    </div>
-                    <div class="brutal-card-body">
-                        <h3>VÝZTUHY & HANDLING</h3>
-                        <p>Instalace rozpěr, stavitelných podvozků.</p>
-                        <a href="#" class="brutal-btn btn-gold" onclick="playClickSound()">Zjistit více</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="lesteni" class="content-section">
-            <div class="section-header">
-                <h1 class="glitch-title">DETAILING LAKU</h1>
-                <span>// 05 ZRCADLOVÝ LESK</span>
-            </div>
-            <div class="grid-3">
-                <div class="brutal-card">
-                    <div class="card-img-wrap">
-                        <img src="lestibawo dva.jpg" alt="Korekce laku">
-                    </div>
-                    <div class="brutal-card-body">
-                        <h3>KOREKCE LAKU</h3>
-                        <p>Vícestupňové leštění pro odstranění škrábanců a obnovení hloubky barvy.</p>
-                    </div>
-                </div>
-                <div class="brutal-card">
-                    <div class="card-img-wrap">
-                        <img src="merglesti.jpg" alt="Keramika">
-                    </div>
-                    <div class="brutal-card-body">
-                        <h3>KERAMIKA & OCHRANA</h3>
-                        <p>Odolná nano-keramika pro extrémní odtok vody a ochranu laku.</p>
-                    </div>
-                </div>
-                <div class="brutal-card">
-                    <div class="card-img-wrap">
-                        <img src="fabkalesti.jpg" alt="Renovace světel">
-                    </div>
-                    <div class="brutal-card-body">
-                        <h3>SVĚTLA & SKLA</h3>
-                        <p>Rozleštění zažloutlých světel pro čistý vzhled a bezpečné svícení.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="lakovna" class="content-section">
-            <div class="section-header">
-                <h1 class="glitch-title">LAKOVACÍ BOX</h1>
-                <span>// 06 PAINTJOB LAB</span>
-            </div>
-            <div style="border: 1px dashed var(--border-accent); padding: 70px 20px; text-align: center; background: var(--surface-color);">
-                <h2 style="color: var(--punk-red); font-size: 32px; letter-spacing: 2px;">[ STATUS: VE VÝSTAVBĚ ]</h2>
-                <p style="color: var(--text-dim); margin-top: 15px;">Instalujeme nový přetlakový lakovací box a kalibrujeme technologie.</p>
-                <div style="margin-top: 30px; font-size: 20px; color: var(--lux-gold);">
-                    <span id="blink">_</span> SYSTÉM SE PŘIPRAVUJE
-                </div>
-            </div>
-        </div>
-
+        <!-- KONTAKT -->
         <div id="kontakt" class="content-section">
             <div class="section-header">
-                <h1 class="glitch-title">SPOJTE SE S NÁMI</h1>
-                <span>// 07 KONTAKT</span>
+                <h1 class="gruz-headline">SPOJTE SE S NÁMI</h1>
             </div>
-            <div style="max-width: 900px; margin: 0 auto;">
-                <div class="brutal-card">
-                    <div class="brutal-card-body" style="padding: 40px;">
-                        <h3>GARÁŽOVÉ KOORDINÁTY & OTEVÍRACÍ DOBA</h3>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px;">
-                            <div>
-                                <p style="line-height: 2.2;">
-                                    <strong style="color: var(--lux-gold);">TEL:</strong> <a href="tel:608607667" style="color: var(--text-main); text-decoration: none;">+420 608 607 667</a><br>
-                                    <strong style="color: var(--lux-gold);">MAIL:</strong> <a href="mailto:GRUZGARAGE66@SEZNAM.CZ" style="color: var(--text-main); text-decoration: none;">GRUZGARAGE66@SEZNAM.CZ</a><br>
-                                    <strong style="color: var(--lux-gold);">BASE:</strong> <a href="https://mapy.cz/s/gajejatepe" target="_blank" style="color: var(--text-main); text-decoration: none;">Jičíněves 507 31</a><br>
-                                    <strong style="color: var(--lux-gold);">IG:</strong> <a href="https://instagram.com" style="color: var(--text-main); text-decoration: none;">@GARAGE.GRUZ</a>
-                                </p>
-                            </div>
-                            <div>
-                                <p style="line-height: 2.2; font-size: 13px;">
-                                    <strong style="color: var(--lux-gold);">OTEVÍRACÍ PROTOKOL:</strong><br>
-                                    PO-PÁ // 16:00 - 0:00<br>
-                                    SO // 10:00 - 18:00<br>
-                                    NE // <span style="color: var(--punk-red); font-weight: bold;">OFFLINE</span>
-                                </p>
-                                <a href="tel:608607667" class="brutal-btn btn-gold" style="width: 100%; text-align: center; margin-top: 15px;" onclick="playClickSound()">ZAVOLAT HNED</a>
-                            </div>
-                        </div>
+            <div class="gruz-card kontakt-card">
+                <h3 class="gruz-headline">GARÁŽOVÉ KOORDINÁTY & OTEVÍRACÍ DOBA</h3>
+                <div class="kontakt-grid">
+                    <div>
+                        <p><strong>TEL:</strong> <a href__="tel:608607667">+420 608 607 667</a></p>
+                        <p><strong>MAIL:</strong> <a href__="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a></p>
+                        <p><strong>BASE:</strong> <a href__="https://mapy.cz/s/gajejatepe" target="_blank" rel="noreferrer">Jičíněves 507 31</a></p>
+                        <p><strong>IG:</strong> <a href__="https://instagram.com" target="_blank" rel="noreferrer">@GARAGE.GRUZ</a></p>
+                    </div>
+                    <div>
+                        <p><strong>OTEVÍRACÍ PROTOKOL:</strong></p>
+                        <p>PO–PÁ // 16:00 – 0:00</p>
+                        <p>SO // 10:00 – 18:00</p>
+                        <p>NE // <span class="offline">OFFLINE</span></p>
+                        <a href__="tel:608607667" class="gruz-btn gruz-btn-hazard">ZAVOLAT HNED</a>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- FÓRUM -->
         <div id="forum" class="content-section">
             <div class="section-header">
-                <h1 class="glitch-title">UNDRGND LIVE CHAT</h1>
-                <span>// 08 KOMUNITNÍ KECÁRNA</span>
+                <h1 class="gruz-headline">UNDERGROUND CHAT</h1>
             </div>
-            <div class="brutal-card" style="max-width: 900px; margin: 0 auto; height: 500px; display: flex; flex-direction: column;">
-                <div class="brutal-card-body" style="padding: 25px; display: flex; flex-direction: column; height: 100%; justify-content: space-between;">
-                    <div id="chat-messages" style="flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border-dark);"></div>
-                    <form id="chat-form" onsubmit="handleChatSubmit(event)" style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <input type="text" id="chat-name" placeholder="TVŮJ NICK..." required maxlength="25" style="background: var(--bg-color); border: 1px solid var(--border-accent); color: var(--text-main); padding: 12px; font-family: 'Space Mono', monospace; font-size: 13px; width: 150px; outline: none;">
-                        <input type="text" id="chat-input" placeholder="NAPIŠ ZPRÁVU..." required autocomplete="off" style="flex-grow: 1; background: var(--bg-color); border: 1px solid var(--border-accent); color: var(--text-main); padding: 12px; font-family: 'Space Mono', monospace; font-size: 13px; outline: none;">
-                        <button type="submit" class="brutal-btn btn-gold" style="margin-top: 0;" onclick="playClickSound()">ODESLAT</button>
-                    </form>
+            <div class="gruz-card chat-card">
+                <div id="chat-messages">
+                    <div class="chat-msg"><span class="name">[00:00] GRUZ_SYS:</span> <span class="text">Underground chat.</span></div>
                 </div>
+                <form id="chat-form" onsubmit="handleChatSubmit(event)">
+                    <input type="text" id="chat-name" class="gruz-input" placeholder="TVOJE JMÉNO..." maxlength="25" required>
+                    <input type="text" id="chat-input" class="gruz-input" placeholder="..." autocomplete="off" required>
+                    <button type="submit" class="gruz-btn gruz-btn-hazard">ODESLAT</button>
+                </form>
             </div>
         </div>
 
     </div>
 
     <script>
-        // Custom Cursor Motion
-        const cursor = document.getElementById('cursor');
-        const cursorFollower = document.getElementById('cursor-follower');
-        let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
-
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
-        });
-
-        function animateFollower() {
-            followerX += (mouseX - followerX) * 0.2;
-            followerY += (mouseY - followerY) * 0.2;
-            cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
-            requestAnimationFrame(animateFollower);
-        }
-        animateFollower();
-
-        const interactiveElements = document.querySelectorAll('a, button, input, img');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-        });
-
-        // Synth Click Audio
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        function playClickSound() {
-            try {
-                if (audioCtx.state === 'suspended') audioCtx.resume();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(380, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(90, audioCtx.currentTime + 0.04);
-                gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.04);
-            } catch(e) {}
-        }
-
-        setInterval(() => {
-            const blinker = document.getElementById('blink');
-            if(blinker) blinker.style.opacity = blinker.style.opacity === '0' ? '1' : '0';
-        }, 500);
-
         function switchTab(event, tabId) {
             event.preventDefault();
             document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active-tab'));
-            document.querySelectorAll('nav a').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
             document.getElementById(tabId).classList.add('active-tab');
-            event.currentTarget.classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(btn => {
+                if (btn.getAttribute('onclick').includes("'" + tabId + "'")) btn.classList.add('active');
+            });
             window.scrollTo({ top: 0, behavior: 'smooth' });
             if (tabId === 'forum') scrollToBottom();
         }
 
-        function toggleSpecs(event, element) {
-            event.preventDefault();
-            element.closest('.car-card').classList.toggle('specs-active');
+        function toggleSpecs(element) {
+            element.closest('.gruz-card').classList.toggle('specs-active');
         }
 
         const chatMessages = document.getElementById('chat-messages');
@@ -843,10 +921,10 @@
             const nameInput = document.getElementById('chat-name');
             const messageInput = document.getElementById('chat-input');
             if (nameInput.value.trim() && messageInput.value.trim()) {
-                const messageDiv = document.createElement('div');
-                messageDiv.style.cssText = 'padding: 8px 12px; background: rgba(255,255,255,0.02); border-left: 2px solid var(--lux-gold); font-size: 12px;';
                 const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                messageDiv.innerHTML = `<span style="color: var(--lux-gold); font-weight: bold;">[${timeStr}] ${escapeHtml(nameInput.value)}:</span> ${escapeHtml(messageInput.value)}`;
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'chat-msg';
+                messageDiv.innerHTML = `<span class="name">[${timeStr}] ${escapeHtml(nameInput.value.trim())}:</span> <span class="text">${escapeHtml(messageInput.value.trim())}</span>`;
                 chatMessages.appendChild(messageDiv);
                 messageInput.value = '';
                 scrollToBottom();
@@ -857,32 +935,5 @@
             const map = {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'};
             return text.replace(/[&<>"']/g, m => map[m]);
         }
-
-        // --- STATISTIKY NÁVŠTĚVNOSTI ---
-        function initGruzStats() {
-            let visits = localStorage.getItem('gruz_visits_count');
-            
-            if (!visits) {
-                visits = Math.floor(Math.random() * 300) + 1250; 
-         } else {
-        visits = parseInt(visits) + 1;
-    }
-            localStorage.setItem('gruz_visits_count', visits);
-            document.getElementById('stat-visits').innerText = visits.toString().padStart(4, '0');
-
-            function updateOnlineStatus() {
-                const onlineCount = Math.floor(Math.random() * 8) + 2;
-                document.getElementById('stat-online').innerText = onlineCount;
-            }
-            
-            updateOnlineStatus();
-            
-            setInterval(() => {
-                updateOnlineStatus();
-            }, Math.floor(Math.random() * 15000) + 15000);
-        }
-
-        document.addEventListener('DOMContentLoaded', initGruzStats);
     </script>
 </body>
-</html>
