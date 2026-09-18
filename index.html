@@ -1,3 +1,6 @@
+Jasně — tady je celý web v jednom HTML souboru, aktualizovaný o projekt LADA (a bez E36):
+
+```html
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -815,21 +818,23 @@
                         </div>
                     </div>
 
+                    <!-- LADA.png -->
                     <div class="gruz-card">
                         <div class="card-img-wrap">
-                            <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/16bcdc158_e36.jpg" alt="BMW E36 na sněhu">
+                            <img src="https://media.base44.com/images/public/6aacf130c9fbb464386c2c30/423fd7a80_image.png" alt="LADA Only Fast Only Low">
                         </div>
                         <div class="card-body">
-                            <h3 class="gruz-headline">E36 SNOW UNIT</h3>
-                            <p style="margin-bottom: 16px;">Noční jízdy pro radost, trénink a zábavu v zimním období.</p>
+                            <h3 class="gruz-headline">LADA ONLY FAST</h3>
+                            <p style="margin-bottom: 16px;">Sovětský boxy klasik zavařený na podlahu. Syrová jízda, žádné kompromisy.</p>
                             <button class="gruz-btn gruz-btn-outline-hazard" onclick="toggleSpecs(this)">DETAIL VOZU</button>
                         </div>
                         <div class="spec-overlay">
-                            <h3 class="gruz-headline">SPEC // E36 SNOW UNIT</h3>
+                            <h3 class="gruz-headline">SPEC // LADA ONLY FAST</h3>
                             <ul class="spec-list">
-                                <li class="gold"><span>MOTOR</span> 2.0L R6 (M50B20)</li>
-                                <li class="gold"><span>POHON</span> RWD</li>
-                                <li class="gold"><span>STATUS</span> Winter Weapon</li>
+                                <li class="gold"><span>KAROSERIE</span> Boxy Hatchback</li>
+                                <li class="gold"><span>POHON</span> RWD + Zavařenec</li>
+                                <li class="gold"><span>VÝFUK</span> Velký box konec</li>
+                                <li class="gold"><span>STATUS</span> Only Fast, Only Low</li>
                             </ul>
                             <button class="gruz-btn gruz-btn-outline-hazard" onclick="toggleSpecs(this)">← NÁVRAT</button>
                         </div>
@@ -890,7 +895,7 @@
             document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active-tab'));
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             document.getElementById(tabId).classList.add('active-tab');
-            
+
             if (event.currentTarget) {
                 event.currentTarget.classList.add('active');
             }
