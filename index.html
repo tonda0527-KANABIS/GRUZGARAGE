@@ -583,7 +583,7 @@
             </div>
           </div>
 
-          <!-- LADA (LADA.png) -->
+          <!-- LADA -->
           <div class="gruz-card">
             <div class="gruz-card-img-wrap">
               <img class="gruz-card-img" src="https://media.base44.com/images/public/6aacf130c9fbb464386c2c30/423fd7a80_image.png" alt="LADA ONLY FAST" />
@@ -659,7 +659,24 @@
     </div>
   </main>
 
-  <script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getDatabase, ref, push, onChildAdded, query, limitToLast, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB4nw_OFiflXff1bBB8Vul99YGwgU8iRtI",
+      authDomain: "gruzgarage-36a47.firebaseapp.com",
+      databaseURL: "https://gruzgarage-36a47-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "gruzgarage-36a47",
+      storageBucket: "gruzgarage-36a47.firebasestorage.app",
+      messagingSenderId: "295160379354",
+      appId: "1:295160379354:web:f82698f72bbe6ffe43b2e3"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const messagesRef = ref(db, "messages");
+
     function showSection(tab) {
       document.querySelectorAll('.section').forEach(function (s) {
         var isActive = s.id === 'section-' + tab;
@@ -675,34 +692,42 @@
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    window.showSection = showSection;
 
     function toggleSpecs(btn) {
       var card = btn.closest('.gruz-card');
       if (card) card.classList.toggle('specs-active');
     }
+    window.toggleSpecs = toggleSpecs;
 
-    // Fórum — v této statické verzi se zprávy ukládají jen lokálně v prohlížeči
-    document.getElementById('forum-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      var nameInput = document.getElementById('forum-name');
-      var textInput = document.getElementById('forum-text');
-      var name = nameInput.value.trim();
-      var text = textInput.value.trim();
-      if (!name || !text) return;
-      var msg = document.createElement('div');
+    // Fórum — načtení posledních 50 zpráv + živé aktualizace
+    const box = document.getElementById('forum-messages');
+    onChildAdded(query(messagesRef, limitToLast(50)), (snap) => {
+      const m = snap.val();
+      const msg = document.createElement('div');
       msg.className = 'chat-msg';
-      var author = document.createElement('span');
+      const author = document.createElement('span');
       author.className = 'author';
-      author.textContent = name + ': ';
-      var body = document.createElement('span');
+      author.textContent = (m.name || 'ANON') + ': ';
+      const body = document.createElement('span');
       body.style.color = 'var(--gruz-steel)';
-      body.textContent = text;
+      body.textContent = m.text;
       msg.appendChild(author);
       msg.appendChild(body);
-      var box = document.getElementById('forum-messages');
       box.appendChild(msg);
-      textInput.value = '';
       box.scrollTop = box.scrollHeight;
+    });
+
+    // Odeslání zprávy
+    document.getElementById('forum-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const nameInput = document.getElementById('forum-name');
+      const textInput = document.getElementById('forum-text');
+      const name = nameInput.value.trim().slice(0, 30);
+      const text = textInput.value.trim().slice(0, 500);
+      if (!name || !text) return;
+      push(messagesRef, { name: name, text: text, date: serverTimestamp() });
+      textInput.value = '';
     });
   </script>
 </body>
