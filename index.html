@@ -1,908 +1,709 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRUZ GARAGE | Autoservis, Tuning & Detailing Jičíněves</title>
-    <link rel="icon" type="image/jpeg" href="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/ee4c23c4a_logo.jpg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gruz-obsidian: #0A0A0B;
-            --gruz-steel: #E2E8F0;
-            --gruz-hazard: #FF4D00;
-            --gruz-blueprint: #27272A;
-            --gruz-dim: #71717A;
-            --gruz-card-bg: #0E0E11;
-            --gruz-sidebar-bg: #08080A;
-            --gruz-img-bg: #050506;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            background-color: var(--gruz-obsidian);
-            background-image:
-                linear-gradient(to right, rgba(255,255,255,0.018) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,255,255,0.018) 1px, transparent 1px);
-            background-size: 48px 48px;
-            color: var(--gruz-steel);
-            font-family: 'JetBrains Mono', ui-monospace, monospace;
-            font-size: 14px;
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .gruz-headline {
-            font-family: 'Unbounded', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: var(--gruz-obsidian); }
-        ::-webkit-scrollbar-thumb { background: var(--gruz-blueprint); }
-        ::-webkit-scrollbar-thumb:hover { background: var(--gruz-hazard); }
-
-        /* ===== SIDEBAR ===== */
-        aside {
-            position: fixed; left: 0; top: 0; bottom: 0;
-            width: 256px;
-            background: var(--gruz-sidebar-bg);
-            border-right: 1px solid var(--gruz-blueprint);
-            display: flex; flex-direction: column;
-            z-index: 40;
-        }
-
-        .sidebar-head {
-            padding: 24px 20px;
-            border-bottom: 1px solid var(--gruz-blueprint);
-        }
-
-        .sidebar-head img {
-            display: block;
-            width: 100%;
-            max-width: 160px;
-            object-fit: contain;
-        }
-
-        .sidebar-head .telemetry {
-            margin-top: 8px;
-            font-size: 10px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--gruz-dim);
-        }
-
-        aside nav {
-            display: flex; flex-direction: column;
-            padding: 16px 0;
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .nav-item {
-            display: flex; align-items: center;
-            padding: 11px 14px;
-            width: 100%;
-            background: transparent;
-            border: none;
-            border-left: 2px solid transparent;
-            color: var(--gruz-dim);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px; font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.15s ease;
-        }
-
-        .nav-item:hover {
-            color: var(--gruz-steel);
-            border-left-color: var(--gruz-steel);
-            background: rgba(255,255,255,0.02);
-        }
-
-        .nav-item.active {
-            color: var(--gruz-hazard);
-            border-left-color: var(--gruz-hazard);
-            background: rgba(255,77,0,0.06);
-        }
-
-        .sidebar-foot {
-            padding: 16px 20px;
-            border-top: 1px solid var(--gruz-blueprint);
-            font-size: 10px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--gruz-dim);
-        }
-
-        .online-dot {
-            display: inline-block;
-            width: 7px; height: 7px;
-            background: var(--gruz-hazard);
-            border-radius: 50%;
-            margin-right: 8px;
-            box-shadow: 0 0 8px #FF4D00;
-            animation: gruzPulse 2s infinite;
-            vertical-align: middle;
-        }
-
-        @keyframes gruzPulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 8px #FF4D00; }
-            50% { opacity: 0.35; box-shadow: 0 0 2px #FF4D00; }
-        }
-
-        /* ===== MAIN & WRAPPER FOR CENTERING ===== */
-        .main-wrapper {
-            margin-left: 256px;
-            width: calc(100% - 256px);
-            display: flex;
-            justify-content: center;
-        }
-
-        .container {
-            padding: 32px 40px 64px;
-            max-width: 1152px;
-            width: 100%;
-        }
-
-        .content-section { display: none; }
-        .content-section.active-tab { display: block; animation: gruzFadeIn 0.28s cubic-bezier(0.16,1,0.3,1) forwards; }
-
-        @keyframes gruzFadeIn {
-            0% { opacity: 0; transform: translateY(8px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .section-header {
-            border-bottom: 1px solid var(--gruz-blueprint);
-            padding-bottom: 14px;
-            margin-bottom: 32px;
-            display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
-        }
-
-        .section-header h1 {
-            font-size: 30px;
-            font-weight: 900;
-            color: var(--gruz-steel);
-        }
-
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 24px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
-
-        /* ===== CARDS ===== */
-        .gruz-card {
-            border: 1px solid var(--gruz-blueprint);
-            background: var(--gruz-card-bg);
-            position: relative;
-            display: flex; flex-direction: column;
-            overflow: hidden;
-            transition: border-color 0.2s ease, transform 0.2s ease;
-        }
-
-        .gruz-card:hover {
-            border-color: var(--gruz-hazard);
-            transform: translateY(-3px);
-        }
-
-        .card-img-wrap {
-            position: relative;
-            width: 100%; height: 260px;
-            overflow: hidden;
-            border-bottom: 1px solid var(--gruz-blueprint);
-            background: var(--gruz-img-bg);
-        }
-
-        .card-img-wrap img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            object-position: center;
-            filter: brightness(0.82) contrast(1.08) saturate(0.9);
-            transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), filter 0.3s ease;
-        }
-
-        .gruz-card:hover .card-img-wrap img {
-            transform: scale(1.05);
-            filter: brightness(1) contrast(1.12) saturate(1);
-        }
-
-        .card-body {
-            padding: 24px;
-            flex: 1;
-            display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
-        }
-
-        .card-body h3 {
-            font-size: 20px; font-weight: 700;
-            color: var(--gruz-hazard);
-            margin-bottom: 8px;
-        }
-
-        .card-body p { color: var(--gruz-dim); font-size: 13px; }
-        .card-body p span { display: block; }
-
-        /* ===== BUTTONS ===== */
-        .gruz-btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            background: transparent;
-            color: var(--gruz-steel);
-            border: 1px solid var(--gruz-blueprint);
-            padding: 13px 22px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px; font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            text-decoration: none;
-            min-height: 48px;
-            cursor: pointer;
-            transition: all 0.18s ease;
-        }
-
-        .gruz-btn:hover {
-            color: #0A0A0B;
-            background: var(--gruz-steel);
-            border-color: var(--gruz-steel);
-        }
-
-        .gruz-btn-hazard {
-            background: var(--gruz-hazard);
-            border-color: var(--gruz-hazard);
-            color: #0A0A0B;
-        }
-
-        .gruz-btn-hazard:hover {
-            background: #FF6A2B;
-            border-color: #FF6A2B;
-            color: #0A0A0B;
-        }
-
-        .gruz-btn-outline-hazard {
-            border-color: var(--gruz-hazard);
-            color: var(--gruz-hazard);
-        }
-
-        .gruz-btn-outline-hazard:hover {
-            background: var(--gruz-hazard);
-            color: #0A0A0B;
-        }
-
-        /* ===== HERO ===== */
-        .hero {
-            position: relative;
-            width: 100%;
-            height: clamp(280px, 50vh, 460px);
-            overflow: hidden;
-            border: 1px solid var(--gruz-blueprint);
-            margin-bottom: 40px;
-        }
-
-        .hero img { width: 100%; height: 100%; object-fit: cover; }
-
-        .hero-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(180deg, rgba(10,10,11,0.4) 0%, rgba(10,10,11,0.85) 100%);
-        }
-
-        .hero-content {
-            position: absolute; inset: 0;
-            display: flex; flex-direction: column; justify-content: flex-end;
-            padding: 24px 40px;
-        }
-
-        .hero-telemetry {
-            font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-            color: var(--gruz-dim);
-            margin-bottom: 12px;
-        }
-
-        .hero-telemetry .live { color: var(--gruz-hazard); }
-
-        .hero-content h1 {
-            font-size: clamp(36px, 5vw, 60px);
-            font-weight: 900;
-            line-height: 1;
-            color: var(--gruz-steel);
-        }
-
-        .hero-content h1 span { color: var(--gruz-hazard); }
-
-        .hero-content p {
-            margin-top: 16px; max-width: 560px;
-            font-size: 13px;
-            color: var(--gruz-dim);
-        }
-
-        /* ===== CREW LIST ===== */
-        .crew-card {
-            padding: 40px;
-            max-width: 768px;
-        }
-
-        .crew-card h3 {
-            font-size: 24px; font-weight: 700;
-            color: var(--gruz-steel);
-            margin-bottom: 24px;
-        }
-
-        .crew-card ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
-
-        .crew-card li { padding-left: 16px; }
-        .crew-card li.border-red { border-left: 3px solid var(--gruz-hazard); }
-        .crew-card li.border-steel { border-left: 3px solid var(--gruz-steel); }
-
-        .crew-card li strong {
-            display: block;
-            font-family: 'Unbounded', sans-serif;
-            text-transform: uppercase;
-            font-size: 15px; font-weight: 700;
-            color: var(--gruz-steel);
-            margin-bottom: 4px;
-        }
-
-        .crew-card li span { font-size: 13px; color: var(--gruz-dim); }
-
-        .crew-footer {
-            margin-top: 32px; padding-top: 24px;
-            border-top: 1px solid var(--gruz-blueprint);
-            display: flex; flex-wrap: wrap; gap: 16px;
-            justify-content: space-between; align-items: center;
-        }
-
-        .crew-footer .telemetry {
-            font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-            color: var(--gruz-hazard);
-        }
-
-        /* ===== SPEC OVERLAY ===== */
-        .spec-overlay {
-            position: absolute; inset: 0;
-            background: rgba(10,10,11,0.97);
-            display: flex; flex-direction: column;
-            justify-content: space-between;
-            padding: 24px;
-            transform: translateY(100%);
-            opacity: 0;
-            transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease;
-            z-index: 10;
-        }
-
-        .gruz-card.specs-active .spec-overlay {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .spec-overlay h3 {
-            font-size: 17px; font-weight: 700;
-            color: var(--gruz-steel);
-            border-bottom: 1px solid var(--gruz-blueprint);
-            padding-bottom: 8px;
-            margin-bottom: 12px;
-        }
-
-        .spec-list { list-style: none; flex: 1; margin: 12px 0; }
-
-        .spec-list li {
-            display: flex; justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px dotted var(--gruz-blueprint);
-            font-size: 13px;
-            color: var(--gruz-steel);
-        }
-
-        .spec-list li span {
-            font-size: 12px; font-weight: 700;
-            color: var(--gruz-hazard);
-        }
-
-        .spec-list li.gold span { color: var(--gruz-steel); }
-
-        /* ===== LAKOVNA ===== */
-        .build-box {
-            border: 1px dashed var(--gruz-blueprint);
-            background: var(--gruz-card-bg);
-            padding: 64px 20px;
-            text-align: center;
-        }
-
-        .build-box h2 {
-            font-size: clamp(22px, 3vw, 30px);
-            font-weight: 900;
-            color: var(--gruz-hazard);
-        }
-
-        .build-box p { margin-top: 16px; font-size: 13px; color: var(--gruz-dim); }
-
-        .build-box .blink-wrap {
-            margin-top: 24px; font-size: 17px;
-            color: var(--gruz-steel);
-        }
-
-        .gruz-blink { animation: gruzBlink 1s step-end infinite; }
-
-        @keyframes gruzBlink { 50% { opacity: 0; } }
-
-        /* ===== KONTAKT ===== */
-        .kontakt-card {
-            padding: 40px;
-            max-width: 768px;
-        }
-
-        .kontakt-card h3 {
-            font-size: 20px; font-weight: 700;
-            color: var(--gruz-steel);
-            margin-bottom: 24px;
-        }
-
-        .kontakt-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
-            font-size: 13px; line-height: 2.1;
-        }
-
-        .kontakt-grid strong { color: var(--gruz-hazard); }
-        .kontakt-grid a { color: var(--gruz-steel); text-decoration: none; transition: color 0.15s ease; }
-        .kontakt-grid a:hover { color: var(--gruz-hazard); }
-        .kontakt-grid .offline { color: var(--gruz-hazard); font-weight: 700; }
-        .kontakt-grid .gruz-btn { width: 100%; margin-top: 16px; }
-
-        /* ===== CHAT ===== */
-        .chat-card {
-            max-width: 768px;
-            height: 480px;
-            display: flex; flex-direction: column;
-            padding: 20px;
-        }
-
-        #chat-messages {
-            flex: 1; overflow-y: auto;
-            display: flex; flex-direction: column; gap: 8px;
-            margin-bottom: 16px; padding-bottom: 16px;
-            border-bottom: 1px solid var(--gruz-blueprint);
-        }
-
-        .chat-msg {
-            padding: 8px 12px;
-            font-size: 12px;
-            background: rgba(255,255,255,0.02);
-            border-left: 2px solid var(--gruz-hazard);
-        }
-
-        .chat-msg .name { color: var(--gruz-hazard); font-weight: 700; }
-        .chat-msg .text { color: var(--gruz-steel); }
-
-        #chat-form { display: flex; gap: 8px; flex-wrap: wrap; }
-
-        .gruz-input {
-            background: var(--gruz-img-bg);
-            border: 1px solid var(--gruz-blueprint);
-            color: var(--gruz-steel);
-            padding: 12px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            outline: none;
-            transition: border-color 0.15s ease;
-        }
-
-        .gruz-input:focus { border-color: var(--gruz-hazard); }
-        .gruz-input::placeholder { color: var(--gruz-dim); }
-        #chat-name { width: 140px; }
-        #chat-input { flex: 1; min-width: 180px; }
-
-        /* ===== CONTACT DOCK ===== */
-        .contact-dock {
-            position: fixed; bottom: 20px; right: 20px;
-            z-index: 30;
-            border: 1px solid var(--gruz-blueprint);
-            background: rgba(8,8,10,0.92);
-            backdrop-filter: blur(8px);
-            padding: 16px 20px;
-            font-size: 12px;
-        }
-
-        .contact-dock .telemetry {
-            font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-            color: var(--gruz-steel);
-            margin-bottom: 8px;
-        }
-
-        .contact-dock a {
-            display: block;
-            color: var(--gruz-dim);
-            text-decoration: none;
-            transition: color 0.15s ease;
-        }
-
-        .contact-dock a:hover { color: var(--gruz-hazard); }
-
-        /* ===== MOBILE ===== */
-        .mobile-nav { display: none; }
-
-        @media (max-width: 1023px) {
-            aside { display: none; }
-            .main-wrapper { margin-left: 0; width: 100%; }
-            .container { padding: 32px 20px 140px; }
-            .hero-content { padding: 20px; }
-            .mobile-nav {
-                display: flex;
-                position: fixed; bottom: 0; left: 0; right: 0;
-                z-index: 40;
-                border-top: 1px solid var(--gruz-blueprint);
-                background: var(--gruz-sidebar-bg);
-                overflow-x: auto;
-            }
-            .mobile-nav .nav-item {
-                border-left: none;
-                border-bottom: 2px solid transparent;
-                border-top: none;
-                white-space: nowrap;
-                flex: 0 0 auto;
-                width: auto;
-            }
-            .mobile-nav .nav-item.active { border-bottom-color: var(--gruz-hazard); background: transparent; }
-            .contact-dock { display: none; }
-            .kontakt-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/jpeg" href="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/ee4c23c4a_logo.jpg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GRUZ GARAGE | Autoservis, Tuning & Detailing Jičíněves</title>
+  <meta name="description" content="GRUZ GARAGE — autoservis v Jičíněvsi. Komplexní servis, detailing, leštění, tuning úpravy a projekty. Kvalitní a čistá práce." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gruz-obsidian: #0A0A0B;
+      --gruz-steel: #E2E8F0;
+      --gruz-hazard: #FF4D00;
+      --gruz-blueprint: #27272A;
+      --gruz-dim: #71717A;
+      --gruz-card-bg: #0E0E11;
+      --gruz-sidebar-bg: #08080A;
+      --gruz-img-bg: #050506;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body.gruz-surface {
+      background-color: var(--gruz-obsidian);
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+      color: var(--gruz-steel);
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--gruz-obsidian); }
+    ::-webkit-scrollbar-thumb { background: var(--gruz-blueprint); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gruz-hazard); }
+    a { text-decoration: none; }
+
+    .gruz-headline {
+      font-family: 'Unbounded', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .gruz-telemetry {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gruz-dim);
+    }
+
+    /* ===== Sidebar ===== */
+    .sidebar {
+      position: fixed; left: 0; top: 0; bottom: 0;
+      width: 256px;
+      background: var(--gruz-sidebar-bg);
+      border-right: 1px solid var(--gruz-blueprint);
+      display: none;
+      flex-direction: column;
+      z-index: 40;
+    }
+    .sidebar-logo { padding: 24px; border-bottom: 1px solid var(--gruz-blueprint); }
+    .sidebar-logo img { display: block; height: 56px; width: auto; max-width: 100%; object-fit: contain; cursor: pointer; }
+    .sidebar nav { display: flex; flex-direction: column; padding: 16px 0; flex: 1; overflow-y: auto; }
+    .sidebar-status { padding: 16px; border-top: 1px solid var(--gruz-blueprint); }
+
+    .gruz-nav-item {
+      display: flex; align-items: center;
+      padding: 11px 14px; width: 100%;
+      background: transparent; border: none;
+      border-left: 2px solid transparent;
+      color: var(--gruz-dim);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-align: left; cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .gruz-nav-item:hover {
+      color: var(--gruz-steel);
+      border-left-color: var(--gruz-steel);
+      background: rgba(255,255,255,0.02);
+    }
+    .gruz-nav-item.active {
+      color: var(--gruz-hazard);
+      border-left-color: var(--gruz-hazard);
+      background: rgba(255,77,0,0.06);
+    }
+
+    .gruz-online-dot {
+      display: inline-block; width: 7px; height: 7px;
+      background: var(--gruz-hazard); border-radius: 50%;
+      margin-right: 8px; vertical-align: middle;
+      box-shadow: 0 0 8px #FF4D00;
+      animation: gruzPulse 2s infinite;
+    }
+    @keyframes gruzPulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px #FF4D00; }
+      50% { opacity: 0.35; box-shadow: 0 0 2px #FF4D00; }
+    }
+
+    /* ===== Mobile nav ===== */
+    .mobile-nav {
+      display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
+      border-top: 1px solid var(--gruz-blueprint);
+      background: var(--gruz-sidebar-bg);
+      overflow-x: auto;
+    }
+    .mobile-nav .gruz-nav-item { border-left: none; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; width: auto; }
+    .mobile-nav .gruz-nav-item.active { border-left: none; border-bottom: 2px solid var(--gruz-hazard); background: transparent; }
+
+    /* ===== Contact dock ===== */
+    .contact-dock {
+      display: none; position: fixed; bottom: 20px; right: 20px; z-index: 30;
+      border: 1px solid var(--gruz-blueprint);
+      background: rgba(8,8,10,0.92);
+      padding: 16px; font-size: 12px;
+    }
+    .contact-dock a { display: block; color: var(--gruz-dim); transition: color 0.15s ease; }
+    .contact-dock a:hover { color: var(--gruz-hazard); }
+
+    /* ===== Layout ===== */
+    .main { display: flex; justify-content: center; padding: 32px 20px 128px; }
+    .main-inner { width: 100%; max-width: 1152px; }
+    @media (min-width: 1024px) {
+      .sidebar { display: flex; }
+      .main { margin-left: 256px; width: calc(100% - 256px); padding-bottom: 64px; }
+      .mobile-nav { display: none; }
+      .contact-dock { display: block; }
+    }
+    @media (min-width: 768px) {
+      .main { padding-left: 40px; padding-right: 40px; }
+    }
+
+    /* ===== Cards ===== */
+    .gruz-card {
+      border: 1px solid var(--gruz-blueprint);
+      background: var(--gruz-card-bg);
+      position: relative; display: flex; flex-direction: column;
+      overflow: hidden;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .gruz-card:hover { border-color: var(--gruz-hazard); transform: translateY(-3px); }
+    .gruz-card-img-wrap {
+      position: relative; width: 100%; height: 260px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--gruz-blueprint);
+      background: var(--gruz-img-bg);
+    }
+    .gruz-card-img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      filter: brightness(0.82) contrast(1.08) saturate(0.9);
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), filter 0.3s ease;
+    }
+    .gruz-card:hover .gruz-card-img { transform: scale(1.05); filter: brightness(1) contrast(1.12) saturate(1); }
+
+    /* ===== Buttons ===== */
+    .gruz-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: transparent; color: var(--gruz-steel);
+      border: 1px solid var(--gruz-blueprint);
+      padding: 13px 22px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      min-height: 48px; cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .gruz-btn:hover { color: #0A0A0B; background: var(--gruz-steel); border-color: var(--gruz-steel); }
+    .gruz-btn-hazard { background: var(--gruz-hazard); border-color: var(--gruz-hazard); color: #0A0A0B; }
+    .gruz-btn-hazard:hover { background: #FF6A2B; border-color: #FF6A2B; color: #0A0A0B; }
+    .gruz-btn-outline-hazard { border-color: var(--gruz-hazard); color: var(--gruz-hazard); }
+    .gruz-btn-outline-hazard:hover { background: var(--gruz-hazard); color: #0A0A0B; }
+
+    /* ===== Inputs ===== */
+    .gruz-input {
+      background: var(--gruz-img-bg);
+      border: 1px solid var(--gruz-blueprint);
+      color: var(--gruz-steel);
+      padding: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; outline: none;
+      transition: border-color 0.15s ease;
+    }
+    .gruz-input:focus { border-color: var(--gruz-hazard); }
+    .gruz-input::placeholder { color: var(--gruz-dim); }
+
+    /* ===== Animations ===== */
+    @keyframes gruzFadeIn {
+      0% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .gruz-fade-in { animation: gruzFadeIn 0.28s cubic-bezier(0.16,1,0.3,1) forwards; }
+    @keyframes gruzBlink { 50% { opacity: 0; } }
+    .gruz-blink { animation: gruzBlink 1s step-end infinite; }
+
+    /* ===== Spec overlay ===== */
+    .gruz-spec-overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,10,11,0.97);
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 24px;
+      transform: translateY(100%); opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease;
+      z-index: 10;
+    }
+    .gruz-card.specs-active .gruz-spec-overlay { transform: translateY(0); opacity: 1; }
+
+    /* ===== Sections & grids ===== */
+    .section { display: none; }
+    .section.active { display: block; }
+    .section-header {
+      border-bottom: 1px solid var(--gruz-blueprint);
+      padding-bottom: 14px; margin-bottom: 32px;
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+    }
+    .section-header h1 { font-size: 30px; font-weight: 900; color: var(--gruz-steel); }
+    .grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+    .grid.wide { grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); }
+    .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+    .card-title { font-size: 20px; font-weight: 700; color: var(--gruz-hazard); margin-bottom: 8px; }
+    .card-text { color: var(--gruz-dim); font-size: 13px; }
+    .card-text span { display: block; }
+    .self-start { align-self: flex-start; }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative; width: 100%; overflow: hidden;
+      border: 1px solid var(--gruz-blueprint);
+      margin-bottom: 40px; height: clamp(280px, 50vh, 460px);
+    }
+    .hero img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,11,0.4) 0%, rgba(10,10,11,0.85) 100%); }
+    .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; }
+    @media (min-width: 768px) { .hero-content { padding: 40px; } }
+    .hero-content h1 { font-size: clamp(36px, 5vw, 60px); font-weight: 900; line-height: 1; color: var(--gruz-steel); }
+    .hero-content p { margin-top: 16px; max-width: 560px; font-size: 13px; color: var(--gruz-dim); }
+    .crew-card { padding: 40px; max-width: 768px; }
+    .crew-card h3 { font-size: 24px; font-weight: 700; color: var(--gruz-steel); margin-bottom: 24px; }
+    .crew-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+    .crew-list li { padding-left: 16px; border-left: 3px solid var(--gruz-hazard); }
+    .crew-list li:nth-child(2) { border-left-color: var(--gruz-steel); }
+    .crew-list strong { display: block; font-size: 15px; font-weight: 700; color: var(--gruz-steel); margin-bottom: 4px; }
+    .crew-list span { font-size: 13px; color: var(--gruz-dim); }
+    .crew-footer { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--gruz-blueprint); display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
+
+    /* ===== Forum ===== */
+    .forum-card { max-width: 768px; height: 480px; display: flex; flex-direction: column; padding: 20px; }
+    .forum-messages { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gruz-blueprint); }
+    .forum-form { display: flex; gap: 8px; flex-wrap: wrap; }
+    .forum-form .name-input { width: 140px; }
+    .forum-form .text-input { flex: 1; min-width: 180px; }
+    .chat-msg { font-size: 13px; }
+    .chat-msg .author { color: var(--gruz-hazard); font-weight: 700; }
+
+    /* Kontakt */
+    .kontakt-card { padding: 40px; max-width: 768px; }
+    .kontakt-card h3 { font-size: 20px; font-weight: 700; color: var(--gruz-steel); margin-bottom: 24px; }
+    .kontakt-grid { display: grid; grid-template-columns: 1fr; gap: 32px; font-size: 13px; line-height: 2.1; }
+    @media (min-width: 768px) { .kontakt-grid { grid-template-columns: 1fr 1fr; } }
+    .kontakt-grid strong { color: var(--gruz-hazard); }
+    .kontakt-grid a { color: var(--gruz-steel); transition: color 0.15s ease; }
+    .kontakt-grid a:hover { color: var(--gruz-hazard); }
+
+    /* Lakovna */
+    .lakovna-placeholder {
+      border: 1px dashed var(--gruz-blueprint);
+      background: var(--gruz-card-bg);
+      padding: 64px; text-align: center;
+    }
+    .lakovna-placeholder h2 { font-size: clamp(22px, 3vw, 30px); font-weight: 900; color: var(--gruz-hazard); }
+    .lakovna-placeholder p { margin-top: 16px; font-size: 13px; color: var(--gruz-dim); }
+    .lakovna-placeholder .system { margin-top: 24px; font-size: 17px; color: var(--gruz-steel); }
+
+    .upravy-wrap { max-width: 640px; }
+  </style>
 </head>
-<body>
+<body class="gruz-surface">
 
-    <!-- SIDEBAR -->
-    <aside>
-        <div class="sidebar-head">
-            <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/ee4c23c4a_logo.jpg" alt="GRUZ GARAGE" style="cursor:pointer" onclick="switchTab(event, 'crew')">
-            <div class="telemetry">// JIČÍNĚVES BASE</div>
-        </div>
-        <nav>
-            <button class="nav-item active" onclick="switchTab(event, 'crew')">GRUZ CREW</button>
-            <button class="nav-item" onclick="switchTab(event, 'servis')">SERVIS</button>
-            <button class="nav-item" onclick="switchTab(event, 'upravy')">ÚPRAVY</button>
-            <button class="nav-item" onclick="switchTab(event, 'lesteni')">LEŠTĚNÍ</button>
-            <button class="nav-item" onclick="switchTab(event, 'detailing')">DETAILING</button>
-            <button class="nav-item" onclick="switchTab(event, 'lakovna')">LAKOVNA</button>
-            <button class="nav-item" onclick="switchTab(event, 'projekty')">PROJEKTY</button>
-            <button class="nav-item" onclick="switchTab(event, 'kontakt')">KONTAKT</button>
-            <button class="nav-item" onclick="switchTab(event, 'forum')">FÓRUM</button>
-        </nav>
-        <div class="sidebar-foot">
-            <span class="online-dot"></span>GARÁŽ V PŘÍPRAVĚ
-        </div>
-    </aside>
-
-    <!-- MOBILE NAV -->
-    <nav class="mobile-nav">
-        <button class="nav-item active" onclick="switchTab(event, 'crew')">GRUZ CREW</button>
-        <button class="nav-item" onclick="switchTab(event, 'servis')">SERVIS</button>
-        <button class="nav-item" onclick="switchTab(event, 'upravy')">ÚPRAVY</button>
-        <button class="nav-item" onclick="switchTab(event, 'lesteni')">LEŠTĚNÍ</button>
-        <button class="nav-item" onclick="switchTab(event, 'detailing')">DETAILING</button>
-        <button class="nav-item" onclick="switchTab(event, 'lakovna')">LAKOVNA</button>
-        <button class="nav-item" onclick="switchTab(event, 'projekty')">PROJEKTY</button>
-        <button class="nav-item" onclick="switchTab(event, 'kontakt')">KONTAKT</button>
-        <button class="nav-item" onclick="switchTab(event, 'forum')">FÓRUM</button>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/ee4c23c4a_logo.jpg" alt="GRUZ GARAGE" onclick="showSection('crew')" />
+    </div>
+    <nav>
+      <button class="gruz-nav-item active" data-tab="crew" onclick="showSection('crew')">GRUZ CREW</button>
+      <button class="gruz-nav-item" data-tab="servis" onclick="showSection('servis')">SERVIS</button>
+      <button class="gruz-nav-item" data-tab="upravy" onclick="showSection('upravy')">ÚPRAVY</button>
+      <button class="gruz-nav-item" data-tab="lesteni" onclick="showSection('lesteni')">LEŠTĚNÍ</button>
+      <button class="gruz-nav-item" data-tab="detailing" onclick="showSection('detailing')">DETAILING</button>
+      <button class="gruz-nav-item" data-tab="lakovna" onclick="showSection('lakovna')">LAKOVNA</button>
+      <button class="gruz-nav-item" data-tab="projekty" onclick="showSection('projekty')">PROJEKTY</button>
+      <button class="gruz-nav-item" data-tab="kontakt" onclick="showSection('kontakt')">KONTAKT</button>
+      <button class="gruz-nav-item" data-tab="forum" onclick="showSection('forum')">FÓRUM</button>
     </nav>
-
-    <!-- CONTACT DOCK -->
-    <div class="contact-dock">
-        <div class="telemetry">// JIČÍNĚVES</div>
-        <a href="tel:608607667">+420 608 607 667</a>
-        <a href="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a>
+    <div class="sidebar-status gruz-telemetry">
+      <span class="gruz-online-dot"></span>GARÁŽ V PŘÍPRAVĚ
     </div>
+  </aside>
 
-    <!-- MAIN WRAPPER FOR CENTERING -->
-    <div class="main-wrapper">
-        <div class="container">
+  <!-- MOBILE NAV -->
+  <nav class="mobile-nav">
+    <button class="gruz-nav-item active" data-tab="crew" onclick="showSection('crew')">CREW</button>
+    <button class="gruz-nav-item" data-tab="servis" onclick="showSection('servis')">SERVIS</button>
+    <button class="gruz-nav-item" data-tab="upravy" onclick="showSection('upravy')">ÚPRAVY</button>
+    <button class="gruz-nav-item" data-tab="lesteni" onclick="showSection('lesteni')">LEŠTĚNÍ</button>
+    <button class="gruz-nav-item" data-tab="detailing" onclick="showSection('detailing')">DETAIL</button>
+    <button class="gruz-nav-item" data-tab="lakovna" onclick="showSection('lakovna')">LAKOVNA</button>
+    <button class="gruz-nav-item" data-tab="projekty" onclick="showSection('projekty')">PROJEKTY</button>
+    <button class="gruz-nav-item" data-tab="kontakt" onclick="showSection('kontakt')">KONTAKT</button>
+    <button class="gruz-nav-item" data-tab="forum" onclick="showSection('forum')">FÓRUM</button>
+  </nav>
 
-            <!-- CREW -->
-            <div id="crew" class="content-section active-tab">
-                <div class="hero">
-                    <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/b732a3f7e_prednirozpera.jpg" alt="BMW motor — GRUZ Garage">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <div class="hero-telemetry"><span class="live">[JIČÍNĚVES]</span></div>
-                        <h1 class="gruz-headline">GRUZ<br><span>GARAGE</span></h1>
-                        <p>Autoservis v Jičíněvsi, čištění interiéru, lehké úpravy, kvalitní a čistá práce.</p>
-                    </div>
-                </div>
+  <!-- CONTACT DOCK -->
+  <div class="contact-dock">
+    <a href="tel:608607667">+420 608 607 667</a>
+    <a href="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a>
+  </div>
 
-                <div class="section-header">
-                    <h1 class="gruz-headline">GRUZ CREW</h1>
-                </div>
+  <!-- MAIN -->
+  <main class="main">
+    <div class="main-inner">
 
-                <div class="gruz-card crew-card">
-                    <h3 class="gruz-headline">VÍTEJTE V GRUZ.GARAGE</h3>
-                    <ul>
-                        <li class="border-red">
-                            <strong>KOMPLEXNÍ AUTOSERVIS</strong>
-                            <span>Pravidelná údržba, výměny olejů, brzdových destiček a mechanické opravy všeho druhu.</span>
-                        </li>
-                        <li class="border-steel">
-                            <strong>DETAILY & INTERIÉRY</strong>
-                            <span>Profesionální čištění interiéru a renovace/rozleštění zašlých světlometů.</span>
-                        </li>
-                        <li class="border-red">
-                            <strong>TUNING & PROJEKTY</strong>
-                            <span>Vizuální i výkonové úpravy aut stavěných pro radost i ostré nasazení.</span>
-                        </li>
-                    </ul>
-                    <div class="crew-footer">
-                        <span class="telemetry">// JIČÍNĚVES</span>
-                        <button class="gruz-btn gruz-btn-hazard" onclick="switchTab(event, 'projekty')">PROJEKTY →</button>
-                    </div>
-                </div>
+      <!-- ===== CREW ===== -->
+      <section class="section active gruz-fade-in" id="section-crew">
+        <div class="hero">
+          <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/b732a3f7e_prednirozpera.jpg" alt="BMW motor — GRUZ Garage" />
+          <div class="hero-shade"></div>
+          <div class="hero-content">
+            <div class="gruz-telemetry" style="margin-bottom:12px;">
+              <span style="color:var(--gruz-hazard);">[JIČÍNĚVES]</span>
             </div>
-
-            <!-- SERVIS -->
-            <div id="servis" class="content-section">
-                <div class="section-header">
-                    <h1 class="gruz-headline">MECHANIKA & SERVIS</h1>
-                </div>
-                <div class="grid-3">
-                    <div class="gruz-card">
-                        <div class="card-img-wrap">
-                            <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/ddccc08b2_e60cigan.jpg" alt="Hluboká mechanika">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="gruz-headline">MECHANIKA</h3>
-                            <p><span>&gt; Výměny spojek a převodovek</span><span>&gt; Řešení složitějších závad</span></p>
-                        </div>
-                    </div>
-                    <div class="gruz-card">
-                        <div class="card-img-wrap">
-                            <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/12c986775_like.png" alt="Běžný servis — svíčky a filtry">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="gruz-headline">BĚŽNÝ SERVIS</h3>
-                            <p><span>&gt; Oleje a provozní kapaliny</span><span>&gt; Brzdové soustavy a filtry</span></p>
-                        </div>
-                    </div>
-                    <div class="gruz-card">
-                        <div class="card-img-wrap">
-                            <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/447e7ca1f_schnilejgolfik.jpg" alt="Podvozek" style="object-position: bottom;">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="gruz-headline">PODVOZEK</h3>
-                            <p><span>&gt; Kontrola a výměna dílů</span><span>&gt; Svařování a vyztužování</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ÚPRAVY -->
-            <div id="upravy" class="content-section">
-                <div class="section-header">
-                    <h1 class="gruz-headline">PERFORMANCE ÚPRAVY</h1>
-                </div>
-                <div style="max-width: 640px;">
-                    <div class="gruz-card">
-                        <div class="card-img-wrap">
-                            <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/b732a3f7e_prednirozpera.jpg" alt="Výztuhy a handling">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="gruz-headline">VÝZTUHY & HANDLING</h3>
-                            <p style="margin-bottom: 16px;">Instalace rozpěr, stavitelných podvozků a geometrie.</p>
-                            <a href="tel:608607667" class="gruz-btn gruz-btn-outline-hazard" style="align-self: flex-start;">ZJISTIT VÍCE</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- LEŠTĚNÍ -->
-            <div id="lesteni" class="content-section">
-                <div class="section-header">
-                    <h1 class="gruz-headline">DETAILING LAKU</h1>
-                </div>
-                <div class="grid-2">
-                    <div class="gruz-card">
-                        <div class="card-img-wrap">
-                            <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/9fdcac02d_merglesti.jpg" alt="Keramika">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="gruz-headline">KERAMIKA & OCHRANA</h3>
-                            <p>Odolná nano-keramika pro extrémní odtok vody a ochranu laku.</p>
-                        </div>
-                    </div>
-                    <div class="gruz-card">
-                        <div class="card-img-wrap">
-                            <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/b47c7af2e_lestibawodva.jpg" alt="Renovace světel">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="gruz-headline">SVĚTLA & SKLA</h3>
-                            <p>Rozleštění zažloutlých světel pro čistý vzhled a bezpečné svícení.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- DETAILING -->
-            <div id="detailing" class="content-section">
-                <div class="section-header">
-                    <h1 class="gruz-headline">DETAILING</h1>
-                </div>
-                <div class="grid-2">
-                    <div class="gruz-card">
-                        <div class="card-img-wrap">
-                            <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/79b84bbbf_detailing2.png" alt="Čištění interiéru auta">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="gruz-headline">INTERIÉR</h3>
-                            <p>
-                                <span>&gt; Hloubkové čištění čalounění</span>
-                                <span>&gt; Ošetření plastů a kůže</span>
-                                <span>&gt; Čištění a impregnace potahů</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="gruz-card">
-                        <div class="card-img-wrap">
-                            <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/50a43b348_detailing.png" alt="Čištění autokoberců">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="gruz-headline">KOBERCE & PODLAHY</h3>
-                            <p>
-                                <span>&gt; Vysávání a extrakce koberců</span>
-                                <span>&gt; Odstranění nečistot a chlupů</span>
-                                <span>&gt; Ošetření textilních dílů</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- LAKOVNA -->
-            <div id="lakovna" class="content-section">
-                <div class="section-header">
-                    <h1 class="gruz-headline">LAKOVACÍ BOX</h1>
-                </div>
-                <div class="build-box">
-                    <h2 class="gruz-headline">[ STATUS: VE VÝSTAVBĚ ]</h2>
-                    <p>Připravujeme lakovací box.</p>
-                    <div class="blink-wrap"><span class="gruz-blink">_</span> SYSTÉM SE PŘIPRAVUJE</div>
-                </div>
-            </div>
-
-            <!-- PROJEKTY -->
-            <div id="projekty" class="content-section">
-                <div class="section-header">
-                    <h1 class="gruz-headline">PROJEKTY & VÝSTAVA</h1>
-                </div>
-                <div class="grid-2">
-                    <div class="gruz-card">
-                        <div class="card-img-wrap">
-                            <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/b252b4b75_e60.jpg" alt="BMW E60 535d">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="gruz-headline">PROJECT E60 535d</h3>
-                            <p style="margin-bottom: 16px;">Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a silný zátah.</p>
-                            <button class="gruz-btn" onclick="toggleSpecs(this)">DETAIL VOZU</button>
-                        </div>
-                        <div class="spec-overlay">
-                            <h3 class="gruz-headline">SPEC // PROJECT E60 535d</h3>
-                            <ul class="spec-list">
-                                <li><span>MOTOR</span> 3.0L R6 Biturbo (M57)</li>
-                                <li><span>VÝKON</span> 350+ HP // 700+ Nm</li>
-                                <li><span>POHON</span> Zadní náprava (RWD)</li>
-                                <li><span>PŘEVODOVKA</span> Automat + xHP Flash</li>
-                                <li><span>STATUS</span> Daily / Street Weapon</li>
-                            </ul>
-                            <button class="gruz-btn" onclick="toggleSpecs(this)">← NÁVRAT</button>
-                        </div>
-                    </div>
-
-                    <div class="gruz-card">
-                        <div class="card-img-wrap">
-                            <img src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/9ae6f30af_prdelka.jpg" alt="BMW E46ti 316i">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="gruz-headline" style="color: var(--gruz-steel);">COMPACT E46ti 316i</h3>
-                            <p style="margin-bottom: 16px;">Oldschool přístup. Syrová zadokolka postavená pro čistou zábavu na silnici i sněhu.</p>
-                            <button class="gruz-btn gruz-btn-outline-hazard" onclick="toggleSpecs(this)">DETAIL VOZU</button>
-                        </div>
-                        <div class="spec-overlay">
-                            <h3 class="gruz-headline">SPEC // COMPACT E46ti 316i</h3>
-                            <ul class="spec-list">
-                                <li class="gold"><span>MOTOR</span> 1.8L R4 (N42/N46)</li>
-                                <li class="gold"><span>VÝKON</span> 115 HP (85 kW)</li>
-                                <li class="gold"><span>POHON</span> RWD + Zavařenec</li>
-                                <li class="gold"><span>PŘEVODOVKA</span> Manuál (5q)</li>
-                                <li class="gold"><span>STATUS</span> Drift Missile / Fun car</li>
-                            </ul>
-                            <button class="gruz-btn gruz-btn-outline-hazard" onclick="toggleSpecs(this)">← NÁVRAT</button>
-                        </div>
-                    </div>
-
-                    <!-- LADA.png -->
-                    <div class="gruz-card">
-                        <div class="card-img-wrap">
-                            <img src="https://media.base44.com/images/public/6aacf130c9fbb464386c2c30/423fd7a80_image.png" alt="LADA Only Fast Only Low">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="gruz-headline">LADA ONLY FAST</h3>
-                            <p style="margin-bottom: 16px;">Sovětský boxy klasik zavařený na podlahu. Syrová jízda, žádné kompromisy.</p>
-                            <button class="gruz-btn gruz-btn-outline-hazard" onclick="toggleSpecs(this)">DETAIL VOZU</button>
-                        </div>
-                        <div class="spec-overlay">
-                            <h3 class="gruz-headline">SPEC // LADA ONLY FAST</h3>
-                            <ul class="spec-list">
-                                <li class="gold"><span>KAROSERIE</span> Boxy Hatchback</li>
-                                <li class="gold"><span>POHON</span> RWD + Zavařenec</li>
-                                <li class="gold"><span>VÝFUK</span> Velký box konec</li>
-                                <li class="gold"><span>STATUS</span> Only Fast, Only Low</li>
-                            </ul>
-                            <button class="gruz-btn gruz-btn-outline-hazard" onclick="toggleSpecs(this)">← NÁVRAT</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- KONTAKT -->
-            <div id="kontakt" class="content-section">
-                <div class="section-header">
-                    <h1 class="gruz-headline">KONTAKT & LOKACE</h1>
-                </div>
-                <div class="gruz-card kontakt-card">
-                    <h3 class="gruz-headline">GRUZ GARAGE JIČÍNĚVES</h3>
-                    <div class="kontakt-grid">
-                        <div>
-                            <strong>ADRESA & BASE</strong><br>
-                            <a href="https://www.google.com/maps/place/GRUZ.GARAGE/@50.3737135,15.3396977,17.43z/data=!4m15!1m8!3m7!1s0x470ea1285102dbb7:0x1c00af129863a6d0!2zNTA3IDMxIEppxI3DrW7Em3Zlcw!3b1!8m2!3d50.368474!4d15.3434666!16s%2Fg%2F1tdfgdrt!3m5!1s0x470ea1d02ee56e63:0x75c92c13ba189bca!8m2!3d50.3742719!4d15.3407163!16s%2Fg%2F11nvzhhv_d?entry=ttu&g_ep=EgoyMDI2MDkwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">Jičíněves</a><br>
-                            Česká Republika<br><br>
-                            <strong>TELEFON</strong><br>
-                            <a href="tel:608607667">+420 608 607 667</a>
-                        </div>
-                        <div>
-                            <strong>E-MAIL</strong><br>
-                            <a href="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a><br><br>
-                            <strong>STATUS GARÁŽE</strong><br>
-                            <span class="offline">V PŘÍPRAVĚ</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FÓRUM -->
-            <div id="forum" class="content-section">
-                <div class="section-header">
-                    <h1 class="gruz-headline">GARÁŽOVÉ FÓRUM</h1>
-                </div>
-                <div class="gruz-card chat-card">
-                    <div id="chat-messages">
-                        <div class="chat-msg">
-                            <span class="name">SYSTEM:</span> <span class="text">Vítejte v garážovém chatu. Ptejte se na dotazy ohledně servisu nebo úprav.</span>
-                        </div>
-                    </div>
-                    <form id="chat-form" onsubmit="event.preventDefault();">
-                        <input type="text" id="chat-name" class="gruz-input" placeholder="Jméno / Nick" required>
-                        <input type="text" id="chat-input" class="gruz-input" placeholder="Napiš zprávu..." required>
-                        <button type="submit" class="gruz-btn gruz-btn-hazard">ODESLAT</button>
-                    </form>
-                </div>
-            </div>
-
+            <h1 class="gruz-headline">GRUZ<br /><span style="color:var(--gruz-hazard);">GARAGE</span></h1>
+            <p>Autoservis v Jičíněvsi, čištění interiéru, lehké úpravy, kvalitní a čistá práce.</p>
+          </div>
         </div>
+
+        <div class="section-header">
+          <h1 class="gruz-headline">GRUZ CREW</h1>
+        </div>
+
+        <div class="gruz-card crew-card">
+          <h3 class="gruz-headline">VÍTEJTE V GRUZ.GARAGE</h3>
+          <ul class="crew-list">
+            <li>
+              <strong class="gruz-headline">KOMPLEXNÍ AUTOSERVIS</strong>
+              <span>Pravidelná údržba, výměny olejů, brzdových destiček a mechanické opravy všeho druhu.</span>
+            </li>
+            <li>
+              <strong class="gruz-headline">DETAILY & INTERIÉRY</strong>
+              <span>Profesionální čištění interiéru a renovace/rozleštění zašlých světlometů.</span>
+            </li>
+            <li>
+              <strong class="gruz-headline">TUNING & PROJEKTY</strong>
+              <span>Vizuální i výkonové úpravy aut stavěných pro radost i ostré nasazení.</span>
+            </li>
+          </ul>
+          <div class="crew-footer">
+            <span class="gruz-telemetry" style="color:var(--gruz-hazard);">// JIČÍNĚVES</span>
+            <button class="gruz-btn gruz-btn-hazard" onclick="showSection('projekty')">PROJEKTY →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SERVIS ===== -->
+      <section class="section" id="section-servis">
+        <div class="section-header">
+          <h1 class="gruz-headline">MECHANIKA & SERVIS</h1>
+        </div>
+        <div class="grid">
+          <div class="gruz-card">
+            <div class="gruz-card-img-wrap">
+              <img class="gruz-card-img" src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/ddccc08b2_e60cigan.jpg" alt="MECHANIKA" />
+            </div>
+            <div class="card-body">
+              <div>
+                <h3 class="gruz-headline card-title">MECHANIKA</h3>
+                <p class="card-text">
+                  <span>&gt; Výměny spojek a převodovek</span>
+                  <span>&gt; Řešení složitějších závad</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="gruz-card">
+            <div class="gruz-card-img-wrap">
+              <img class="gruz-card-img" src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/12c986775_like.png" alt="BĚŽNÝ SERVIS" />
+            </div>
+            <div class="card-body">
+              <div>
+                <h3 class="gruz-headline card-title">BĚŽNÝ SERVIS</h3>
+                <p class="card-text">
+                  <span>&gt; Oleje a provozní kapaliny</span>
+                  <span>&gt; Brzdové soustavy a filtry</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="gruz-card">
+            <div class="gruz-card-img-wrap">
+              <img class="gruz-card-img" src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/447e7ca1f_schnilejgolfik.jpg" alt="PODVOZEK" style="object-position: bottom;" />
+            </div>
+            <div class="card-body">
+              <div>
+                <h3 class="gruz-headline card-title">PODVOZEK</h3>
+                <p class="card-text">
+                  <span>&gt; Kontrola a výměna dílů</span>
+                  <span>&gt; Svařování a vyztužování</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== ÚPRAVY ===== -->
+      <section class="section" id="section-upravy">
+        <div class="section-header">
+          <h1 class="gruz-headline">PERFORMANCE ÚPRAVY</h1>
+        </div>
+        <div class="upravy-wrap">
+          <div class="gruz-card">
+            <div class="gruz-card-img-wrap">
+              <img class="gruz-card-img" src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/b732a3f7e_prednirozpera.jpg" alt="Výztuhy a handling" />
+            </div>
+            <div class="card-body">
+              <div>
+                <h3 class="gruz-headline card-title">VÝZTUHY & HANDLING</h3>
+                <p class="card-text" style="margin-bottom:16px;">Instalace rozpěr, stavitelných podvozků a geometrie.</p>
+              </div>
+              <a href="tel:608607667" class="gruz-btn gruz-btn-outline-hazard self-start">ZJISTIT VÍCE</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== LEŠTĚNÍ ===== -->
+      <section class="section" id="section-lesteni">
+        <div class="section-header">
+          <h1 class="gruz-headline">DETAILING LAKU</h1>
+        </div>
+        <div class="grid wide">
+          <div class="gruz-card">
+            <div class="gruz-card-img-wrap">
+              <img class="gruz-card-img" src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/9fdcac02d_merglesti.jpg" alt="KERAMIKA & OCHRANA" />
+            </div>
+            <div class="card-body">
+              <div>
+                <h3 class="gruz-headline card-title">KERAMIKA & OCHRANA</h3>
+                <p class="card-text">Odolná nano-keramika pro extrémní odtok vody a ochranu laku.</p>
+              </div>
+            </div>
+          </div>
+          <div class="gruz-card">
+            <div class="gruz-card-img-wrap">
+              <img class="gruz-card-img" src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/b47c7af2e_lestibawodva.jpg" alt="SVĚTLA & SKLA" />
+            </div>
+            <div class="card-body">
+              <div>
+                <h3 class="gruz-headline card-title">SVĚTLA & SKLA</h3>
+                <p class="card-text">Rozleštění zažloutlých světel pro čistý vzhled a bezpečné svícení.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== DETAILING ===== -->
+      <section class="section" id="section-detailing">
+        <div class="section-header">
+          <h1 class="gruz-headline">DETAILING</h1>
+        </div>
+        <div class="grid wide">
+          <div class="gruz-card">
+            <div class="gruz-card-img-wrap">
+              <img class="gruz-card-img" src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/79b84bbbf_detailing2.png" alt="INTERIÉR" />
+            </div>
+            <div class="card-body">
+              <div>
+                <h3 class="gruz-headline card-title">INTERIÉR</h3>
+                <p class="card-text">
+                  <span>&gt; Hloubkové čištění čalounění</span>
+                  <span>&gt; Ošetření plastů a kůže</span>
+                  <span>&gt; Čištění a impregnace potahů</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="gruz-card">
+            <div class="gruz-card-img-wrap">
+              <img class="gruz-card-img" src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/50a43b348_detailing.png" alt="KOBERCE & PODLAHY" />
+            </div>
+            <div class="card-body">
+              <div>
+                <h3 class="gruz-headline card-title">KOBERCE & PODLAHY</h3>
+                <p class="card-text">
+                  <span>&gt; Vysávání a extrakce koberců</span>
+                  <span>&gt; Odstranění nečistot a chlupů</span>
+                  <span>&gt; Ošetření textilních dílů</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== LAKOVNA ===== -->
+      <section class="section" id="section-lakovna">
+        <div class="section-header">
+          <h1 class="gruz-headline">LAKOVACÍ BOX</h1>
+        </div>
+        <div class="lakovna-placeholder">
+          <h2 class="gruz-headline">[ STATUS: VE VÝSTAVBĚ ]</h2>
+          <p>Připravujeme lakovací box.</p>
+          <div class="system"><span class="gruz-blink">_</span> SYSTÉM SE PŘIPRAVUJE</div>
+        </div>
+      </section>
+
+      <!-- ===== PROJEKTY ===== -->
+      <section class="section" id="section-projekty">
+        <div class="section-header">
+          <h1 class="gruz-headline">PROJEKTY & VÝSTAVA</h1>
+        </div>
+        <div class="grid wide">
+
+          <!-- E60 -->
+          <div class="gruz-card">
+            <div class="gruz-card-img-wrap">
+              <img class="gruz-card-img" src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/b252b4b75_e60.jpg" alt="PROJECT E60 535d" />
+            </div>
+            <div class="card-body">
+              <div>
+                <h3 class="gruz-headline card-title" style="color:var(--gruz-steel);">PROJECT E60 535d</h3>
+                <p class="card-text" style="margin-bottom:16px;">Vlajková loď syndikátu. Nekompromisní výkon, custom detaily a silný zátah.</p>
+              </div>
+              <button class="gruz-btn" onclick="toggleSpecs(this)">DETAIL VOZU</button>
+            </div>
+            <div class="gruz-spec-overlay">
+              <h3 class="gruz-headline" style="font-size:17px;font-weight:700;color:var(--gruz-steel);border-bottom:1px solid var(--gruz-blueprint);padding-bottom:8px;margin-bottom:12px;">
+                SPEC // PROJECT E60 535d
+              </h3>
+              <ul style="list-style:none;flex:1;margin:12px 0;">
+                <li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--gruz-blueprint);font-size:13px;"><span class="gruz-telemetry" style="color:var(--gruz-hazard);">MOTOR</span>3.0L R6 Biturbo (M57)</li>
+                <li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--gruz-blueprint);font-size:13px;"><span class="gruz-telemetry" style="color:var(--gruz-hazard);">VÝKON</span>350+ HP // 700+ Nm</li>
+                <li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--gruz-blueprint);font-size:13px;"><span class="gruz-telemetry" style="color:var(--gruz-hazard);">POHON</span>Zadní náprava (RWD)</li>
+                <li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--gruz-blueprint);font-size:13px;"><span class="gruz-telemetry" style="color:var(--gruz-hazard);">PŘEVODOVKA</span>Automat + xHP Flash</li>
+                <li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--gruz-blueprint);font-size:13px;"><span class="gruz-telemetry" style="color:var(--gruz-hazard);">STATUS</span>Daily / Street Weapon</li>
+              </ul>
+              <button class="gruz-btn" onclick="toggleSpecs(this)">← NÁVRAT</button>
+            </div>
+          </div>
+
+          <!-- E46ti -->
+          <div class="gruz-card">
+            <div class="gruz-card-img-wrap">
+              <img class="gruz-card-img" src="https://media.base44.com/images/public/6aa85300d32043916ae5ef95/9ae6f30af_prdelka.jpg" alt="COMPACT E46ti 316i" />
+            </div>
+            <div class="card-body">
+              <div>
+                <h3 class="gruz-headline card-title" style="color:var(--gruz-steel);">COMPACT E46ti 316i</h3>
+                <p class="card-text" style="margin-bottom:16px;">Oldschool přístup. Syrová zadokolka postavená pro čistou zábavu na silnici i sněhu.</p>
+              </div>
+              <button class="gruz-btn gruz-btn-outline-hazard" onclick="toggleSpecs(this)">DETAIL VOZU</button>
+            </div>
+            <div class="gruz-spec-overlay">
+              <h3 class="gruz-headline" style="font-size:17px;font-weight:700;color:var(--gruz-steel);border-bottom:1px solid var(--gruz-blueprint);padding-bottom:8px;margin-bottom:12px;">
+                SPEC // COMPACT E46ti 316i
+              </h3>
+              <ul style="list-style:none;flex:1;margin:12px 0;">
+                <li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--gruz-blueprint);font-size:13px;"><span class="gruz-telemetry" style="color:var(--gruz-hazard);">MOTOR</span>1.8L R4 (N42/N46)</li>
+                <li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--gruz-blueprint);font-size:13px;"><span class="gruz-telemetry" style="color:var(--gruz-hazard);">VÝKON</span>115 HP (85 kW)</li>
+                <li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--gruz-blueprint);font-size:13px;"><span class="gruz-telemetry" style="color:var(--gruz-hazard);">POHON</span>RWD + Zavařenec</li>
+                <li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--gruz-blueprint);font-size:13px;"><span class="gruz-telemetry" style="color:var(--gruz-hazard);">PŘEVODOVKA</span>Manuál (5q)</li>
+                <li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--gruz-blueprint);font-size:13px;"><span class="gruz-telemetry" style="color:var(--gruz-hazard);">STATUS</span>Drift Missile / Fun car</li>
+              </ul>
+              <button class="gruz-btn gruz-btn-outline-hazard" onclick="toggleSpecs(this)">← NÁVRAT</button>
+            </div>
+          </div>
+
+          <!-- LADA (LADA.png) -->
+          <div class="gruz-card">
+            <div class="gruz-card-img-wrap">
+              <img class="gruz-card-img" src="https://media.base44.com/images/public/6aacf130c9fbb464386c2c30/423fd7a80_image.png" alt="LADA ONLY FAST" />
+            </div>
+            <div class="card-body">
+              <div>
+                <h3 class="gruz-headline card-title" style="color:var(--gruz-steel);">LADA ONLY FAST</h3>
+                <p class="card-text" style="margin-bottom:16px;">Sovětský boxy klasik zavařený na podlahu. Syrová jízda, žádné kompromisy.</p>
+              </div>
+              <button class="gruz-btn gruz-btn-outline-hazard" onclick="toggleSpecs(this)">DETAIL VOZU</button>
+            </div>
+            <div class="gruz-spec-overlay">
+              <h3 class="gruz-headline" style="font-size:17px;font-weight:700;color:var(--gruz-steel);border-bottom:1px solid var(--gruz-blueprint);padding-bottom:8px;margin-bottom:12px;">
+                SPEC // LADA ONLY FAST
+              </h3>
+              <ul style="list-style:none;flex:1;margin:12px 0;">
+                <li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--gruz-blueprint);font-size:13px;"><span class="gruz-telemetry" style="color:var(--gruz-hazard);">KAROSERIE</span>Boxy Hatchback</li>
+                <li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--gruz-blueprint);font-size:13px;"><span class="gruz-telemetry" style="color:var(--gruz-hazard);">POHON</span>RWD + Zavařenec</li>
+                <li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--gruz-blueprint);font-size:13px;"><span class="gruz-telemetry" style="color:var(--gruz-hazard);">VÝFUK</span>Velký box konec</li>
+                <li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--gruz-blueprint);font-size:13px;"><span class="gruz-telemetry" style="color:var(--gruz-hazard);">STATUS</span>Only Fast, Only Low</li>
+              </ul>
+              <button class="gruz-btn gruz-btn-outline-hazard" onclick="toggleSpecs(this)">← NÁVRAT</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== KONTAKT ===== -->
+      <section class="section" id="section-kontakt">
+        <div class="section-header">
+          <h1 class="gruz-headline">KONTAKT & LOKACE</h1>
+        </div>
+        <div class="gruz-card kontakt-card">
+          <h3 class="gruz-headline">GRUZ GARAGE JIČÍNĚVES</h3>
+          <div class="kontakt-grid">
+            <div>
+              <strong>ADRESA</strong><br />
+              <a href="https://www.google.com/maps/place/GRUZ.GARAGE/@50.3737135,15.3396977,17.43z/data=!4m15!1m8!3m7!1s0x470ea1285102dbb7:0x1c00af129863a6d0!2zNTA3IDMxIEppxI3DrW7Em3Zlcw!3b1!8m2!3d50.368474!4d15.3434666!16s%2Fg%2F1tdfgdrt!3m5!1s0x470ea1d02ee56e63:0x75c92c13ba189bca!8m2!3d50.3742719!4d15.3407163!16s%2Fg%2F11nvzhhv_d?entry=ttu&g_ep=EgoyMDI2MDkwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">Jičíněves</a><br />
+              Česká Republika<br /><br />
+              <strong>TELEFON</strong><br />
+              <a href="tel:608607667">+420 608 607 667</a>
+            </div>
+            <div>
+              <strong>E-MAIL</strong><br />
+              <a href="mailto:GRUZGARAGE66@SEZNAM.CZ">GRUZGARAGE66@SEZNAM.CZ</a><br /><br />
+              <strong>STATUS GARÁŽE</strong><br />
+              <span style="color:var(--gruz-hazard);font-weight:700;">V PŘÍPRAVĚ</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== FÓRUM ===== -->
+      <section class="section" id="section-forum">
+        <div class="section-header">
+          <h1 class="gruz-headline">GARÁŽOVÉ FÓRUM</h1>
+        </div>
+        <div class="gruz-card forum-card">
+          <div class="forum-messages" id="forum-messages">
+            <div class="chat-msg">
+              <span class="author">SYSTEM:</span>
+              <span style="color:var(--gruz-steel);"> Vítejte v garážovém chatu. Ptejte se na dotazy ohledně servisu nebo úprav.</span>
+            </div>
+          </div>
+          <form class="forum-form" id="forum-form">
+            <input type="text" id="forum-name" class="gruz-input name-input" placeholder="Jméno..." required />
+            <input type="text" id="forum-text" class="gruz-input text-input" placeholder="Napiš zprávu..." required />
+            <button type="submit" class="gruz-btn gruz-btn-hazard">ODESLAT</button>
+          </form>
+        </div>
+      </section>
+
     </div>
+  </main>
 
-    <script>
-        function switchTab(event, tabId) {
-            event.preventDefault();
-            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active-tab'));
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active-tab');
-
-            if (event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            }
+  <script>
+    function showSection(tab) {
+      document.querySelectorAll('.section').forEach(function (s) {
+        var isActive = s.id === 'section-' + tab;
+        s.classList.toggle('active', isActive);
+        if (isActive) {
+          s.classList.remove('gruz-fade-in');
+          void s.offsetWidth;
+          s.classList.add('gruz-fade-in');
         }
+      });
+      document.querySelectorAll('.gruz-nav-item[data-tab]').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.tab === tab);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-        function toggleSpecs(btn) {
-            const card = btn.closest('.gruz-card');
-            card.classList.toggle('specs-active');
-        }
-    </script>
+    function toggleSpecs(btn) {
+      var card = btn.closest('.gruz-card');
+      if (card) card.classList.toggle('specs-active');
+    }
+
+    // Fórum — v této statické verzi se zprávy ukládají jen lokálně v prohlížeči
+    document.getElementById('forum-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nameInput = document.getElementById('forum-name');
+      var textInput = document.getElementById('forum-text');
+      var name = nameInput.value.trim();
+      var text = textInput.value.trim();
+      if (!name || !text) return;
+      var msg = document.createElement('div');
+      msg.className = 'chat-msg';
+      var author = document.createElement('span');
+      author.className = 'author';
+      author.textContent = name + ': ';
+      var body = document.createElement('span');
+      body.style.color = 'var(--gruz-steel)';
+      body.textContent = text;
+      msg.appendChild(author);
+      msg.appendChild(body);
+      var box = document.getElementById('forum-messages');
+      box.appendChild(msg);
+      textInput.value = '';
+      box.scrollTop = box.scrollHeight;
+    });
+  </script>
 </body>
 </html>
